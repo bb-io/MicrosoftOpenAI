@@ -8,6 +8,7 @@ using Azure.AI.OpenAI;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using TiktokenSharp;
 
 namespace Apps.AzureOpenAI.Actions;
 
@@ -38,6 +39,22 @@ public class TextAnalysisActions : BaseInvocable
         return new()
         {
             Embedding = embeddings.Value.Data.First().Embedding.ToArray(),
+        };
+    }
+
+    [Action("Tokenize text", Description = "Tokenize the text provided. Optionally specify encoding: cl100k_base " +
+                                           "(used by gpt-4, gpt-3.5-turbo, text-embedding-ada-002) or p50k_base " +
+                                           "(used by codex models, text-davinci-002, text-davinci-003).")]
+    public async Task<TokenizeTextResponse> TokenizeText([ActionParameter] TokenizeTextRequest input)
+    {
+        var encoding = input.Encoding ?? "cl100k_base";
+        var tikToken = await TikToken.GetEncodingAsync(encoding);
+
+        var tokens = tikToken.Encode(input.Text);
+
+        return new()
+        {
+            Tokens = tokens
         };
     }
 }
