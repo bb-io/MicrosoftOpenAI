@@ -1,5 +1,6 @@
 ﻿using Apps.AzureOpenAI.Actions;
 using Apps.AzureOpenAI.Models.Requests.Chat;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -20,7 +21,7 @@ namespace Apps.AzureOpenAI.Connections
             var actions = new ChatActions(new InvocationContext() { AuthenticationCredentialsProviders = authProviders });
             try
             {
-                await actions.ChatMessageRequest(new ChatRequest() { Message = "hello" });
+                //await actions.ChatMessageRequest(new ChatRequest() { Message = "hello" });
                 return new()
                 {
                     IsValid = true
