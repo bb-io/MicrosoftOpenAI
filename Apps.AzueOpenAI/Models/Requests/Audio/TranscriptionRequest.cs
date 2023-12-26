@@ -2,13 +2,12 @@
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Files;
-using File = Blackbird.Applications.Sdk.Common.Files.File;
 
 namespace Apps.AzureOpenAI.Models.Requests.Audio;
 
 public class TranscriptionRequest
 {       
-    public File File { get; set; }
+    public FileReference File { get; set; }
 
     [Display("Language (ISO 639-1)")]
     [DataSource(typeof(IsoLanguageDataSourceHandler))]
