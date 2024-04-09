@@ -12,9 +12,9 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.9" />
-    <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.3.2-alpha1" />
     <PackageReference Include="Blackbird.Applications.SDK.Extensions.FileManagement" Version="1.0.1" />
     <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.16" />
+    <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="TiktokenSharp" Version="1.0.7" />
   </ItemGroup>
