@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Apps.AzureOpenAI.Extensions;
-using Apps.AzureOpenAI.Models.Requests.Chat;
+﻿using Apps.AzureOpenAI.Models.Requests.Chat;
 using Apps.AzureOpenAI.Models.Responses.Chat;
 using Azure.AI.OpenAI;
-using Azure;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
-using System.Reflection;
-using System.Xml.Serialization;
+using Apps.AzureOpenAI.Actions.Base;
 using Apps.AzureOpenAI.Utils;
 using Newtonsoft.Json;
 using TiktokenSharp;
@@ -18,20 +12,10 @@ using TiktokenSharp;
 namespace Apps.AzureOpenAI.Actions;
 
 [ActionList]
-public class ChatActions : BaseInvocable
+public class ChatActions : BaseActions
 {
-    private OpenAIClient Client { get; set; }
-
-    private string DeploymentName { get; set; }
-
     public ChatActions(InvocationContext invocationContext) : base(invocationContext)
     {
-        DeploymentName = InvocationContext.AuthenticationCredentialsProviders.First(x => x.KeyName == "deployment")
-            .Value;
-        Client = new OpenAIClient(
-            new Uri(InvocationContext.AuthenticationCredentialsProviders.First(x => x.KeyName == "url").Value),
-            new AzureKeyCredential(InvocationContext.AuthenticationCredentialsProviders
-                .First(x => x.KeyName == "apiKey").Value));
     }
 
     #region Chat actions
