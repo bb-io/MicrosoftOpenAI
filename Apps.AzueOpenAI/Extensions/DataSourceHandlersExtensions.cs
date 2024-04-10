@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Apps.AzureOpenAI.Extensions;
+﻿namespace Apps.AzureOpenAI.Extensions;
 
 public static class DataSourceHandlersExtensions
 {

@@ -1,5 +1,4 @@
 ﻿using Blackbird.Applications.Sdk.Common;
-using System;
 using Blackbird.Applications.Sdk.Common.Metadata;
 
 namespace Apps.AzureOpenAI;

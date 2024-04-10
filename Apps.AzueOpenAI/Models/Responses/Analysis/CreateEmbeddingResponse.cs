@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Apps.AzureOpenAI.Models.Responses.Analysis;
+﻿namespace Apps.AzureOpenAI.Models.Responses.Analysis;
 
 public class CreateEmbeddingResponse
 {

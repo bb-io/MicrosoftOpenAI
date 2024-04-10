@@ -1,8 +1,5 @@
-﻿using System;
-using Blackbird.Applications.Sdk.Common.Authentication;
+﻿using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Apps.AzureOpenAI.Connections;
 

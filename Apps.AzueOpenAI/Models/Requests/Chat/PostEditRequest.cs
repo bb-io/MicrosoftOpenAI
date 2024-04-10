@@ -1,6 +1,4 @@
-﻿using Apps.AzureOpenAI.DataSourceHandlers;
-using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Dynamic;
+﻿using Blackbird.Applications.Sdk.Common;
 
 namespace Apps.AzureOpenAI.Models.Requests.Chat;
 
