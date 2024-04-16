@@ -1,6 +1,6 @@
 ﻿using Apps.AzureOpenAI.DataSourceHandlers;
 using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.AzureOpenAI.Models.Requests.Chat;
 
@@ -25,7 +25,7 @@ public class GetTranslationIssuesRequest
     public int? MaximumTokens { get; set; }
 
     [Display("Temperature")]
-    [DataSource(typeof(TemperatureDataSourceHandler))]
+    [StaticDataSource(typeof(TemperatureDataSourceHandler))]
     public float? Temperature { get; set; }
 
     [Display("Target audience")]

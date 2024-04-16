@@ -1,11 +1,6 @@
 ﻿using Apps.AzureOpenAI.DataSourceHandlers;
 using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Dynamic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.AzureOpenAI.Models.Requests.Chat
 {
@@ -15,15 +10,15 @@ namespace Apps.AzureOpenAI.Models.Requests.Chat
         public int? MaximumTokens { get; set; }
 
         [Display("Temperature")]
-        [DataSource(typeof(TemperatureDataSourceHandler))]
+        [StaticDataSource(typeof(TemperatureDataSourceHandler))]
         public float? Temperature { get; set; }
 
         [Display("Presence penalty")]
-        [DataSource(typeof(PenaltyDataSourceHandler))]
+        [StaticDataSource(typeof(PenaltyDataSourceHandler))]
         public float? PresencePenalty { get; set; }
 
         [Display("Frequency penalty")]
-        [DataSource(typeof(PenaltyDataSourceHandler))]
+        [StaticDataSource(typeof(PenaltyDataSourceHandler))]
         public float? FrequencyPenalty { get; set; }
     }
 }

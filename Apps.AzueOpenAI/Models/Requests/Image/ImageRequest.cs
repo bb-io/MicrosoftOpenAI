@@ -1,5 +1,5 @@
 ﻿using Apps.AzureOpenAI.DataSourceHandlers;
-using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.AzureOpenAI.Models.Requests.Image;
 
@@ -7,6 +7,6 @@ public class ImageRequest
 {
     public string Prompt { get; set; }
         
-    [DataSource(typeof(ImageSizeDataSourceHandler))]
+    [StaticDataSource(typeof(ImageSizeDataSourceHandler))]
     public string? Size { get; set; }
 }
