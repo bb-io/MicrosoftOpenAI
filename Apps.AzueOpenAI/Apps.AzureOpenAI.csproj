@@ -6,19 +6,25 @@
     <Nullable>enable</Nullable>
 	<Product>Microsoft OpenAI</Product>
 	<Description>Azure OpenAI Service offers industry-leading coding and language AI models that you can fine-tune to your specific needs for a variety of use cases.</Description>
-	<Version>1.0.4</Version>
+	<Version>1.1.0</Version>
 	<AssemblyName>Apps.AzureOpenAI</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.9" />
-    <PackageReference Include="Blackbird.Applications.SDK.Extensions.FileManagement" Version="1.0.1" />
-    <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.16" />
-    <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.6.0" />
+    <PackageReference Include="Blackbird.Applications.SDK.Extensions.FileManagement" Version="1.0.2-alpha2" />
+    <PackageReference Include="Blackbird.Applications.Sdk.Glossaries.Utils" Version="1.0.2-alpha1" />
+    <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.25" />
+    <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.9.0-alpha1" />
+    <PackageReference Include="Blackbird.Xliff.Utils" Version="1.1.5" />
+    <PackageReference Include="morelinq" Version="4.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="TiktokenSharp" Version="1.0.7" />
   </ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Utils\Xliff\" />
 	</ItemGroup>
 </Project>

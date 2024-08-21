@@ -26,6 +26,8 @@ You can find how to create and deploy an Azure OpenAI Service resource [here](ht
 5. Click _Connect_.
 6. Verify that connection was added successfully.
 
+> **_NOTE:_** Pay attention to your `Resource URL` connection parameter. Sometimes the correct url could have some path after a domain name. For example: h<span>ttps://example.openai.azure.com/**openai**
+
 ![connection](image/README/connection.png)
 
 ## Actions
@@ -60,6 +62,35 @@ You can find how to create and deploy an Azure OpenAI Service resource [here](ht
 
 - **Create embedding**: Generate an embedding for a text provided. An embedding is a list of floating point numbers that captures semantic information about the text that it represents.
 - **Tokenize text**: Tokenize the text provided. Optionally specify encoding: cl100k_base (used by gpt-4, gpt-3.5-turbo, text-embedding-ada-002) or p50k_base (used by codex models, text-davinci-002, text-davinci-003).
+
+### XLIFF Actions
+- **Get Quality Scores for XLIFF file** Gets segment and file level quality scores for XLIFF files. Supports only version 1.2 of XLIFF currently. Optionally, you can add Threshold, New Target State and Condition input parameters to the Blackbird action to change the target state value of segments meeting the desired criteria (all three must be filled).
+
+    Optional inputs:
+	- Prompt: Add your criteria for scoring each source-target pair. If none are provided, this is replaced by _"accuracy, fluency, consistency, style, grammar and spelling"_.
+	- Bucket size: Amount of translation units to process in the same request. (See dedicated section)
+	- Source and Target languages: By defualt, we get these values from the XLIFF header. You can provide different values, no specific format required. 
+	- Threshold: value between 0-10.
+	- Condition: Criteria to filter segments whose target state will be modified.
+	- New Target State: value to update target state to for filtered translation units.
+
+    Output:
+	- Average Score: aggregated score of all segment level scores.
+	- Updated XLIFF file: segment level score added to extradata attribute & updated target state when instructed.
+
+- **Post-edit XLIFF file** Updates the targets of XLIFF 1.2 files
+
+	Optional inputs:
+	- Prompt: Add your linguistic criteria for postediting targets.
+	- Bucket size: Amount of translation units to process in the same request. (See dedicated section)
+	- Source and Target languages: By default, we get these values from the XLIFF header. You can provide different values, no specific format required.
+	- Glossary
+
+- **Process XLIFF file** given an XLIFF file, processes each translation unit according to provided instructions (default is to translate source tags) and updates the target text for each unit. This action supports only version 1.2 of XLIFF currently.
+
+#### Bucket size, performance and cost
+
+XLIFF files can contain a lot of segments. Each action takes your segments and sends them to the AI app for processing. It's possible that the amount of segments is so high that the prompt exceeds the model's context window or that the model takes longer than Blackbird actions are allowed to take. This is why we have introduced the bucket size parameter. You can tweak the bucket size parameter to determine how many segments to send to the AI model at once. This will allow you to split the workload into different API calls. The trade-off is that the same context prompt needs to be send along with each request (which increases the tokens used). From experiments we have found that a bucket size of 1500 is sufficient for models like gpt-4o. That's why 1500 is the default bucket size, however other models may require different bucket sizes.
 
 ## Example
 
