@@ -1,4 +1,4 @@
-using Apps.GoogleVertexAI.Models.Dto;
+using Apps.AzureOpenAI.Models.Dto;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Files;
 
