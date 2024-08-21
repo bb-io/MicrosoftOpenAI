@@ -7,7 +7,7 @@ public class UsageDto
 {
     [Display("Prompt tokens")] public int PromptTokens { get; set; }
 
-    //[Display("Candidates tokens")] public int CandidatesTokens { get; set; }
+    [Display("Completion tokens")] public int CompletionTokens { get; set; }
 
     [Display("Total tokens")] public int TotalTokens { get; set; }
 
@@ -17,7 +17,8 @@ public class UsageDto
         return new UsageDto
         {
             PromptTokens = u1.PromptTokens + u2.PromptTokens,
-            TotalTokens = u1.TotalTokens + u2.TotalTokens
+            TotalTokens = u1.TotalTokens + u2.TotalTokens,
+            CompletionTokens = u1.CompletionTokens + u2.CompletionTokens
         };
     }
 
@@ -29,6 +30,6 @@ public class UsageDto
     {
         PromptTokens = usageMetadata.PromptTokens;
         TotalTokens = usageMetadata.TotalTokens;
-        //CandidatesTokens = usageMetadata.C;
+        CompletionTokens = usageMetadata.CompletionTokens;
     }
 }
