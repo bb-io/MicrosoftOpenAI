@@ -26,7 +26,7 @@ You can find how to create and deploy an Azure OpenAI Service resource [here](ht
 5. Click _Connect_.
 6. Verify that connection was added successfully.
 
-> **_NOTE:_** Pay attention to your `Resource URL` connection parameter. Sometimes the correct url could have some path after a domain name. For example: h<span>ttps://example.openai.azure.com/**openai**
+> **_NOTE:_** Pay attention to your `Resource URL` connection parameter. Sometimes the correct url could have some path after a domain name. For example: https://example.openai.azure.com/**openai**
 
 ![connection](image/README/connection.png)
 
