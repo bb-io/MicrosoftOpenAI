@@ -464,7 +464,8 @@ public class XliffActions : BaseActions
                 MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
-                FrequencyPenalty = input.FrequencyPenalty
+                FrequencyPenalty = input.FrequencyPenalty,
+                DeploymentName = DeploymentName,
             });
         var result = response.Value.Choices[0].Message.Content;
         return (result, new(response.Value.Usage));

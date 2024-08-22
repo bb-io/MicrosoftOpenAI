@@ -1,4 +1,4 @@
-# Blackbird.io Microsoft OpenAI
+# Blackbird.io Azure OpenAI
 
 Blackbird is the new automation backbone for the language technology industry. Blackbird provides enterprise-scale automation and orchestration with a simple no-code/low-code platform. Blackbird enables ambitious organizations to identify, vet and automate as many processes as possible. Not just localization workflows, but any business and IT process. This repository represents an application that is deployable on Blackbird and usable inside the workflow editor.
 
@@ -19,9 +19,9 @@ You can find how to create and deploy an Azure OpenAI Service resource [here](ht
 
 ## Connecting
 
-1. Navigate to Apps, and identify the **Microsoft OpenAI** app. You can use search to find it.
+1. Navigate to Apps, and identify the **Azure OpenAI** app. You can use search to find it.
 2. Click _Add Connection_.
-3. Name your connection for future reference e.g. 'My Microsoft OpenAI connection'.
+3. Name your connection for future reference e.g. 'My Azure OpenAI connection'.
 4. Enter the `Resource URL`, `Deployment name`, and `API key` for your Azure OpenAI account.
 5. Click _Connect_.
 6. Verify that connection was added successfully.
@@ -94,7 +94,7 @@ XLIFF files can contain a lot of segments. Each action takes your segments and s
 
 ## Example
 
-Here is an example of how you can use the `Microsoft OpenAI` app in a workflow:
+Here is an example of how you can use the `Azure OpenAI` app in a workflow:
 
 ![example](image/README/example.png)
 
@@ -103,7 +103,7 @@ This workflow automates the process of handling a specific trigger in Slack. Her
 1. On app mentioned (Slack): The workflow starts when the app is mentioned in a Slack channel.
 2. Find translation issues (Blackbird Prompts): It then uses Blackbird Prompts to find translation issues in the mentioned content.
 3. Build prompt: Next, it constructs a prompt based on the identified issues.
-4. Chat (Microsoft OpenAI): The constructed prompt is sent to Microsoft OpenAI to generate a response or solution.
+4. Chat (Azure OpenAI): The constructed prompt is sent to Azure OpenAI to generate a response or solution.
 5. Send message (Slack): Finally, the response from OpenAI is sent back as a message in the Slack channel.
 
 ## Feedback

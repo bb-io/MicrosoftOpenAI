@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apps.AzureOpenAI", "Apps.AzueOpenAI\Apps.AzureOpenAI.csproj", "{8FBB7BA9-8E4F-4532-BC9A-3BD27F51B962}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apps.AzureOpenAI", "Apps.AzueOpenAI\Apps.AzureOpenAI.csproj", "{8FBB7BA9-8E4F-4532-BC9A-3BD27F51B962}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8FBB7BA9-8E4F-4532-BC9A-3BD27F51B962}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FBB7BA9-8E4F-4532-BC9A-3BD27F51B962}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FBB7BA9-8E4F-4532-BC9A-3BD27F51B962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

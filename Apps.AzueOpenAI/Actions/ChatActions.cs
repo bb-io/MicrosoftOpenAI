@@ -23,10 +23,12 @@ public class ChatActions : BaseActions
     [Action("Generate completion", Description = "Completes the given prompt")]
     public async Task<CompletionResponse> CreateCompletion([ActionParameter] CompletionRequest input)
     {
+        var test = "x";
         var completion = await Client.GetCompletionsAsync(
             new CompletionsOptions(DeploymentName,
                 new List<string>() { input.Prompt })
             {
+                DeploymentName = DeploymentName,
                 MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
@@ -45,6 +47,7 @@ public class ChatActions : BaseActions
             new ChatCompletionsOptions(DeploymentName,
                 new List<ChatMessage>() { new ChatMessage(ChatRole.User, input.Message) })
             {
+                DeploymentName = DeploymentName,
                 MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
@@ -67,6 +70,7 @@ public class ChatActions : BaseActions
                     new ChatMessage(ChatRole.System, input.SystemPrompt), new ChatMessage(ChatRole.User, input.Message)
                 })
             {
+                DeploymentName = DeploymentName,
                 MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
@@ -96,6 +100,7 @@ public class ChatActions : BaseActions
             new CompletionsOptions(DeploymentName,
                 new List<string>() { prompt })
             {
+                DeploymentName = DeploymentName,
                 MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
@@ -124,6 +129,7 @@ public class ChatActions : BaseActions
                 new List<ChatMessage>()
                     { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
+                DeploymentName = DeploymentName,
                 MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
@@ -143,6 +149,7 @@ public class ChatActions : BaseActions
         var response = await Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName, messages)
             {
+                DeploymentName = DeploymentName,
                 MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
@@ -180,7 +187,8 @@ public class ChatActions : BaseActions
         var response = await Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
                 new List<ChatMessage>()
-                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) }));
+                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
+            { DeploymentName = DeploymentName });
         return new()
         {
             EditText = response.Value.Choices.First().Message.Content
@@ -212,7 +220,8 @@ public class ChatActions : BaseActions
                     { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
                 MaxTokens = input.MaximumTokens ?? 5000,
-                Temperature = input.Temperature ?? 0.5f
+                Temperature = input.Temperature ?? 0.5f,
+                DeploymentName = DeploymentName,
             });
         return new()
         {
@@ -250,7 +259,8 @@ public class ChatActions : BaseActions
                     { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
                 MaxTokens = input.MaximumTokens ?? 5000,
-                Temperature = input.Temperature ?? 0.5f
+                Temperature = input.Temperature ?? 0.5f,
+                DeploymentName = DeploymentName,
             });
         return new()
         {
@@ -291,6 +301,7 @@ public class ChatActions : BaseActions
             {
                 MaxTokens = input.MaximumTokens ?? 5000,
                 Temperature = input.Temperature ?? 0.5f,
+                DeploymentName = DeploymentName,
             });
         try
         {
@@ -319,7 +330,8 @@ public class ChatActions : BaseActions
                 new List<ChatMessage>() { new ChatMessage(ChatRole.User, prompt) })
             {
                 MaxTokens = maximumTokensNumber,
-                Temperature = 0.1f
+                DeploymentName = DeploymentName,
+                Temperature = 0.1f,
             });
         return new()
         {
