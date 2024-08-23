@@ -17,6 +17,7 @@ using Blackbird.Applications.Sdk.Glossaries.Utils.Converters;
 using Apps.AzureOpenAI.Models.Dto;
 using Apps.AzureOpenAI.Models.Requests.Chat;
 using Azure.AI.OpenAI;
+using Apps.AzureOpenAI.Utils.Xliff;
 
 namespace Apps.AzureOpenAI.Actions;
 
@@ -48,22 +49,22 @@ public class XliffActions : BaseActions
                  "Specify the number of source texts to be translated at once. Default value: 1500. (See our documentation for an explanation)")]
         int? bucketSize = 1500)
     {
-        var xliffDocument = await LoadAndParseXliffDocument(input.File);
+        var fileStream = await _fileManagementClient.DownloadAsync(input.File);
+        var xliffDocument = Utils.Xliff.Extensions.ParseXLIFF(fileStream);
         if (xliffDocument.TranslationUnits.Count == 0)
         {
             return new TranslateXliffResponse { File = input.File, Usage = new UsageDto() };
         }
 
         string systemPrompt = GetSystemPrompt(string.IsNullOrEmpty(prompt));
-        var list = xliffDocument.TranslationUnits.Select(x => x.Source).ToList();
-
-        var (translatedTexts, usage) = await GetTranslations(prompt, xliffDocument, systemPrompt, list,
+        var (translatedTexts, usage) = await GetTranslations(prompt, xliffDocument, systemPrompt,
             bucketSize ?? 1500,
             glossary.Glossary, promptRequest);
 
-        var updatedDocument =
-            UpdateXliffDocumentWithTranslations(xliffDocument, translatedTexts, true);
-        var fileReference = await UploadUpdatedDocument(updatedDocument, input.File);
+        var stream = await _fileManagementClient.DownloadAsync(input.File);
+        var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, translatedTexts);
+        string contentType = input.File.ContentType ?? "application/xml";
+        var fileReference = await _fileManagementClient.UploadAsync(updatedFile, contentType, input.File.Name);
         return new TranslateXliffResponse { File = fileReference, Usage = usage };
     }
 
@@ -325,27 +326,19 @@ public class XliffActions : BaseActions
         return prompt;
     }
 
-    private async Task<(string[], UsageDto)> GetTranslations(string prompt, XliffDocument xliffDocument,
-        string systemPrompt, List<string> sourceTexts, int bucketSize, FileReference? glossary,
+    private async Task<(Dictionary<string, string>, UsageDto)> GetTranslations(string prompt, ParsedXliff xliff,
+        string systemPrompt, int bucketSize, FileReference? glossary,
         BaseChatRequest promptRequest)
     {
-        List<string> allTranslatedTexts = new List<string>();
-
-        int numberOfBuckets = (int)Math.Ceiling(sourceTexts.Count / (double)bucketSize);
+        var results = new List<string>();
+        var batches = xliff.TranslationUnits.Batch(bucketSize);
 
         var usageDto = new UsageDto();
-        for (int i = 0; i < numberOfBuckets; i++)
+        foreach (var batch in batches)
         {
-            var bucketIndexOffset = i * bucketSize;
-            var bucketSourceTexts = sourceTexts
-                .Skip(bucketIndexOffset)
-                .Take(bucketSize)
-                .Select((text, index) => "{ID:" + $"{bucketIndexOffset + index}" + "}" + $"{text}")
-                .ToList();
+            string json = JsonConvert.SerializeObject(batch.Select(x => "{ID:" + x.Id + "}" + x.Source));
 
-            string json = JsonConvert.SerializeObject(bucketSourceTexts);
-
-            var userPrompt = GetUserPrompt(prompt, xliffDocument, json);
+            var userPrompt = GetUserPrompt(prompt, xliff, json);
 
             if (glossary != null)
             {
@@ -365,20 +358,13 @@ public class XliffActions : BaseActions
             var (response, promptUsage) = await ExecuteSystemPrompt(promptRequest, userPrompt, systemPrompt);
 
             usageDto += promptUsage;
-            var translatedText = response.Trim()
-                .Replace("```", string.Empty).Replace("json", string.Empty);
-
+            var translatedText = response.Trim();
+            
             try
             {
-                var result = JsonConvert.DeserializeObject<string[]>(translatedText)
-                    .Select(t =>
-                    {
-                        int idEndIndex = t.IndexOf('}') + 1;
-                        return idEndIndex < t.Length ? t.Substring(idEndIndex) : string.Empty;
-                    })
-                    .ToArray();
+                var result = JsonConvert.DeserializeObject<string[]>(Regex.Match(translatedText,"\\[[\\s\\S]+\\]").Value);
 
-                if (result.Length != bucketSourceTexts.Count)
+                if (result.Length != batch.Count())
                 {
                     throw new InvalidOperationException(
                         "OpenAI returned inappropriate response. " +
@@ -387,19 +373,19 @@ public class XliffActions : BaseActions
                         "Try change model or bucket size (to lower values) or add retries to this action.");
                 }
 
-                allTranslatedTexts.AddRange(result);
+                results.AddRange(result);
             }
             catch (Exception e)
             {
                 throw new Exception(
-                    $"Failed to parse the translated text in bucket {i + 1}. Exception message: {e.Message}; Exception type: {e.GetType()}");
+                    $"Failed to parse the translated text. Exception message: {e.Message}; Exception type: {e.GetType()}");
             }
         }
 
-        return (allTranslatedTexts.ToArray(), usageDto);
+        return (results.ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value), usageDto);
     }
 
-    string GetUserPrompt(string prompt, XliffDocument xliffDocument, string json)
+    string GetUserPrompt(string prompt, ParsedXliff xliffDocument, string json)
     {
         string instruction = string.IsNullOrEmpty(prompt)
             ? $"Translate the following texts from {xliffDocument.SourceLanguage} to {xliffDocument.TargetLanguage}."
