@@ -358,12 +358,11 @@ public class XliffActions : BaseActions
             var (response, promptUsage) = await ExecuteSystemPrompt(promptRequest, userPrompt, systemPrompt);
 
             usageDto += promptUsage;
-            var translatedText = response.Trim()
-                .Replace("```", string.Empty).Replace("json", string.Empty);
-
+            var translatedText = response.Trim();
+            
             try
             {
-                var result = JsonConvert.DeserializeObject<string[]>(translatedText.Substring(translatedText.IndexOf("[")));
+                var result = JsonConvert.DeserializeObject<string[]>(Regex.Match(translatedText,"\\[[\\s\\S]+\\]").Value);
 
                 if (result.Length != batch.Count())
                 {
