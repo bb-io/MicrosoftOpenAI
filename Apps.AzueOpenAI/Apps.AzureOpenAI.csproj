@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 	<Product>Azure OpenAI</Product>
 	<Description>Azure OpenAI Service offers industry-leading coding and language AI models that you can fine-tune to your specific needs for a variety of use cases.</Description>
-	<Version>1.1.1</Version>
+	<Version>1.1.2</Version>
 	<AssemblyName>Apps.AzureOpenAI</AssemblyName>
   </PropertyGroup>
 
