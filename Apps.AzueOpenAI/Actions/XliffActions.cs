@@ -61,8 +61,9 @@ public class XliffActions : BaseActions
             bucketSize ?? 1500,
             glossary.Glossary, promptRequest);
 
+        var updatedResults = Utils.Xliff.Extensions.CheckTagIssues(xliffDocument.TranslationUnits, translatedTexts);
         var stream = await _fileManagementClient.DownloadAsync(input.File);
-        var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, translatedTexts);
+        var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, updatedResults);
         string contentType = input.File.ContentType ?? "application/xml";
         var fileReference = await _fileManagementClient.UploadAsync(updatedFile, contentType, input.File.Name);
         return new TranslateXliffResponse { File = fileReference, Usage = usage };
@@ -362,27 +363,49 @@ public class XliffActions : BaseActions
             
             try
             {
-                var result = JsonConvert.DeserializeObject<string[]>(Regex.Match(translatedText,"\\[[\\s\\S]+\\]").Value);
-
-                if (result.Length != batch.Count())
+                var filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+(\\])").Value;
+                if (String.IsNullOrEmpty(filteredText))
                 {
-                    throw new InvalidOperationException(
-                        "OpenAI returned inappropriate response. " +
-                        "The number of translated texts does not match the number of source texts. " +
-                        "Probably there is a duplication or a missing text in translation unit. " +
-                        "Try change model or bucket size (to lower values) or add retries to this action.");
+                    var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
+                    filteredText = translatedText.Remove(index) + "\"]"; 
                 }
+                filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+(\\])").Value;
+                var result = JsonConvert.DeserializeObject<string[]>(filteredText);
 
-                results.AddRange(result);
+                 results.AddRange(result);
             }
-            catch (Exception e)
+            catch 
             {
-                throw new Exception(
+                try 
+                {
+                (response, promptUsage) = await ExecuteSystemPrompt(promptRequest, userPrompt, systemPrompt);
+
+                usageDto += promptUsage;
+                translatedText = response.Trim();
+
+                    
+                    var filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+(\\])").Value;
+                    if (String.IsNullOrEmpty(filteredText))
+                    {
+                        var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
+                        filteredText = translatedText.Remove(index) + "\"]";
+                    }
+                    filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+(\\])").Value;
+                    var result = JsonConvert.DeserializeObject<string[]>(filteredText);
+
+                    results.AddRange(result);
+                } 
+                catch (Exception e)
+                {
+                    throw new Exception(
                     $"Failed to parse the translated text. Exception message: {e.Message}; Exception type: {e.GetType()}");
+
+                }
             }
         }
+        
+        return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value), usageDto);
 
-        return (results.ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value), usageDto);
     }
 
     string GetUserPrompt(string prompt, ParsedXliff xliffDocument, string json)

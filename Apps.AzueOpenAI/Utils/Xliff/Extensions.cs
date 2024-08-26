@@ -59,12 +59,13 @@ public static class Extensions
         foreach ( var tag in tags.Select(x => x.Value)) 
         {
             count++;
+            var type = Regex.Match(tag, "<(.*?) ").Groups[1].Value;
             parsedTags.Add(new Tag 
             {
                 Position = count,
                 Id = Regex.Match(tag.ToLower(), "id=\"(.*?)\"").Groups[1].Value,
-                Value = tag,
-                Type = Regex.Match(tag, "<(.*?) ").Groups[1].Value
+                Value = type == "g" || type == "x" ? "" : tag,
+                Type = type
             });
 
         }
