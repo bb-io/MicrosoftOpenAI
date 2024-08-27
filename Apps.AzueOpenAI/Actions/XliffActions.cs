@@ -379,8 +379,9 @@ public class XliffActions : BaseActions
             }
             catch (Exception e)
                 {
-                    throw new Exception(e.Message);
-                }
+                    throw new Exception(
+                    $"Failed to parse the translated text. Exception message: {e.Message}; Exception type: {e.GetType()}");
+            }
                         
         }
         
