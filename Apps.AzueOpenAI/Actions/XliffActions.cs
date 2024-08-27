@@ -66,7 +66,7 @@ public class XliffActions : BaseActions
         var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, updatedResults);
         string contentType = input.File.ContentType ?? "application/xml";
         var fileReference = await _fileManagementClient.UploadAsync(updatedFile, contentType, input.File.Name);
-        return new TranslateXliffResponse { File = fileReference, Usage = usage };
+        return new TranslateXliffResponse { File = fileReference, Usage = usage, Changes = updatedResults.Count };
     }
 
     [Action("Get Quality Scores for XLIFF file",
