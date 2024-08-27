@@ -376,7 +376,7 @@ public class XliffActions : BaseActions
             }
             catch (Exception e)
                 {
-                    throw new Exception(e + filteredText);
+                    throw new Exception(filteredText);
                 }
                         
         }
