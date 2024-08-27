@@ -339,7 +339,9 @@ public class XliffActions : BaseActions
         {
             string json = JsonConvert.SerializeObject(batch.Select(x => "{ID:" + x.Id + "}" + x.Source));
 
-            var userPrompt = GetUserPrompt(prompt, xliff, json);
+            var userPrompt = GetUserPrompt(prompt +
+                "Reply with the processed text preserving the same format structure as provided, your output will need to be deserialized programmatically afterwards.",
+                xliff, json);
 
             if (glossary != null)
             {
@@ -366,7 +368,7 @@ public class XliffActions : BaseActions
                  filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+(\\])").Value;
                 if (String.IsNullOrEmpty(filteredText))
                 {
-                    var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
+                    var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") == -1? translatedText.LastIndexOf("\n\",") : translatedText.LastIndexOf("\",");
                     filteredText = translatedText.Remove(index) + "\"]"; 
                 }
                 filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+(\\])").Value;
