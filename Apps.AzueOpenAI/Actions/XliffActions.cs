@@ -360,10 +360,10 @@ public class XliffActions : BaseActions
 
             usageDto += promptUsage;
             var translatedText = response.Trim();
-            
+            string filteredText = "";
             try
             {
-                var filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+(\\])").Value;
+                 filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+(\\])").Value;
                 if (String.IsNullOrEmpty(filteredText))
                 {
                     var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
@@ -376,7 +376,7 @@ public class XliffActions : BaseActions
             }
             catch (Exception e)
                 {
-                    continue;
+                    throw new Exception(e + filteredText);
                 }
                         
         }
