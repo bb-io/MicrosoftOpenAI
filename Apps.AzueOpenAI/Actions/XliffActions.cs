@@ -372,36 +372,13 @@ public class XliffActions : BaseActions
                 filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+(\\])").Value;
                 var result = JsonConvert.DeserializeObject<string[]>(filteredText);
 
-                 results.AddRange(result);
+                results.AddRange(result);
             }
-            catch 
-            {
-                try 
+            catch (Exception e)
                 {
-                (response, promptUsage) = await ExecuteSystemPrompt(promptRequest, userPrompt, systemPrompt);
-
-                usageDto += promptUsage;
-                translatedText = response.Trim();
-
-                    
-                    var filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+(\\])").Value;
-                    if (String.IsNullOrEmpty(filteredText))
-                    {
-                        var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
-                        filteredText = translatedText.Remove(index) + "\"]";
-                    }
-                    filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+(\\])").Value;
-                    var result = JsonConvert.DeserializeObject<string[]>(filteredText);
-
-                    results.AddRange(result);
-                } 
-                catch (Exception e)
-                {
-                    throw new Exception(
-                    $"Failed to parse the translated text. Exception message: {e.Message}; Exception type: {e.GetType()}");
-
+                    continue;
                 }
-            }
+                        
         }
         
         return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value), usageDto);
