@@ -369,7 +369,7 @@ public class XliffActions : BaseActions
                 if (String.IsNullOrEmpty(filteredText))
                 {
                     var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
-                    index = index == -1 ? translatedText.LastIndexOf("\n\",") : index;
+                    index = index == -1 ? translatedText.LastIndexOf("\n\",") == -1? translatedText.LastIndexOf("\\n\",") : translatedText.LastIndexOf("\n\",") : index;
                     filteredText = translatedText.Remove(index) + "\"]"; 
                 }
                 filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+(\\])").Value;
@@ -379,7 +379,7 @@ public class XliffActions : BaseActions
             }
             catch (Exception e)
                 {
-                    throw new Exception(filteredText);
+                    throw new Exception(e.Message);
                 }
                         
         }
