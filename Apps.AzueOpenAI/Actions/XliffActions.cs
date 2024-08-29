@@ -63,17 +63,17 @@ public class XliffActions : BaseActions
             glossary.Glossary, promptRequest);
         //[DEBUG]
         debug = debug + "translatedTexts: " + translatedTexts.Count +"\n";
-        var updatedResults = Utils.Xliff.Extensions.CheckTagIssues(xliffDocument.TranslationUnits, translatedTexts);
+        //var updatedResults = Utils.Xliff.Extensions.CheckTagIssues(xliffDocument.TranslationUnits, translatedTexts);
         //[DEBUG]
-        debug = debug + "updatedResults: " + updatedResults.Count + "\n";
+       // debug = debug + "updatedResults: " + updatedResults.Count + "\n";
         var stream = await _fileManagementClient.DownloadAsync(input.File);
-        var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, updatedResults);
+        var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, translatedTexts);
         string contentType = input.File.ContentType ?? "application/xml";
         var fileReference = await _fileManagementClient.UploadAsync(updatedFile, contentType, input.File.Name);
         //[DEBUG]
         var streamFile = new MemoryStream(Encoding.UTF8.GetBytes(debug));
         var debugFile = await _fileManagementClient.UploadAsync(streamFile, contentType, "debugFile.txt");
-        return new TranslateXliffResponse { File = debugFile, Usage = usage, Changes = updatedResults.Count };
+        return new TranslateXliffResponse { File = debugFile, Usage = usage, Changes = translatedTexts.Count };
     }
 
     [Action("Get Quality Scores for XLIFF file",
