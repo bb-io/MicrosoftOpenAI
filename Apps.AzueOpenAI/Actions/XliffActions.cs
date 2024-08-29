@@ -57,16 +57,23 @@ public class XliffActions : BaseActions
         }
 
         string systemPrompt = GetSystemPrompt(string.IsNullOrEmpty(prompt));
-        var (translatedTexts, usage) = await GetTranslations(prompt, xliffDocument, systemPrompt,
+        //[DEBUG]
+        var (translatedTexts, usage, debug) = await GetTranslations(prompt, xliffDocument, systemPrompt,
             bucketSize ?? 1500,
             glossary.Glossary, promptRequest);
-
+        //[DEBUG]
+        debug = debug + "translatedTexts: " + translatedTexts.Count +"\n";
         var updatedResults = Utils.Xliff.Extensions.CheckTagIssues(xliffDocument.TranslationUnits, translatedTexts);
+        //[DEBUG]
+        debug = debug + "updatedResults: " + updatedResults.Count + "\n";
         var stream = await _fileManagementClient.DownloadAsync(input.File);
         var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, updatedResults);
         string contentType = input.File.ContentType ?? "application/xml";
         var fileReference = await _fileManagementClient.UploadAsync(updatedFile, contentType, input.File.Name);
-        return new TranslateXliffResponse { File = fileReference, Usage = usage, Changes = updatedResults.Count };
+        //[DEBUG]
+        var streamFile = new MemoryStream(Encoding.UTF8.GetBytes(debug));
+        var debugFile = await _fileManagementClient.UploadAsync(streamFile, contentType, "debugFile.txt");
+        return new TranslateXliffResponse { File = debugFile, Usage = usage, Changes = updatedResults.Count };
     }
 
     [Action("Get Quality Scores for XLIFF file",
@@ -327,10 +334,12 @@ public class XliffActions : BaseActions
         return prompt;
     }
 
-    private async Task<(Dictionary<string, string>, UsageDto)> GetTranslations(string prompt, ParsedXliff xliff,
+    private async Task<(Dictionary<string, string>, UsageDto, string)> GetTranslations(string prompt, ParsedXliff xliff,
         string systemPrompt, int bucketSize, FileReference? glossary,
         BaseChatRequest promptRequest)
     {
+        //[DEBUG]
+        var debug = new StringBuilder();
         var results = new List<string>();
         var batches = xliff.TranslationUnits.Batch(bucketSize);
 
@@ -365,14 +374,20 @@ public class XliffActions : BaseActions
             string filteredText = "";
             try
             {
-                 filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+(\\])").Value;
+                //[DEBUG]
+                debug.Append("filteredText line 371"+filteredText + Environment.NewLine);
+                 filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+\\]").Value;
                 if (String.IsNullOrEmpty(filteredText))
                 {
                     var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
                     index = index == -1 ? translatedText.LastIndexOf("\n\",") == -1? translatedText.LastIndexOf("\\n\",") : translatedText.LastIndexOf("\n\",") : index;
-                    filteredText = translatedText.Remove(index) + "\"]"; 
+                    filteredText = translatedText.Remove(index) + "\"]";
+                    //[DEBUG]
+                    debug.Append("Index" + index + Environment.NewLine);
                 }
-                filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+(\\])").Value;
+                filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+\\]").Value;
+                //[DEBUG]
+                debug.Append("After matching and ready for deserialize" + filteredText + Environment.NewLine);
                 var result = JsonConvert.DeserializeObject<string[]>(filteredText);
 
                 results.AddRange(result);
@@ -384,8 +399,8 @@ public class XliffActions : BaseActions
             }
                         
         }
-        
-        return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value), usageDto);
+        //[DEBUG]
+        return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value), usageDto, debug.ToString());
 
     }
 
