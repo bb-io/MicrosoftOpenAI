@@ -340,7 +340,7 @@ public class XliffActions : BaseActions
             string json = JsonConvert.SerializeObject(batch.Select(x => "{ID:" + x.Id + "}" + x.Source));
 
             var userPrompt = GetUserPrompt(prompt +
-                "Reply with the processed text preserving the same format structure as provided, your output will need to be deserialized programmatically afterwards.",
+                "Reply with the processed text preserving the same format structure as provided, your output will need to be deserialized programmatically afterwards. Do not add linebreaks.",
                 xliff, json);
 
             if (glossary != null)
