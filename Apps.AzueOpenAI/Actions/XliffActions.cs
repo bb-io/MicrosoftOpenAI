@@ -371,7 +371,8 @@ public class XliffActions : BaseActions
                     var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
                     index = index == -1 ? translatedText.LastIndexOf("\n\",") == -1? translatedText.LastIndexOf("\\n\",") : translatedText.LastIndexOf("\n\",") : index;
                     filteredText = translatedText.Remove(index) + "\"]";
-                    }
+                    filteredText = filteredText.Replace("\\n", "").Replace("\n","");
+                }
                 filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+\\]").Value;
                 var result = JsonConvert.DeserializeObject<string[]>(filteredText);
 
