@@ -60,13 +60,12 @@ public class XliffActions : BaseActions
         var (translatedTexts, usage) = await GetTranslations(prompt, xliffDocument, systemPrompt,
             bucketSize ?? 1500,
             glossary.Glossary, promptRequest);
-
-        var updatedResults = Utils.Xliff.Extensions.CheckTagIssues(xliffDocument.TranslationUnits, translatedTexts);
+        //var updatedResults = Utils.Xliff.Extensions.CheckTagIssues(xliffDocument.TranslationUnits, translatedTexts);
         var stream = await _fileManagementClient.DownloadAsync(input.File);
-        var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, updatedResults);
+        var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, translatedTexts);
         string contentType = input.File.ContentType ?? "application/xml";
         var fileReference = await _fileManagementClient.UploadAsync(updatedFile, contentType, input.File.Name);
-        return new TranslateXliffResponse { File = fileReference, Usage = usage, Changes = updatedResults.Count };
+        return new TranslateXliffResponse { File = fileReference, Usage = usage, Changes = translatedTexts.Count };
     }
 
     [Action("Get Quality Scores for XLIFF file",
@@ -331,6 +330,7 @@ public class XliffActions : BaseActions
         string systemPrompt, int bucketSize, FileReference? glossary,
         BaseChatRequest promptRequest)
     {
+       
         var results = new List<string>();
         var batches = xliff.TranslationUnits.Batch(bucketSize);
 
@@ -340,7 +340,7 @@ public class XliffActions : BaseActions
             string json = JsonConvert.SerializeObject(batch.Select(x => "{ID:" + x.Id + "}" + x.Source));
 
             var userPrompt = GetUserPrompt(prompt +
-                "Reply with the processed text preserving the same format structure as provided, your output will need to be deserialized programmatically afterwards.",
+                "Reply with the processed text preserving the same format structure as provided, your output will need to be deserialized programmatically afterwards. Do not add linebreaks.",
                 xliff, json);
 
             if (glossary != null)
@@ -365,14 +365,15 @@ public class XliffActions : BaseActions
             string filteredText = "";
             try
             {
-                 filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+(\\])").Value;
+                filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+\\]").Value;
                 if (String.IsNullOrEmpty(filteredText))
                 {
                     var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
                     index = index == -1 ? translatedText.LastIndexOf("\n\",") == -1? translatedText.LastIndexOf("\\n\",") : translatedText.LastIndexOf("\n\",") : index;
-                    filteredText = translatedText.Remove(index) + "\"]"; 
+                    filteredText = translatedText.Remove(index) + "\"]";
+                    filteredText = filteredText.Replace("\\n", "");
                 }
-                filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+(\\])").Value;
+                filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+\\]").Value;
                 var result = JsonConvert.DeserializeObject<string[]>(filteredText);
 
                 results.AddRange(result);
@@ -384,7 +385,7 @@ public class XliffActions : BaseActions
             }
                         
         }
-        
+       
         return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value), usageDto);
 
     }
