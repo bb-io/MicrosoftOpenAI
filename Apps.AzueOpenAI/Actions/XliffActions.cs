@@ -386,7 +386,7 @@ public class XliffActions : BaseActions
                         
         }
        
-        return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value), usageDto);
+        return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value.Trim()), usageDto);
 
     }
 
