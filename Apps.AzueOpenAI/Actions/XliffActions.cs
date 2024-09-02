@@ -374,7 +374,7 @@ public class XliffActions : BaseActions
                 }
                 filteredText = Regex.Replace(filteredText,"\\n *", "").Replace("& ", "&amp; ");
                 filteredText = Regex.Replace(filteredText, "\\\\n *", "");
-                filteredText = Regex.Replace(filteredText,"(\\<(g|x) id=)\\\"(.*?)\\\"\\>", "${1}\"${3}\">");
+                filteredText = Regex.Replace(filteredText,@"(\<(g|x) id=)\""(.*?)\"">", "${1}\"${3}\">");
                 filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+\\]").Value;
                 var result = JsonConvert.DeserializeObject<string[]>(filteredText);
 
