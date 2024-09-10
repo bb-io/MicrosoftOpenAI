@@ -372,8 +372,7 @@ public class XliffActions : BaseActions
                     index = index == -1 ? translatedText.LastIndexOf("\n\",") == -1? translatedText.LastIndexOf("\\n\",") : translatedText.LastIndexOf("\n\",") : index;
                     filteredText = translatedText.Remove(index) + "\"]";
                 }
-                filteredText = Regex.Replace(filteredText,"\\n *", "").Replace("& ", "&amp; ");
-                filteredText = Regex.Replace(filteredText, "\\\\n *", "");
+                filteredText = filteredText.Replace("& ", "&amp; ");
                 filteredText = Regex.Replace(filteredText,@"(\<(g|x) id=)\?\""(.*?)\?\"">", "${1}\"${3}\">");
                 filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+\\]").Value;
                 var result = JsonConvert.DeserializeObject<string[]>(filteredText);
@@ -382,13 +381,13 @@ public class XliffActions : BaseActions
             }
             catch (Exception e)
                 {
+                continue;
                     throw new Exception(
                     $"Failed to parse the translated text. Exception message: {e.Message}; Exception type: {e.GetType()}");
             }
                         
         }
-       
-        return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value.Trim()), usageDto);
+        return (results.Where(z => Regex.Match(z ,"\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Replace(Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value, "\\?\\n *","").Trim()), usageDto);
 
     }
 
