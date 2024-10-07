@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using Apps.AzureOpenAI.Models.Requests.Xliff;
 using Apps.AzureOpenAI.Actions.Base;
+using Apps.AzureOpenAI.Constants;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Apps.AzureOpenAI.Models.Response.Xliff;
 using MoreLinq;
@@ -15,22 +16,17 @@ using Blackbird.Xliff.Utils;
 using Blackbird.Xliff.Utils.Extensions;
 using Blackbird.Applications.Sdk.Glossaries.Utils.Converters;
 using Apps.AzureOpenAI.Models.Dto;
+using Apps.AzureOpenAI.Models.Entities;
 using Apps.AzureOpenAI.Models.Requests.Chat;
+using Apps.AzureOpenAI.Utils;
 using Azure.AI.OpenAI;
-using Apps.AzureOpenAI.Utils.Xliff;
 
 namespace Apps.AzureOpenAI.Actions;
 
 [ActionList]
-public class XliffActions : BaseActions
+public class XliffActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
+    : BaseActions(invocationContext, fileManagementClient)
 {
-    private readonly IFileManagementClient _fileManagementClient;
-
-    public XliffActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : base(invocationContext)
-    {
-        _fileManagementClient = fileManagementClient;
-    }
-
     [Action("Process XLIFF file",
         Description =
             "Processes each translation unit in the XLIFF file according to the provided instructions (by default it just translates the source tags) and updates the target text for each unit. For now it supports only 1.2 version of XLIFF.")]
@@ -49,23 +45,28 @@ public class XliffActions : BaseActions
                  "Specify the number of source texts to be translated at once. Default value: 1500. (See our documentation for an explanation)")]
         int? bucketSize = 1500)
     {
-        var fileStream = await _fileManagementClient.DownloadAsync(input.File);
-        var xliffDocument = Utils.Xliff.Extensions.ParseXLIFF(fileStream);
+        var xliffDocument = await DownloadXliffDocumentAsync(input.File);
         if (xliffDocument.TranslationUnits.Count == 0)
         {
             return new TranslateXliffResponse { File = input.File, Usage = new UsageDto() };
         }
 
-        string systemPrompt = GetSystemPrompt(string.IsNullOrEmpty(prompt));
-        var (translatedTexts, usage) = await GetTranslations(prompt, xliffDocument, systemPrompt,
-            bucketSize ?? 1500,
-            glossary.Glossary, promptRequest);
-        //var updatedResults = Utils.Xliff.Extensions.CheckTagIssues(xliffDocument.TranslationUnits, translatedTexts);
-        var stream = await _fileManagementClient.DownloadAsync(input.File);
-        var updatedFile = Blackbird.Xliff.Utils.Utils.XliffExtensions.UpdateOriginalFile(stream, translatedTexts);
-        string contentType = input.File.ContentType ?? "application/xml";
-        var fileReference = await _fileManagementClient.UploadAsync(updatedFile, contentType, input.File.Name);
-        return new TranslateXliffResponse { File = fileReference, Usage = usage, Changes = translatedTexts.Count };
+        var systemPrompt = GetSystemPrompt(string.IsNullOrEmpty(prompt));
+        var (translatedTexts, usage) = await ProcessTranslationUnits(xliffDocument,
+            new(prompt, systemPrompt, bucketSize ?? 1500, promptRequest, glossary?.Glossary));
+
+        translatedTexts.ForEach(x =>
+        {
+            var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x.TranslationId);
+            if (translationUnit != null)
+            {
+                translationUnit.Target = x.TranslatedText;
+            }
+        });
+
+        var fileReference =
+            await fileManagementClient.UploadAsync(xliffDocument.ToStream(), input.File.ContentType, input.File.Name);
+        return new TranslateXliffResponse { File = fileReference, Usage = usage };
     }
 
     [Action("Get Quality Scores for XLIFF file",
@@ -83,56 +84,54 @@ public class XliffActions : BaseActions
                  "Specify the number of translation units to be processed at once. Default value: 1500. (See our documentation for an explanation)")]
         int? bucketSize = 1500)
     {
-        var xliffDocument = await LoadAndParseXliffDocument(input.File);
+        var xliffDocument = await DownloadXliffDocumentAsync(input.File);
         string criteriaPrompt = string.IsNullOrEmpty(prompt)
             ? "accuracy, fluency, consistency, style, grammar and spelling"
             : prompt;
-        var results = new Dictionary<string, float>();
+        
         var batches = xliffDocument.TranslationUnits.Batch((int)bucketSize);
         var src = input.SourceLanguage ?? xliffDocument.SourceLanguage;
         var tgt = input.TargetLanguage ?? xliffDocument.TargetLanguage;
-
+        
         var usage = new UsageDto();
-
+        var results = new Dictionary<string, float>();
         foreach (var batch in batches)
         {
-            string userPrompt =
-                $"Your input is going to be a group of sentences in {src} and their translation into {tgt}. " +
-                "Only provide as output the ID of the sentence and the score number as a comma separated array of tuples. " +
-                $"Place the tuples in a same line and separate them using semicolons, example for two assessments: 2,7;32,5. The score number is a score from 1 to 10 assessing the quality of the translation, considering the following criteria: {criteriaPrompt}. Sentences: ";
-            foreach (var tu in batch)
-            {
-                userPrompt += $" {tu.Id} {tu.Source} {tu.Target}";
-            }
-
-            var systemPrompt =
-                "You are a linguistic expert that should process the following texts accoring to the given instructions";
-            var (result, promptUsage) = await ExecuteSystemPrompt(promptRequest, userPrompt, systemPrompt);
+            var userPrompt = PromptConstants.GetQualityScorePrompt(criteriaPrompt, src, tgt,
+                JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target }).ToList()));
+            var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt, "2024-08-01-preview",
+                promptRequest, ResponseFormats.GetQualityScoreXliffResponseFormat()));
             usage += promptUsage;
-
-            foreach (var r in result.Split(";"))
+            
+            TryCatchHelper.TryCatch(() =>
             {
-                var split = r.Split(",");
-                results.Add(split[0], float.Parse(split[1]));
+                var deserializeResult = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
+                foreach (var entity in deserializeResult.Translations)
+                {
+                    results.Add(entity.TranslationId, entity.QualityScore);
+                }
+            }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
+        }
+        
+        results.ForEach(x =>
+        {
+            var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x.Key);
+            if (translationUnit != null)
+            {
+                var attribute = translationUnit.Attributes.FirstOrDefault(x => x.Key == "extradata");
+                if (!string.IsNullOrEmpty(attribute.Key))
+                {
+                    translationUnit.Attributes.Remove(attribute.Key);
+                    translationUnit.Attributes.Add("extradata", x.Value.ToString());
+                }
+                else
+                {
+                    translationUnit.Attributes.Add("extradata", x.Value.ToString());
+                }
             }
-        }
+        });
 
-        var file = await _fileManagementClient.DownloadAsync(input.File);
-        string fileContent;
-        Encoding encoding;
-        using (var inFileStream = new StreamReader(file, true))
-        {
-            encoding = inFileStream.CurrentEncoding;
-            fileContent = inFileStream.ReadToEnd();
-        }
-
-        foreach (var r in results)
-        {
-            fileContent = Regex.Replace(fileContent, @"(<trans-unit id=""" + r.Key + @""")",
-                @"${1} extradata=""" + r.Value + @"""");
-        }
-
-        if (input is { Threshold: not null, Condition: not null, State: not null })
+        if (input.Threshold != null && input.Condition != null && input.State != null)
         {
             var filteredTUs = new List<string>();
             switch (input.Condition)
@@ -153,15 +152,31 @@ public class XliffActions : BaseActions
                     filteredTUs = results.Where(x => x.Value <= input.Threshold).Select(x => x.Key).ToList();
                     break;
             }
-
-            fileContent = UpdateTargetState(fileContent, input.State, filteredTUs);
+            
+            filteredTUs.ForEach(x =>
+            {
+                var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x);
+                if (translationUnit != null)
+                {
+                    var stateAttribute = translationUnit.Attributes.FirstOrDefault(x => x.Key == "state");
+                    if (!string.IsNullOrEmpty(stateAttribute.Key))
+                    {
+                        translationUnit.Attributes.Remove(stateAttribute.Key);
+                        translationUnit.Attributes.Add("state", input.State);
+                    }
+                    else
+                    {
+                        translationUnit.Attributes.Add("state", input.State);
+                    }
+                }
+            });
         }
 
+        var stream = xliffDocument.ToStream();
         return new ScoreXliffResponse
         {
             AverageScore = results.Average(x => x.Value),
-            File = await _fileManagementClient.UploadAsync(new MemoryStream(encoding.GetBytes(fileContent)),
-                MediaTypeNames.Text.Xml, input.File.Name),
+            File = await FileManagementClient.UploadAsync(stream, MediaTypeNames.Text.Xml, input.File.Name),
             Usage = usage,
         };
     }
@@ -176,75 +191,71 @@ public class XliffActions : BaseActions
         string? prompt,
         [ActionParameter] GlossaryRequest glossary,
         [ActionParameter] BaseChatRequest promptRequest,
-    [ActionParameter,
+        [ActionParameter,
          Display("Bucket size",
              Description =
                  "Specify the number of translation units to be processed at once. Default value: 1500. (See our documentation for an explanation)")]
         int? bucketSize = 1500)
     {
-        var fileStream = await _fileManagementClient.DownloadAsync(input.File);
-        var xliffDocument = Utils.Xliff.Extensions.ParseXLIFF(fileStream);
+        var xliffDocument = await DownloadXliffDocumentAsync(input.File);
 
-        var results = new Dictionary<string, string>();
-        var batches = xliffDocument.TranslationUnits.Batch((int)bucketSize);
+        var batches = xliffDocument.TranslationUnits.Batch((int)bucketSize!).ToList();
         var src = input.SourceLanguage ?? xliffDocument.SourceLanguage;
         var tgt = input.TargetLanguage ?? xliffDocument.TargetLanguage;
         var usage = new UsageDto();
 
+        var results = new List<TranslationEntity>();
         foreach (var batch in batches)
         {
-            string? glossaryPrompt = null;
+            var glossaryPrompt = string.Empty;
             if (glossary?.Glossary != null)
             {
-                var glossaryPromptPart =
-                    await GetGlossaryPromptPart(glossary.Glossary,
-                        string.Join(';', batch.Select(x => x.Source)) + ";" +
-                        string.Join(';', batch.Select(x => x.Target)));
-                if (glossaryPromptPart != null)
+                var glossaryStream = await FileManagementClient.DownloadAsync(glossary.Glossary);
+                var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
+                glossaryPrompt = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary,
+                    string.Join(';', batch.Select(x => x.Source)));
+                if (!string.IsNullOrEmpty(glossaryPrompt))
                 {
                     glossaryPrompt +=
                         "Enhance the target text by incorporating relevant terms from our glossary where applicable. " +
                         "Ensure that the translation aligns with the glossary entries for the respective languages. " +
                         "If a term has variations or synonyms, consider them and choose the most appropriate " +
                         "translation to maintain consistency and precision. ";
-                    glossaryPrompt += glossaryPromptPart;
                 }
             }
 
-            var userPrompt =
-                $"Your input consists of sentences in {src} language with their translations into {tgt}. " +
-                "Review and edit the translated target text as necessary to ensure it is a correct and accurate translation of the source text. " +
-                "If you see XML tags in the source also include them in the target text, don't delete or modify them. " +
-                "Include only the target texts (updated or not) in the format [ID:X]{target}. " +
-                $"Example: [ID:1]{{target1}},[ID:2]{{target2}}. " +
-                $"{prompt ?? ""} {glossaryPrompt ?? ""} Sentences: \n" +
-                string.Join("\n", batch.Select(tu => $"ID: {tu.Id}; Source: {tu.Source}; Target: {tu.Target}"));
+            var json = JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target }).ToList());
+            var userPrompt = PromptConstants.GetPostEditPrompt(prompt, glossaryPrompt, src, tgt,
+                json);
 
-            var systemPrompt =
-                "You are a linguistic expert that should process the following texts according to the given instructions";
-            var (result, promptUsage) = await ExecuteSystemPrompt(promptRequest, userPrompt, systemPrompt);
+            var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt,
+                "2024-08-01-preview", promptRequest, ResponseFormats.GetProcessXliffResponseFormat()));
             usage += promptUsage;
 
-            var matches = Regex.Matches(result, @"\[ID:(.+?)\]\{([\s\S]+?)\}(?=,\[|$|,?\n)").Cast<Match>().ToList();
-            foreach (var match in matches)
+            TryCatchHelper.TryCatch(() =>
             {
-                if (match.Groups[2].Value.Contains("[ID:"))
-                    continue;
-                results.Add(match.Groups[1].Value, match.Groups[2].Value);
-            }
+                var deserializedTranslations = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
+                results.AddRange(deserializedTranslations.Translations);
+            }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
         }
 
-        var updatedResults = Utils.Xliff.Extensions.CheckTagIssues(xliffDocument.TranslationUnits, results);
-        var originalFile = await _fileManagementClient.DownloadAsync(input.File);
-        var updatedFile = Utils.Xliff.Extensions.UpdateOriginalFile(originalFile, updatedResults);
+        results.ForEach(x =>
+        {
+            var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x.TranslationId);
+            if (translationUnit != null)
+            {
+                translationUnit.Target = x.TranslatedText;
+            }
+        });
 
-        var finalFile = await _fileManagementClient.UploadAsync(updatedFile, input.File.ContentType, input.File.Name);
-        return new TranslateXliffResponse { File = finalFile, Usage = usage, };
+        var fileReference =
+            await FileManagementClient.UploadAsync(xliffDocument.ToStream(), input.File.ContentType, input.File.Name);
+        return new TranslateXliffResponse { File = fileReference, Usage = usage };
     }
 
     private async Task<XliffDocument> LoadAndParseXliffDocument(FileReference inputFile)
     {
-        var stream = await _fileManagementClient.DownloadAsync(inputFile);
+        var stream = await FileManagementClient.DownloadAsync(inputFile);
         var memoryStream = new MemoryStream();
         await stream.CopyToAsync(memoryStream);
         memoryStream.Position = 0;
@@ -254,7 +265,7 @@ public class XliffActions : BaseActions
 
     private async Task<string?> GetGlossaryPromptPart(FileReference glossary, string sourceContent)
     {
-        var glossaryStream = await _fileManagementClient.DownloadAsync(glossary);
+        var glossaryStream = await FileManagementClient.DownloadAsync(glossary);
         var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
 
         var glossaryPromptPart = new StringBuilder();
@@ -326,117 +337,41 @@ public class XliffActions : BaseActions
         return prompt;
     }
 
-    private async Task<(Dictionary<string, string>, UsageDto)> GetTranslations(string prompt, ParsedXliff xliff,
-        string systemPrompt, int bucketSize, FileReference? glossary,
-        BaseChatRequest promptRequest)
+    private async Task<(List<TranslationEntity>, UsageDto)> ProcessTranslationUnits(XliffDocument xliff,
+        XliffParameters parameters)
     {
-       
-        var results = new List<string>();
-        var batches = xliff.TranslationUnits.Batch(bucketSize);
+        var batches = xliff.TranslationUnits.Batch(parameters.BucketSize);
 
         var usageDto = new UsageDto();
+        var entities = new List<TranslationEntity>();
         foreach (var batch in batches)
         {
-            string json = JsonConvert.SerializeObject(batch.Select(x => "{ID:" + x.Id + "}" + x.Source));
+            var json = JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source }).ToList());
+            var prompt = PromptConstants.GetProcessPrompt(parameters.Prompt, xliff.SourceLanguage,
+                xliff.TargetLanguage, json);
 
-            var userPrompt = GetUserPrompt(prompt +
-                "Reply with the processed text preserving the same format structure as provided, your output will need to be deserialized programmatically afterwards. Do not add linebreaks.",
-                xliff, json);
-
-            if (glossary != null)
+            if (parameters.Glossary != null)
             {
-                var glossaryPromptPart = await GetGlossaryPromptPart(glossary, json);
-                if (glossaryPromptPart != null)
-                {
-                    var glossaryPrompt =
-                        "Enhance the target text by incorporating relevant terms from our glossary where applicable. " +
-                        "Ensure that the translation aligns with the glossary entries for the respective languages. " +
-                        "If a term has variations or synonyms, consider them and choose the most appropriate " +
-                        "translation to maintain consistency and precision. ";
-                    glossaryPrompt += glossaryPromptPart;
-                    userPrompt += glossaryPrompt;
-                }
+                var glossaryStream = await FileManagementClient.DownloadAsync(parameters.Glossary);
+                var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
+                var glossaryPromptPart = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary, json);
+                prompt = GlossaryPrompts.GetGlossaryWithUserPrompt(prompt, glossaryPromptPart);
             }
 
-            var (response, promptUsage) = await ExecuteSystemPrompt(promptRequest, userPrompt, systemPrompt);
-
+            var (response, promptUsage) =
+                await ExecuteOpenAIRequestAsync(new(prompt, parameters.SystemPrompt, "2024-08-01-preview",
+                    parameters.ChatRequest, ResponseFormats.GetProcessXliffResponseFormat()));
             usageDto += promptUsage;
+
             var translatedText = response.Trim();
-            string filteredText = "";
-            try
+            TryCatchHelper.TryCatch(() =>
             {
-                filteredText = Regex.Match(translatedText, "\\[[\\s\\S]+\\]").Value;
-                if (String.IsNullOrEmpty(filteredText))
-                {
-                    var index = translatedText.LastIndexOf("\",") == -1 ? translatedText.LastIndexOf("\"\n,") : translatedText.LastIndexOf("\",");
-                    index = index == -1 ? translatedText.LastIndexOf("\n\",") == -1? translatedText.LastIndexOf("\\n\",") : translatedText.LastIndexOf("\n\",") : index;
-                    filteredText = translatedText.Remove(index) + "\"]";
-                }
-                filteredText = Regex.Replace(filteredText, "\\n *", "").Replace("& ", "&amp; ");
-                filteredText = Regex.Replace(filteredText, "\\\\n *", "");
-                filteredText = Regex.Replace(filteredText,@"(\<(g|x) id=)\?\""(.*?)\?\"">", "${1}\"${3}\">");
-                filteredText = Regex.Match(filteredText, "\\[[\\s\\S]+\\]").Value;
-                var result = JsonConvert.DeserializeObject<string[]>(filteredText);
-
-                results.AddRange(result);
-            }
-            catch (Exception e)
-                {
-                continue;
-                    throw new Exception(
-                    $"Failed to parse the translated text. Exception message: {e.Message}; Exception type: {e.GetType()}");
-            }
-                        
+                var deserializedTranslations = JsonConvert.DeserializeObject<TranslationEntities>(translatedText)!;
+                entities.AddRange(deserializedTranslations.Translations);
+            }, $"Failed to deserialize the response from OpenAI, try again later. Response: {translatedText}");
         }
-        return (results.Where(z => Regex.Match(z, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value != "").ToDictionary(x => Regex.Match(x, "\\{ID:(.*?)\\}(.+)$").Groups[1].Value, y => Regex.Match(y, "\\{ID:(.*?)\\}(.+)$").Groups[2].Value.Trim()), usageDto);
-    }
 
-    string GetUserPrompt(string prompt, ParsedXliff xliffDocument, string json)
-    {
-        string instruction = string.IsNullOrEmpty(prompt)
-            ? $"Translate the following texts from {xliffDocument.SourceLanguage} to {xliffDocument.TargetLanguage}."
-            : $"Process the following texts as per the custom instructions: {prompt}. The source language is {xliffDocument.SourceLanguage} and the target language is {xliffDocument.TargetLanguage}. This information might be useful for the custom instructions.";
-
-        return
-            $"Please provide a translation for each individual text, even if similar texts have been provided more than once. " +
-            $"{instruction} Return the outputs as a serialized JSON array of strings without additional formatting " +
-            $"(it is crucial because your response will be deserialized programmatically. Please ensure that your response is formatted correctly to avoid any deserialization issues). " +
-            $"Original texts (in serialized array format): {json}";
-    }
-
-    private XliffDocument UpdateXliffDocumentWithTranslations(XliffDocument xliffDocument, string[] translatedTexts,
-        bool updateLockedSegments)
-    {
-        var updatedUnits = xliffDocument.TranslationUnits.Zip(translatedTexts, (unit, translation) =>
-        {
-            if (updateLockedSegments == false && unit.Attributes is not null &&
-                unit.Attributes.Any(x => x.Key == "locked" && x.Value == "locked"))
-            {
-                unit.Target = unit.Target;
-            }
-            else
-            {
-                unit.Target = translation;
-            }
-
-            return unit;
-        }).ToList();
-
-        var xDoc = xliffDocument.UpdateTranslationUnits(updatedUnits);
-        var stream = new MemoryStream();
-        xDoc.Save(stream);
-        stream.Position = 0;
-
-        return stream.ToXliffDocument();
-        //new XliffConfig{ RemoveWhitespaces = true, CopyAttributes = true, IncludeInlineTags = true }
-    }
-
-    private async Task<FileReference> UploadUpdatedDocument(XliffDocument xliffDocument, FileReference originalFile)
-    {
-        var outputMemoryStream = xliffDocument.ToStream(); //null, false, keepSingleAmpersands: true
-
-        string contentType = originalFile.ContentType ?? "application/xml";
-        return await _fileManagementClient.UploadAsync(outputMemoryStream, contentType, originalFile.Name);
+        return (entities, usageDto);
     }
 
     private async Task<(string result, UsageDto usage)> ExecuteSystemPrompt(BaseChatRequest input,
@@ -444,10 +379,11 @@ public class XliffActions : BaseActions
         string? systemPrompt = null)
     {
         var chatMessages = new List<ChatMessage>();
-        if(systemPrompt != null)
+        if (systemPrompt != null)
         {
             chatMessages.Add(new ChatMessage(ChatRole.System, systemPrompt));
         }
+
         chatMessages.Add(new ChatMessage(ChatRole.User, prompt));
 
         var response = await Client.GetChatCompletionsAsync(
@@ -459,6 +395,7 @@ public class XliffActions : BaseActions
                 FrequencyPenalty = input.FrequencyPenalty,
                 DeploymentName = DeploymentName,
             });
+
         var result = response.Value.Choices[0].Message.Content;
         return (result, new(response.Value.Usage));
     }
