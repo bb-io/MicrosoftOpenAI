@@ -64,6 +64,9 @@ You can find how to create and deploy an Azure OpenAI Service resource [here](ht
 - **Tokenize text**: Tokenize the text provided. Optionally specify encoding: cl100k_base (used by gpt-4, gpt-3.5-turbo, text-embedding-ada-002) or p50k_base (used by codex models, text-davinci-002, text-davinci-003).
 
 ### XLIFF Actions
+
+Note, currently only gpt-4o version: 2024-08-06 supports structured outputs. This means that the actions that support XLIFF files can only be used with this model version. You can find the relevant information about supported models in the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs?tabs=rest).
+
 - **Get Quality Scores for XLIFF file** Gets segment and file level quality scores for XLIFF files. Supports only version 1.2 of XLIFF currently. Optionally, you can add Threshold, New Target State and Condition input parameters to the Blackbird action to change the target state value of segments meeting the desired criteria (all three must be filled).
 
     Optional inputs:

@@ -18,6 +18,7 @@ using Blackbird.Applications.Sdk.Glossaries.Utils.Converters;
 using Apps.AzureOpenAI.Models.Dto;
 using Apps.AzureOpenAI.Models.Entities;
 using Apps.AzureOpenAI.Models.Requests.Chat;
+using Apps.AzureOpenAI.Utils;
 using Azure.AI.OpenAI;
 
 namespace Apps.AzureOpenAI.Actions;
@@ -102,11 +103,14 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                 promptRequest, ResponseFormats.GetQualityScoreXliffResponseFormat()));
             usage += promptUsage;
             
-            var deserializeResult = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
-            foreach (var entity in deserializeResult.Translations)
+            TryCatchHelper.TryCatch(() =>
             {
-                results.Add(entity.TranslationId, entity.QualityScore);
-            }
+                var deserializeResult = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
+                foreach (var entity in deserializeResult.Translations)
+                {
+                    results.Add(entity.TranslationId, entity.QualityScore);
+                }
+            }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
         }
         
         results.ForEach(x =>
@@ -228,8 +232,11 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                 "2024-08-01-preview", promptRequest, ResponseFormats.GetProcessXliffResponseFormat()));
             usage += promptUsage;
 
-            var deserializedTranslations = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
-            results.AddRange(deserializedTranslations.Translations);
+            TryCatchHelper.TryCatch(() =>
+            {
+                var deserializedTranslations = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
+                results.AddRange(deserializedTranslations.Translations);
+            }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
         }
 
         results.ForEach(x =>
@@ -357,9 +364,11 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             usageDto += promptUsage;
 
             var translatedText = response.Trim();
-            var deserializedTranslations = JsonConvert.DeserializeObject<TranslationEntities>(translatedText)!;
-
-            entities.AddRange(deserializedTranslations.Translations);
+            TryCatchHelper.TryCatch(() =>
+            {
+                var deserializedTranslations = JsonConvert.DeserializeObject<TranslationEntities>(translatedText)!;
+                entities.AddRange(deserializedTranslations.Translations);
+            }, $"Failed to deserialize the response from OpenAI, try again later. Response: {translatedText}");
         }
 
         return (entities, usageDto);
