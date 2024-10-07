@@ -6,18 +6,16 @@ using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Apps.AzureOpenAI.Actions.Base;
 using Apps.AzureOpenAI.Utils;
+using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Newtonsoft.Json;
 using TiktokenSharp;
 
 namespace Apps.AzureOpenAI.Actions;
 
 [ActionList]
-public class ChatActions : BaseActions
+public class ChatActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
+    : BaseActions(invocationContext, fileManagementClient)
 {
-    public ChatActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
     #region Chat actions
 
     [Action("Generate completion", Description = "Completes the given prompt")]

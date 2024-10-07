@@ -5,17 +5,15 @@ using Azure.AI.OpenAI;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using TiktokenSharp;
 
 namespace Apps.AzureOpenAI.Actions;
 
 [ActionList]
-public class TextAnalysisActions : BaseActions
+public class TextAnalysisActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
+    : BaseActions(invocationContext, fileManagementClient)
 {
-    public TextAnalysisActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
     [Action("Create embedding", Description = "Generate an embedding for a text provided. An embedding is a list of " +
                                               "floating point numbers that captures semantic information about the " +
                                               "text that it represents.")]

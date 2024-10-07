@@ -10,7 +10,7 @@ namespace Apps.AzureOpenAI.Connections
         public async ValueTask<ConnectionValidationResponse> ValidateConnection(
             IEnumerable<AuthenticationCredentialsProvider> authProviders, CancellationToken cancellationToken)
         {
-            var actions = new ChatActions(new InvocationContext() { AuthenticationCredentialsProviders = authProviders });
+            var actions = new ChatActions(new InvocationContext() { AuthenticationCredentialsProviders = authProviders }, null!);
             try
             {
                 //await actions.ChatMessageRequest(new ChatRequest() { Message = "hello" });

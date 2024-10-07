@@ -5,16 +5,14 @@ using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Apps.AzureOpenAI.Models.Requests.Image;
 using Apps.AzureOpenAI.Models.Responses.Image;
+using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 
 namespace Apps.AzureOpenAI.Actions
 {
     [ActionList]
-    public class ImageActions : BaseActions
+    public class ImageActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
+        : BaseActions(invocationContext, fileManagementClient)
     {
-        public ImageActions(InvocationContext invocationContext) : base(invocationContext)
-        {
-        }
-
         [Action("Generate image", Description = "Generates an image based on a prompt")]
         public async Task<ImageResponse> GenerateImage([ActionParameter] ImageRequest input)
         {
