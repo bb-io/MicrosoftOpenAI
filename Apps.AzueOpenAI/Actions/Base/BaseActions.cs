@@ -83,6 +83,26 @@ public class BaseActions : BaseInvocable
             body.Add("response_format", parameters.ResponseFormat);
         }
         
+        if(parameters.ChatRequest?.Temperature != null)
+        {
+            body.Add("temperature", parameters.ChatRequest.Temperature.Value);
+        }
+        
+        if(parameters.ChatRequest?.MaximumTokens != null)
+        {
+            body.Add("max_completion_tokens", parameters.ChatRequest.MaximumTokens.Value);
+        }
+        
+        if(parameters.ChatRequest?.PresencePenalty != null)
+        {
+            body.Add("presence_penalty", parameters.ChatRequest.PresencePenalty.Value);
+        }
+        
+        if(parameters.ChatRequest?.FrequencyPenalty != null)
+        {
+            body.Add("frequency_penalty", parameters.ChatRequest.FrequencyPenalty.Value);
+        }
+        
         request.AddJsonBody(body);
         
         var response = await restClient.ExecuteAsync(request);

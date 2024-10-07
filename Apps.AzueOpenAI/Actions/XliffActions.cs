@@ -83,56 +83,51 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                  "Specify the number of translation units to be processed at once. Default value: 1500. (See our documentation for an explanation)")]
         int? bucketSize = 1500)
     {
-        var xliffDocument = await LoadAndParseXliffDocument(input.File);
+        var xliffDocument = await DownloadXliffDocumentAsync(input.File);
         string criteriaPrompt = string.IsNullOrEmpty(prompt)
             ? "accuracy, fluency, consistency, style, grammar and spelling"
             : prompt;
-        var results = new Dictionary<string, float>();
+        
         var batches = xliffDocument.TranslationUnits.Batch((int)bucketSize);
         var src = input.SourceLanguage ?? xliffDocument.SourceLanguage;
         var tgt = input.TargetLanguage ?? xliffDocument.TargetLanguage;
-
+        
         var usage = new UsageDto();
-
+        var results = new Dictionary<string, float>();
         foreach (var batch in batches)
         {
-            string userPrompt =
-                $"Your input is going to be a group of sentences in {src} and their translation into {tgt}. " +
-                "Only provide as output the ID of the sentence and the score number as a comma separated array of tuples. " +
-                $"Place the tuples in a same line and separate them using semicolons, example for two assessments: 2,7;32,5. The score number is a score from 1 to 10 assessing the quality of the translation, considering the following criteria: {criteriaPrompt}. Sentences: ";
-            foreach (var tu in batch)
-            {
-                userPrompt += $" {tu.Id} {tu.Source} {tu.Target}";
-            }
-
-            var systemPrompt =
-                "You are a linguistic expert that should process the following texts accoring to the given instructions";
-            var (result, promptUsage) = await ExecuteSystemPrompt(promptRequest, userPrompt, systemPrompt);
+            var userPrompt = PromptConstants.GetQualityScorePrompt(criteriaPrompt, src, tgt,
+                JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target }).ToList()));
+            var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt, "2024-08-01-preview",
+                promptRequest, ResponseFormats.GetQualityScoreXliffResponseFormat()));
             usage += promptUsage;
-
-            foreach (var r in result.Split(";"))
+            
+            var deserializeResult = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
+            foreach (var entity in deserializeResult.Translations)
             {
-                var split = r.Split(",");
-                results.Add(split[0], float.Parse(split[1]));
+                results.Add(entity.TranslationId, entity.QualityScore);
             }
         }
-
-        var file = await FileManagementClient.DownloadAsync(input.File);
-        string fileContent;
-        Encoding encoding;
-        using (var inFileStream = new StreamReader(file, true))
+        
+        results.ForEach(x =>
         {
-            encoding = inFileStream.CurrentEncoding;
-            fileContent = inFileStream.ReadToEnd();
-        }
+            var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x.Key);
+            if (translationUnit != null)
+            {
+                var attribute = translationUnit.Attributes.FirstOrDefault(x => x.Key == "extradata");
+                if (!string.IsNullOrEmpty(attribute.Key))
+                {
+                    translationUnit.Attributes.Remove(attribute.Key);
+                    translationUnit.Attributes.Add("extradata", x.Value.ToString());
+                }
+                else
+                {
+                    translationUnit.Attributes.Add("extradata", x.Value.ToString());
+                }
+            }
+        });
 
-        foreach (var r in results)
-        {
-            fileContent = Regex.Replace(fileContent, @"(<trans-unit id=""" + r.Key + @""")",
-                @"${1} extradata=""" + r.Value + @"""");
-        }
-
-        if (input is { Threshold: not null, Condition: not null, State: not null })
+        if (input.Threshold != null && input.Condition != null && input.State != null)
         {
             var filteredTUs = new List<string>();
             switch (input.Condition)
@@ -153,15 +148,31 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                     filteredTUs = results.Where(x => x.Value <= input.Threshold).Select(x => x.Key).ToList();
                     break;
             }
-
-            fileContent = UpdateTargetState(fileContent, input.State, filteredTUs);
+            
+            filteredTUs.ForEach(x =>
+            {
+                var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x);
+                if (translationUnit != null)
+                {
+                    var stateAttribute = translationUnit.Attributes.FirstOrDefault(x => x.Key == "state");
+                    if (!string.IsNullOrEmpty(stateAttribute.Key))
+                    {
+                        translationUnit.Attributes.Remove(stateAttribute.Key);
+                        translationUnit.Attributes.Add("state", input.State);
+                    }
+                    else
+                    {
+                        translationUnit.Attributes.Add("state", input.State);
+                    }
+                }
+            });
         }
 
+        var stream = xliffDocument.ToStream();
         return new ScoreXliffResponse
         {
             AverageScore = results.Average(x => x.Value),
-            File = await FileManagementClient.UploadAsync(new MemoryStream(encoding.GetBytes(fileContent)),
-                MediaTypeNames.Text.Xml, input.File.Name),
+            File = await FileManagementClient.UploadAsync(stream, MediaTypeNames.Text.Xml, input.File.Name),
             Usage = usage,
         };
     }
@@ -210,10 +221,10 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             }
 
             var json = JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target }).ToList());
-            var userPrompt = UserPrompts.GetPostEditPrompt(prompt, glossaryPrompt, src, tgt,
+            var userPrompt = PromptConstants.GetPostEditPrompt(prompt, glossaryPrompt, src, tgt,
                 json);
 
-            var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, UserPrompts.SystemPrompt,
+            var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt,
                 "2024-08-01-preview", promptRequest, ResponseFormats.GetProcessXliffResponseFormat()));
             usage += promptUsage;
 
@@ -329,7 +340,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         foreach (var batch in batches)
         {
             var json = JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source }).ToList());
-            var prompt = UserPrompts.GetProcessPrompt(parameters.Prompt, xliff.SourceLanguage,
+            var prompt = PromptConstants.GetProcessPrompt(parameters.Prompt, xliff.SourceLanguage,
                 xliff.TargetLanguage, json);
 
             if (parameters.Glossary != null)

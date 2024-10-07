@@ -9,4 +9,7 @@ public class TranslationEntity
 
     [JsonProperty("translated_text")]
     public string TranslatedText { get; set; } = string.Empty;
+    
+    [JsonProperty("quality_score")]
+    public float QualityScore { get; set; }
 }

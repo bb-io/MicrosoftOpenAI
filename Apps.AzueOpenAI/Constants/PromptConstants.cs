@@ -1,6 +1,6 @@
 ﻿namespace Apps.AzureOpenAI.Constants;
 
-public static class UserPrompts
+public static class PromptConstants
 {
     private const string TranslatePrompt = "$Translate the following texts from {source_language} to {target_language}";
 
@@ -19,8 +19,14 @@ public static class UserPrompts
         "If you see XML tags in the source also include them in the target text, don't delete or modify them. " +
         "{prompt}; {glossary_prompt}. " +
         "Translation units: {json}.";
+    
+    private const string QualityScorePrompt =
+        "Your input is going to be a group of sentences in {source_language} and their translation into {target_language}. " +
+        "Only provide as output the ID of the sentence and the score number as a comma separated array of tuples. " +
+        "Place the tuples in a same line and separate them using semicolons, example for two assessments: 2,7;32,5. The score number is a score from 1 to 10 assessing the quality of the translation, considering the following criteria: {criteria_prompt}. " +
+        "Sentences: {json}.";
 
-    public const string SystemPrompt =
+    public const string DefaultSystemPrompt =
         "You are a linguistic expert that should process the following texts according to the given instructions";
 
     private static string GetTranslatePrompt(string sourceLanguage, string targetLanguage)
@@ -57,6 +63,14 @@ public static class UserPrompts
             : result.Replace("{glossary_prompt}", glossaryPrompt);
         
         return result.Replace("{source_language}", sourceLanguage)
+            .Replace("{target_language}", targetLanguage)
+            .Replace("{json}", json);
+    }
+    
+    public static string GetQualityScorePrompt(string criteriaPrompt, string sourceLanguage, string targetLanguage, string json)
+    {
+        return QualityScorePrompt.Replace("{criteria_prompt}", criteriaPrompt)
+            .Replace("{source_language}", sourceLanguage)
             .Replace("{target_language}", targetLanguage)
             .Replace("{json}", json);
     }
