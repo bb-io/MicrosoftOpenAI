@@ -1,4 +1,7 @@
-﻿using Apps.AzureOpenAI.Models.Dto;
+﻿using System.Text;
+using System.Text.RegularExpressions;
+using Apps.AzureOpenAI.Api;
+using Apps.AzureOpenAI.Models.Dto;
 using Apps.AzureOpenAI.Models.Entities;
 using Apps.AzureOpenAI.Models.Requests.Chat;
 using Apps.AzureOpenAI.Models.Responses.Chat;
@@ -8,6 +11,7 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
+using Blackbird.Applications.Sdk.Glossaries.Utils.Converters;
 using Blackbird.Xliff.Utils;
 using Blackbird.Xliff.Utils.Extensions;
 using Newtonsoft.Json;
@@ -18,6 +22,7 @@ namespace Apps.AzureOpenAI.Actions.Base;
 public class BaseActions : BaseInvocable
 {
     protected readonly OpenAIClient Client;
+    protected readonly AzureOpenAiRestClient RestClient;
     protected readonly string DeploymentName;
     protected readonly IFileManagementClient FileManagementClient;
 
@@ -30,6 +35,7 @@ public class BaseActions : BaseInvocable
             new Uri(InvocationContext.AuthenticationCredentialsProviders.First(x => x.KeyName == "url").Value),
             new AzureKeyCredential(InvocationContext.AuthenticationCredentialsProviders
                 .First(x => x.KeyName == "apiKey").Value));
+        RestClient = new(invocationContext.AuthenticationCredentialsProviders);
         FileManagementClient = fileManagementClient;
     }
     
@@ -116,4 +122,36 @@ public class BaseActions : BaseInvocable
         var chatResponse = JsonConvert.DeserializeObject<OpenAIResponseDto>(response.Content!)!;
         return (chatResponse.Choices.First().Message.Content, new(chatResponse.Usage));
     }
+    
+    protected async Task<string> GetGlossaryPromptPart(FileReference glossary, string sourceContent)
+    {
+        var glossaryStream = await FileManagementClient.DownloadAsync(glossary);
+        var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
+
+        var glossaryPromptPart = new StringBuilder();
+        glossaryPromptPart.AppendLine();
+        glossaryPromptPart.AppendLine();
+        glossaryPromptPart.AppendLine("Glossary entries (each entry includes terms in different language. Each " +
+                                      "language may have a few synonymous variations which are separated by ;;):");
+
+        var entriesIncluded = false;
+        foreach (var entry in blackbirdGlossary.ConceptEntries)
+        {
+            var allTerms = entry.LanguageSections.SelectMany(x => x.Terms.Select(y => y.Term));
+            if (!allTerms.Any(x => Regex.IsMatch(sourceContent, $@"\b{x}\b", RegexOptions.IgnoreCase))) continue;
+            entriesIncluded = true;
+
+            glossaryPromptPart.AppendLine();
+            glossaryPromptPart.AppendLine("\tEntry:");
+
+            foreach (var section in entry.LanguageSections)
+            {
+                glossaryPromptPart.AppendLine(
+                    $"\t\t{section.LanguageCode}: {string.Join(";; ", section.Terms.Select(term => term.Term))}");
+            }
+        }
+
+        return entriesIncluded ? glossaryPromptPart.ToString() : null;
+    }
+
 }
