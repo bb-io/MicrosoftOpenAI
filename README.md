@@ -97,7 +97,7 @@ XLIFF files can contain a lot of segments. Each action takes your segments and s
 
 ## Batch processing
 
-You can use batch (async) actions to process large XLIFF files. The batch action will return a `batch` object that you can use to check the status of the processing by using Batch ID.
+You can use batch (async) actions to process large XLIFF files. The batch action will return a `batch` object that you can use to check the status of the processing by using Batch ID. Note that the model should be deployed as Global-batch. For more information on how to deploy a model as Global-batch, please refer to the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/batch?tabs=standard-input&pivots=rest-api).
 
 - **(Batch) Process XLIFF file** - Asynchronously process each translation unit in the XLIFF file according to the provided instructions (by default it just translates the source tags) and updates the target text for each unit.
 - **(Batch) Post-edit XLIFF file** - Asynchronously post-edit the target text of each translation unit in the XLIFF file according to the provided instructions and updates the target text for each unit.
