@@ -157,7 +157,7 @@ public class BatchActions(InvocationContext invocationContext, IFileManagementCl
                 url = "/v1/chat/completions",
                 body = new
                 {
-                    model = InvocationContext.AuthenticationCredentialsProviders.Get(CredNames.Deployment),
+                    model = InvocationContext.AuthenticationCredentialsProviders.Get(CredNames.Deployment).Value,
                     messages = new object[]
                     {
                         new
@@ -204,7 +204,7 @@ public class BatchActions(InvocationContext invocationContext, IFileManagementCl
         do
         {
             await Task.Delay(3000);
-            var getFileRequest = new AzureOpenAiRequest($"/openai/files/{file.Id}?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
+            var getFileRequest = new AzureOpenAiRequest($"/openai/files/{file.Id}?api-version=2024-07-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
             file = await RestClient.ExecuteWithErrorHandling<FileDto>(getFileRequest);
         } while (file.Status == "pending");
 
