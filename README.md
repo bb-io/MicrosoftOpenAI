@@ -95,6 +95,21 @@ Note, currently only gpt-4o version: 2024-08-06 supports structured outputs. Thi
 
 XLIFF files can contain a lot of segments. Each action takes your segments and sends them to the AI app for processing. It's possible that the amount of segments is so high that the prompt exceeds the model's context window or that the model takes longer than Blackbird actions are allowed to take. This is why we have introduced the bucket size parameter. You can tweak the bucket size parameter to determine how many segments to send to the AI model at once. This will allow you to split the workload into different API calls. The trade-off is that the same context prompt needs to be send along with each request (which increases the tokens used). From experiments we have found that a bucket size of 1500 is sufficient for models like gpt-4o. That's why 1500 is the default bucket size, however other models may require different bucket sizes.
 
+## Batch processing
+
+You can use batch (async) actions to process large XLIFF files. The batch action will return a `batch` object that you can use to check the status of the processing by using Batch ID. Note that the model should be deployed as Global-batch. For more information on how to deploy a model as Global-batch, please refer to the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/batch?tabs=standard-input&pivots=rest-api).
+
+- **(Batch) Process XLIFF file** - Asynchronously process each translation unit in the XLIFF file according to the provided instructions (by default it just translates the source tags) and updates the target text for each unit.
+- **(Batch) Post-edit XLIFF file** - Asynchronously post-edit the target text of each translation unit in the XLIFF file according to the provided instructions and updates the target text for each unit.
+- **(Batch) Get Quality Scores for XLIFF file** - Asynchronously get quality scores for each translation unit in the XLIFF file.
+
+To get the results of the batch processing, you can use the following actions:
+
+- **(Batch) Get results of the batch process** - Get the results of the batch process. This action is suitable only for processing and post-editing XLIFF file and should be called after the batch process is completed.
+- **(Batch) Get quality scores results** - Get the quality scores results of the batch process. This action is suitable only for getting quality scores for XLIFF file and should be called after the batch process is completed.
+
+Note, that you should specify the correct original XLIFF file in `Original XLIFF` input. It will help us to construct the correct XLIFF file with updated target segments.
+
 ## Example
 
 Here is an example of how you can use the `Azure OpenAI` app in a workflow:
