@@ -18,6 +18,7 @@ using RestSharp;
 
 namespace Apps.AzureOpenAI.Actions;
 
+[ActionList]
 public class BatchActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
     : BaseActions(invocationContext, fileManagementClient)
 {
