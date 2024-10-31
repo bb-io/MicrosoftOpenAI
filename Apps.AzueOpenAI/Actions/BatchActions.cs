@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 using Apps.AzureOpenAI.Actions.Base;
 using Apps.AzureOpenAI.Api;
 using Apps.AzureOpenAI.Constants;
@@ -81,7 +82,39 @@ public class BatchActions(InvocationContext invocationContext, IFileManagementCl
                     $"Translation unit with id {batchRequest.CustomId} not found in the XLIFF file.");
             }
 
-            translationUnit.Target = batchRequest.Response.Body.Choices[0].Message.Content;
+            var newTargetContent = batchRequest.Response.Body.Choices[0].Message.Content;
+            if (request.AddMissingLeadingTrailingTags.HasValue && request.AddMissingLeadingTrailingTags == true)
+            {
+                var sourceContent = translationUnit.Source;
+                    
+                var tagPattern = @"<(?<tag>\w+)(?<attributes>[^>]*)>(?<content>.*?)</\k<tag>>";
+                var sourceMatch = Regex.Match(sourceContent, tagPattern, RegexOptions.Singleline);
+
+                if (sourceMatch.Success)
+                {
+                    var tagName = sourceMatch.Groups["tag"].Value;
+                    var tagAttributes = sourceMatch.Groups["attributes"].Value;
+                    var openingTag = $"<{tagName}{tagAttributes}>";
+                    var closingTag = $"</{tagName}>";
+
+                    if (!newTargetContent.Contains(openingTag) && !newTargetContent.Contains(closingTag))
+                    {
+                        translationUnit.Target = openingTag + newTargetContent + closingTag;
+                    }
+                    else
+                    {
+                        translationUnit.Target = newTargetContent;
+                    }
+                }
+                else
+                {
+                    translationUnit.Target = newTargetContent;
+                }
+            }
+            else
+            {
+                translationUnit.Target = newTargetContent;
+            }
         }
 
         return new()
