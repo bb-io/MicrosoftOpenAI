@@ -15,10 +15,10 @@ public class GetTranslationIssuesRequest
     [Display("Additional prompt")]
     public string? AdditionalPrompt { get; set; }
 
-    [Display("Source langauge")]
+    [Display("Source language")]
     public string? SourceLanguage { get; set; }
 
-    [Display("Target langauge")]
+    [Display("Target language")]
     public string? TargetLanguage { get; set; }
 
     [Display("Maximum tokens")]
