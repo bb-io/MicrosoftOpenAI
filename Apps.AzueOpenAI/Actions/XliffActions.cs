@@ -207,13 +207,17 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         var results = new List<TranslationEntity>();
         foreach (var batch in batches)
         {
+            var filteredBatch = input.PostEditLockedSegments == true
+                ? batch 
+                : batch.Where(x => !x.IsLocked()).ToArray();
+            
             var glossaryPrompt = string.Empty;
             if (glossary?.Glossary != null)
             {
                 var glossaryStream = await FileManagementClient.DownloadAsync(glossary.Glossary);
                 var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
                 glossaryPrompt = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary,
-                    string.Join(';', batch.Select(x => x.Source)));
+                    string.Join(';', filteredBatch.Select(x => x.Source)));
                 if (!string.IsNullOrEmpty(glossaryPrompt))
                 {
                     glossaryPrompt +=
@@ -224,7 +228,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                 }
             }
 
-            var json = JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target }).ToList());
+            var json = JsonConvert.SerializeObject(filteredBatch.Select(x => new { x.Id, x.Source, x.Target }).ToList());
             var userPrompt = PromptConstants.GetPostEditPrompt(prompt, glossaryPrompt, src, tgt,
                 json);
 
