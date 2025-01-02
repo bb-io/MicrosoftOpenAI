@@ -29,7 +29,7 @@ namespace Apps.AzureOpenAI.Models.Responses.Chat
         [JsonProperty("audience_appropriateness")]
         public int AudienceAppropriateness { get; set; }
 
-        [Display("Design AndMarkup")]
+        [Display("Design And Markup")]
         [JsonProperty("design_and_markup")]
         public int DesignAndMarkup { get; set; }
 
