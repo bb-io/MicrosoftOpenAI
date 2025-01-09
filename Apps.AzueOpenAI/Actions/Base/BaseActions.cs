@@ -57,13 +57,8 @@ public class BaseActions : BaseInvocable
     
     protected async Task<(string result, UsageDto usage)> ExecuteOpenAIRequestAsync(ExecuteOpenAIRequestParameters parameters)
     {
-        var restClient = new RestClient(InvocationContext.AuthenticationCredentialsProviders
-            .First(x => x.KeyName == "url").Value);
-        var request = new RestRequest("/openai/deployments/" + DeploymentName + $"/chat/completions?api-version={parameters.ApiVersion}", Method.Post);
-        
-        request.AddHeader("Content-Type", "application/json");
-        request.AddHeader("api-key", InvocationContext.AuthenticationCredentialsProviders
-            .First(x => x.KeyName == "apiKey").Value);
+        var restClient = new AzureOpenAiRestClient(InvocationContext.AuthenticationCredentialsProviders);
+        var request = new AzureOpenAiRequest("/openai/deployments/" + DeploymentName + $"/chat/completions?api-version={parameters.ApiVersion}", Method.Post, InvocationContext.AuthenticationCredentialsProviders);
 
         var body = new Dictionary<string, object>
         {
@@ -115,6 +110,11 @@ public class BaseActions : BaseInvocable
 
         if (!response.IsSuccessStatusCode)
         {
+            if (string.IsNullOrEmpty(response.Content))
+            {
+                throw new InvalidOperationException(response.ErrorMessage ?? "Unexpected error occured, please send this error to support.");
+            }
+            
             var error = JsonConvert.DeserializeObject<ErrorDto>(response.Content!)!;
             throw new InvalidOperationException(error.ToString());
         }

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Glossaries.Utils.Dtos;
 
 namespace Apps.AzureOpenAI.Constants;
@@ -17,10 +18,22 @@ public static class GlossaryPrompts
         var entriesIncluded = false;
         foreach (var entry in blackbirdGlossary.ConceptEntries)
         {
-            var allTerms = entry.LanguageSections.SelectMany(x => x.Terms.Select(y => y.Term));
-            if (filter.HasValue && filter == true && !allTerms.Any(x => Regex.IsMatch(sourceContentInJson, $@"\b{x}\b", RegexOptions.IgnoreCase))) continue;
-            entriesIncluded = true;
+            if (TryProcessGlossaryEntry(entry, sourceContentInJson, glossaryPromptPart))
+            {
+                entriesIncluded = true;
+            }
+        }
 
+        return entriesIncluded ? glossaryPromptPart.ToString() : null;
+    }
+    
+    private static bool TryProcessGlossaryEntry(GlossaryConceptEntry entry, string sourceContentInJson, StringBuilder glossaryPromptPart)
+    {
+        try
+        {
+            var allTerms = entry.LanguageSections.SelectMany(x => x.Terms.Select(y => y.Term));
+            if (filter.HasValue && filter == true && !allTerms.Any(x => Regex.IsMatch(sourceContentInJson, $"\b{x}\b", RegexOptions.IgnoreCase)))
+                return false;
             glossaryPromptPart.AppendLine();
             glossaryPromptPart.AppendLine("\tEntry:");
 
@@ -29,9 +42,15 @@ public static class GlossaryPrompts
                 glossaryPromptPart.AppendLine(
                     $"\t\t{section.LanguageCode}: {string.Join(";; ", section.Terms.Select(term => term.Term))}");
             }
-        }
 
-        return entriesIncluded ? glossaryPromptPart.ToString() : null;
+            return true;
+        }
+        catch (Exception e)
+        {
+            throw new PluginApplicationException(
+                $"The action failed while trying to insert a glossary entry into a request. The failure occurred on the following entry ID: {entry.Id}. " +
+                $"Error message: {e.Message}. Please check your glossary. If no issues are found, please contact support.");
+        }
     }
 
     public static string GetGlossaryWithUserPrompt(string userPrompt, string? glossaryPromptPart)
@@ -46,7 +65,7 @@ public static class GlossaryPrompts
             glossaryPrompt += glossaryPromptPart;
             userPrompt += glossaryPrompt;
         }
-        
+
         return userPrompt;
     }
 }

@@ -207,13 +207,17 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         var results = new List<TranslationEntity>();
         foreach (var batch in batches)
         {
+            var filteredBatch = input.PostEditLockedSegments == true
+                ? batch 
+                : batch.Where(x => !x.IsLocked()).ToArray();
+            
             var glossaryPrompt = string.Empty;
             if (glossary?.Glossary != null)
             {
                 var glossaryStream = await FileManagementClient.DownloadAsync(glossary.Glossary);
                 var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
                 glossaryPrompt = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary,
-                    string.Join(';', batch.Select(x => x.Source)), input.FilterGlossary);
+                    string.Join(';', filteredBatch.Select(x => x.Source)), input.FilterGlossary);
                 if (!string.IsNullOrEmpty(glossaryPrompt))
                 {
                     glossaryPrompt +=
@@ -224,7 +228,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                 }
             }
 
-            var json = JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target }).ToList());
+            var json = JsonConvert.SerializeObject(filteredBatch.Select(x => new { x.Id, x.Source, x.Target }).ToList());
             var userPrompt = PromptConstants.GetPostEditPrompt(prompt, glossaryPrompt, src, tgt,
                 json);
 
@@ -239,76 +243,26 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
         }
 
+        var changes = 0;
         results.ForEach(x =>
         {
             var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x.TranslationId);
             if (translationUnit != null)
             {
+                if (translationUnit.Target != x.TranslatedText)
+                {
+                    changes += 1;
+                }
+                
                 translationUnit.Target = x.TranslatedText;
             }
         });
 
         var fileReference =
             await FileManagementClient.UploadAsync(xliffDocument.ToStream(), input.File.ContentType, input.File.Name);
-        return new TranslateXliffResponse { File = fileReference, Usage = usage };
+        return new TranslateXliffResponse { File = fileReference, Usage = usage, Changes = changes};
     }
-
-    private async Task<XliffDocument> LoadAndParseXliffDocument(FileReference inputFile)
-    {
-        var stream = await FileManagementClient.DownloadAsync(inputFile);
-        var memoryStream = new MemoryStream();
-        await stream.CopyToAsync(memoryStream);
-        memoryStream.Position = 0;
-
-        return memoryStream.ToXliffDocument();
-    }
-
-    private async Task<string?> GetGlossaryPromptPart(FileReference glossary, string sourceContent)
-    {
-        var glossaryStream = await FileManagementClient.DownloadAsync(glossary);
-        var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
-
-        var glossaryPromptPart = new StringBuilder();
-        glossaryPromptPart.AppendLine();
-        glossaryPromptPart.AppendLine();
-        glossaryPromptPart.AppendLine("Glossary entries (each entry includes terms in different language. Each " +
-                                      "language may have a few synonymous variations which are separated by ;;):");
-
-        var entriesIncluded = false;
-        foreach (var entry in blackbirdGlossary.ConceptEntries)
-        {
-            var allTerms = entry.LanguageSections.SelectMany(x => x.Terms.Select(y => y.Term));
-            if (!allTerms.Any(x => Regex.IsMatch(sourceContent, $@"\b{x}\b", RegexOptions.IgnoreCase))) continue;
-            entriesIncluded = true;
-
-            glossaryPromptPart.AppendLine();
-            glossaryPromptPart.AppendLine("\tEntry:");
-
-            foreach (var section in entry.LanguageSections)
-            {
-                glossaryPromptPart.AppendLine(
-                    $"\t\t{section.LanguageCode}: {string.Join(";; ", section.Terms.Select(term => term.Term))}");
-            }
-        }
-
-        return entriesIncluded ? glossaryPromptPart.ToString() : null;
-    }
-
-    private string UpdateTargetState(string fileContent, string state, List<string> filteredTUs)
-    {
-        var tus = Regex.Matches(fileContent, @"<trans-unit[\s\S]+?</trans-unit>").Select(x => x.Value);
-        foreach (var tu in tus.Where(x =>
-                     filteredTUs.Any(y => y == Regex.Match(x, @"<trans-unit id=""(\d+)""").Groups[1].Value)))
-        {
-            string transformedTU = Regex.IsMatch(tu, @"<target(.*?)state=""(.*?)""(.*?)>")
-                ? Regex.Replace(tu, @"<target(.*?state="")(.*?)("".*?)>", @"<target${1}" + state + "${3}>")
-                : Regex.Replace(tu, "<target", @"<target state=""" + state + @"""");
-            fileContent = Regex.Replace(fileContent, Regex.Escape(tu), transformedTU);
-        }
-
-        return fileContent;
-    }
-
+    
     private string GetSystemPrompt(bool translator)
     {
         string prompt;
@@ -372,31 +326,5 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         }
 
         return (entities, usageDto);
-    }
-
-    private async Task<(string result, UsageDto usage)> ExecuteSystemPrompt(BaseChatRequest input,
-        string prompt,
-        string? systemPrompt = null)
-    {
-        var chatMessages = new List<ChatMessage>();
-        if (systemPrompt != null)
-        {
-            chatMessages.Add(new ChatMessage(ChatRole.System, systemPrompt));
-        }
-
-        chatMessages.Add(new ChatMessage(ChatRole.User, prompt));
-
-        var response = await Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName, chatMessages)
-            {
-                MaxTokens = input.MaximumTokens,
-                Temperature = input.Temperature,
-                PresencePenalty = input.PresencePenalty,
-                FrequencyPenalty = input.FrequencyPenalty,
-                DeploymentName = DeploymentName,
-            });
-
-        var result = response.Value.Choices[0].Message.Content;
-        return (result, new(response.Value.Usage));
     }
 }
