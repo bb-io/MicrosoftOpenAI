@@ -12,4 +12,7 @@ public class PostEditXliffRequest
 
     [Display("Target language")]
     public string? TargetLanguage { get; set; }
+
+    [Display("Filter glossary terms")]
+    public bool? FilterGlossary { get; set; }
 }
