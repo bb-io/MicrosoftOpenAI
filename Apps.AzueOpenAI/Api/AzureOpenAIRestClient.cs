@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Apps.AzureOpenAI.Models.Dto;
 using Blackbird.Applications.Sdk.Common.Authentication;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
 using Newtonsoft.Json;
@@ -24,8 +25,8 @@ public class AzureOpenAiRestClient(IEnumerable<AuthenticationCredentialsProvider
         var error = JsonConvert.DeserializeObject<ErrorDtoWrapper>(response.Content, JsonSettings);
 
         if (response.StatusCode == HttpStatusCode.NotFound && error.Error.Type == "invalid_request_error")
-            return new("Model chosen is not suitable for this task. Please choose a compatible model.");
+            return new PluginMisconfigurationException("Model chosen is not suitable for this task. Please choose a compatible model.");
         
-        return new(error?.Error?.Message ?? response.ErrorException.Message);
+        return new PluginApplicationException(error?.Error?.Message ?? response.ErrorException!.Message);
     }
 }
