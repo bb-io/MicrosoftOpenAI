@@ -53,7 +53,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
 
         var systemPrompt = GetSystemPrompt(string.IsNullOrEmpty(prompt));
         var (translatedTexts, usage) = await ProcessTranslationUnits(xliffDocument,
-            new(prompt, systemPrompt, bucketSize ?? 1500, promptRequest, glossary?.Glossary));
+            new(prompt, systemPrompt, bucketSize ?? 1500, promptRequest, glossary?.Glossary, input.FilterGlossary));
 
         translatedTexts.ForEach(x =>
         {
@@ -213,7 +213,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                 var glossaryStream = await FileManagementClient.DownloadAsync(glossary.Glossary);
                 var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
                 glossaryPrompt = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary,
-                    string.Join(';', batch.Select(x => x.Source)));
+                    string.Join(';', batch.Select(x => x.Source)), input.FilterGlossary);
                 if (!string.IsNullOrEmpty(glossaryPrompt))
                 {
                     glossaryPrompt +=
@@ -354,7 +354,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             {
                 var glossaryStream = await FileManagementClient.DownloadAsync(parameters.Glossary);
                 var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
-                var glossaryPromptPart = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary, json);
+                var glossaryPromptPart = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary, json, parameters.filterTerms);
                 prompt = GlossaryPrompts.GetGlossaryWithUserPrompt(prompt, glossaryPromptPart);
             }
 

@@ -6,7 +6,7 @@ namespace Apps.AzureOpenAI.Constants;
 
 public static class GlossaryPrompts
 {
-    public static string? GetGlossaryPromptPart(Glossary blackbirdGlossary, string sourceContentInJson)
+    public static string? GetGlossaryPromptPart(Glossary blackbirdGlossary, string sourceContentInJson, bool? filter)
     {
         var glossaryPromptPart = new StringBuilder();
         glossaryPromptPart.AppendLine();
@@ -18,7 +18,7 @@ public static class GlossaryPrompts
         foreach (var entry in blackbirdGlossary.ConceptEntries)
         {
             var allTerms = entry.LanguageSections.SelectMany(x => x.Terms.Select(y => y.Term));
-            if (!allTerms.Any(x => Regex.IsMatch(sourceContentInJson, $@"\b{x}\b", RegexOptions.IgnoreCase))) continue;
+            if (filter.HasValue && filter == true && !allTerms.Any(x => Regex.IsMatch(sourceContentInJson, $@"\b{x}\b", RegexOptions.IgnoreCase))) continue;
             entriesIncluded = true;
 
             glossaryPromptPart.AppendLine();
