@@ -18,7 +18,7 @@ public static class GlossaryPrompts
         var entriesIncluded = false;
         foreach (var entry in blackbirdGlossary.ConceptEntries)
         {
-            if (TryProcessGlossaryEntry(entry, sourceContentInJson, glossaryPromptPart))
+            if (TryProcessGlossaryEntry(entry, sourceContentInJson, glossaryPromptPart, filter))
             {
                 entriesIncluded = true;
             }
@@ -27,7 +27,7 @@ public static class GlossaryPrompts
         return entriesIncluded ? glossaryPromptPart.ToString() : null;
     }
     
-    private static bool TryProcessGlossaryEntry(GlossaryConceptEntry entry, string sourceContentInJson, StringBuilder glossaryPromptPart)
+    private static bool TryProcessGlossaryEntry(GlossaryConceptEntry entry, string sourceContentInJson, StringBuilder glossaryPromptPart, bool? filter)
     {
         try
         {
