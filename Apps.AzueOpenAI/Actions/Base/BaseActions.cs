@@ -118,11 +118,11 @@ public class BaseActions : BaseInvocable
             if (string.IsNullOrEmpty(response.Content))
             {
                 throw new InvalidOperationException(response.ErrorMessage ??
-                                                    "Unexpected error occured, please send this error to support.");
+                                                    "Unexpected error occured, response from Azure Open AI is empty.");
             }
 
             var error = JsonConvert.DeserializeObject<ErrorDto>(response.Content!)!;
-            throw new InvalidOperationException(error.ToString());
+            throw new PluginApplicationException(error.ToString());
         }
 
         var chatResponse = JsonConvert.DeserializeObject<OpenAIResponseDto>(response.Content!)!;
@@ -175,7 +175,7 @@ public class BaseActions : BaseInvocable
             {
                 var finishReason = choice.FinishReason ?? "No finish_reason returned";
                 var errorReason = $"No content returned by the model. (finish_reason: {finishReason})";
-                throw new PluginMisconfigurationException(errorReason);
+                throw new PluginApplicationException(errorReason);
             }
         }
 

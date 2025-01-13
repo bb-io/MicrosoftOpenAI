@@ -32,8 +32,12 @@ public static class GlossaryPrompts
         try
         {
             var allTerms = entry.LanguageSections.SelectMany(x => x.Terms.Select(y => y.Term));
-            if (filter.HasValue && filter == true && !allTerms.Any(x => Regex.IsMatch(sourceContentInJson, $"\b{x}\b", RegexOptions.IgnoreCase)))
+            if (filter.HasValue && filter == true && !allTerms.Any(x =>
+                    Regex.IsMatch(sourceContentInJson, $@"\b{Regex.Escape(x)}\b", RegexOptions.IgnoreCase)))
+            {
                 return false;
+            }
+
             glossaryPromptPart.AppendLine();
             glossaryPromptPart.AppendLine("\tEntry:");
 
