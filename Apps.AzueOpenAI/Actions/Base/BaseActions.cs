@@ -3,8 +3,6 @@ using System.Text.RegularExpressions;
 using Apps.AzureOpenAI.Api;
 using Apps.AzureOpenAI.Models.Dto;
 using Apps.AzureOpenAI.Models.Entities;
-using Apps.AzureOpenAI.Models.Requests.Chat;
-using Apps.AzureOpenAI.Models.Responses.Chat;
 using Azure;
 using Azure.AI.OpenAI;
 using Blackbird.Applications.Sdk.Common;
@@ -117,8 +115,15 @@ public class BaseActions : BaseInvocable
         {
             if (string.IsNullOrEmpty(response.Content))
             {
-                throw new InvalidOperationException(response.ErrorMessage ??
-                                                    "Unexpected error occured, response from Azure Open AI is empty.");
+                if(string.IsNullOrEmpty(response.ErrorMessage))
+                {
+                    throw new InvalidOperationException(
+                        "Unexpected error occured, response from Azure Open AI is empty.");
+                }
+                else
+                {
+                    throw new PluginApplicationException(response.ErrorMessage);
+                }
             }
 
             var error = JsonConvert.DeserializeObject<ErrorDto>(response.Content!)!;
