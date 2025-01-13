@@ -20,6 +20,7 @@ using Apps.AzureOpenAI.Models.Entities;
 using Apps.AzureOpenAI.Models.Requests.Chat;
 using Apps.AzureOpenAI.Utils;
 using Azure.AI.OpenAI;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 
 namespace Apps.AzureOpenAI.Actions;
 
@@ -53,7 +54,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
 
         var systemPrompt = GetSystemPrompt(string.IsNullOrEmpty(prompt));
         var (translatedTexts, usage) = await ProcessTranslationUnits(xliffDocument,
-            new(prompt, systemPrompt, bucketSize ?? 1500, promptRequest, glossary?.Glossary));
+            new(prompt, systemPrompt, bucketSize ?? 1500, promptRequest, glossary?.Glossary, input.FilterGlossary));
 
         translatedTexts.ForEach(x =>
         {
@@ -102,6 +103,11 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt, "2024-08-01-preview",
                 promptRequest, ResponseFormats.GetQualityScoreXliffResponseFormat()));
             usage += promptUsage;
+
+            if (string.IsNullOrEmpty(result))
+            {
+                throw new PluginApplicationException("Azure Open AI give us an empty response.");
+            }
             
             TryCatchHelper.TryCatch(() =>
             {
@@ -217,7 +223,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                 var glossaryStream = await FileManagementClient.DownloadAsync(glossary.Glossary);
                 var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
                 glossaryPrompt = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary,
-                    string.Join(';', filteredBatch.Select(x => x.Source)));
+                    string.Join(';', filteredBatch.Select(x => x.Source)), input.FilterGlossary);
                 if (!string.IsNullOrEmpty(glossaryPrompt))
                 {
                     glossaryPrompt +=
@@ -235,6 +241,8 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt,
                 "2024-08-01-preview", promptRequest, ResponseFormats.GetProcessXliffResponseFormat()));
             usage += promptUsage;
+
+            result = FixTagIssues(result);
 
             TryCatchHelper.TryCatch(() =>
             {
@@ -308,7 +316,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             {
                 var glossaryStream = await FileManagementClient.DownloadAsync(parameters.Glossary);
                 var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
-                var glossaryPromptPart = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary, json);
+                var glossaryPromptPart = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary, json, parameters.filterTerms);
                 prompt = GlossaryPrompts.GetGlossaryWithUserPrompt(prompt, glossaryPromptPart);
             }
 
@@ -326,5 +334,11 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         }
 
         return (entities, usageDto);
+    }
+
+    private string FixTagIssues(string result)
+    {
+        return result.Replace("1>", "1&gt;")
+            .Replace("<1", "&lt;1");
     }
 }
