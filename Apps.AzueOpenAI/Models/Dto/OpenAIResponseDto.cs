@@ -23,16 +23,43 @@ public class OpenAIResponseDto
     public CompletionsUsage Usage { get; set; } = new();
 }
 
+public class ContentFilterResults
+{
+    [JsonProperty("hate")]
+    public FilterItem Hate { get; set; } = new();
+
+    [JsonProperty("self_harm")]
+    public FilterItem SelfHarm { get; set; } = new();
+
+    [JsonProperty("sexual")]
+    public FilterItem Sexual { get; set; } = new();
+
+    [JsonProperty("violence")]
+    public FilterItem Violence { get; set; } = new();
+}
+
+public class FilterItem
+{
+    [JsonProperty("filtered")]
+    public bool Filtered { get; set; }
+
+    [JsonProperty("severity")]
+    public string Severity { get; set; } = string.Empty;
+}
+
 public class ChatChoice
 {
     [JsonProperty("finish_reason")]
-    public string FinishReason { get; set; } = string.Empty;
+    public string? FinishReason { get; set; } 
     
     [JsonProperty("index")]
     public int Index { get; set; }
-    
-    [JsonProperty("message")]
+
+    [JsonProperty("message")] 
     public Message Message { get; set; } = new();
+    
+    [JsonProperty("content_filter_results")]
+    public ContentFilterResults ContentFilterResults { get; set; } = new();
 }
 
 public class Message

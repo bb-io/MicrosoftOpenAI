@@ -20,6 +20,7 @@ using Apps.AzureOpenAI.Models.Entities;
 using Apps.AzureOpenAI.Models.Requests.Chat;
 using Apps.AzureOpenAI.Utils;
 using Azure.AI.OpenAI;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 
 namespace Apps.AzureOpenAI.Actions;
 
@@ -102,6 +103,11 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt, "2024-08-01-preview",
                 promptRequest, ResponseFormats.GetQualityScoreXliffResponseFormat()));
             usage += promptUsage;
+
+            if (string.IsNullOrEmpty(result))
+            {
+                throw new PluginApplicationException("Azure Open AI give us an empty response.");
+            }
             
             TryCatchHelper.TryCatch(() =>
             {
@@ -240,7 +246,6 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
 
             TryCatchHelper.TryCatch(() =>
             {
-                Console.WriteLine(result);
                 var deserializedTranslations = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
                 results.AddRange(deserializedTranslations.Translations);
             }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
