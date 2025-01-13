@@ -7,7 +7,7 @@ namespace Apps.AzureOpenAI.Constants;
 
 public static class GlossaryPrompts
 {
-    public static string? GetGlossaryPromptPart(Glossary blackbirdGlossary, string sourceContentInJson)
+    public static string? GetGlossaryPromptPart(Glossary blackbirdGlossary, string sourceContentInJson, bool? filter)
     {
         var glossaryPromptPart = new StringBuilder();
         glossaryPromptPart.AppendLine();
@@ -18,7 +18,7 @@ public static class GlossaryPrompts
         var entriesIncluded = false;
         foreach (var entry in blackbirdGlossary.ConceptEntries)
         {
-            if (TryProcessGlossaryEntry(entry, sourceContentInJson, glossaryPromptPart))
+            if (TryProcessGlossaryEntry(entry, sourceContentInJson, glossaryPromptPart, filter))
             {
                 entriesIncluded = true;
             }
@@ -27,13 +27,16 @@ public static class GlossaryPrompts
         return entriesIncluded ? glossaryPromptPart.ToString() : null;
     }
     
-    private static bool TryProcessGlossaryEntry(GlossaryConceptEntry entry, string sourceContentInJson, StringBuilder glossaryPromptPart)
+    private static bool TryProcessGlossaryEntry(GlossaryConceptEntry entry, string sourceContentInJson, StringBuilder glossaryPromptPart, bool? filter)
     {
         try
         {
             var allTerms = entry.LanguageSections.SelectMany(x => x.Terms.Select(y => y.Term));
-            if (!allTerms.Any(x => Regex.IsMatch(sourceContentInJson, $"\b{x}\b", RegexOptions.IgnoreCase)))
+            if (filter.HasValue && filter == true && !allTerms.Any(x =>
+                    Regex.IsMatch(sourceContentInJson, $@"\b{Regex.Escape(x)}\b", RegexOptions.IgnoreCase)))
+            {
                 return false;
+            }
 
             glossaryPromptPart.AppendLine();
             glossaryPromptPart.AppendLine("\tEntry:");
