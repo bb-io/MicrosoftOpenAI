@@ -236,8 +236,11 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                 "2024-08-01-preview", promptRequest, ResponseFormats.GetProcessXliffResponseFormat()));
             usage += promptUsage;
 
+            result = FixTagIssues(result);
+
             TryCatchHelper.TryCatch(() =>
             {
+                Console.WriteLine(result);
                 var deserializedTranslations = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
                 results.AddRange(deserializedTranslations.Translations);
             }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
@@ -326,5 +329,11 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         }
 
         return (entities, usageDto);
+    }
+
+    private string FixTagIssues(string result)
+    {
+        return result.Replace("1>", "1&gt;")
+            .Replace("<1", "&lt;1");
     }
 }
