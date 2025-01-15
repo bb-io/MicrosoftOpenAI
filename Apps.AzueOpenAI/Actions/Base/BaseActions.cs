@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Apps.AzureOpenAI.Api;
 using Apps.AzureOpenAI.Models.Dto;
 using Apps.AzureOpenAI.Models.Entities;
+using Apps.AzureOpenAI.Utils;
 using Azure;
 using Azure.AI.OpenAI;
 using Blackbird.Applications.Sdk.Common;
@@ -45,7 +46,7 @@ public class BaseActions : BaseInvocable
         await fileStream.CopyToAsync(xliffMemoryStream);
         xliffMemoryStream.Position = 0;
 
-        var xliffDocument = xliffMemoryStream.ToXliffDocument();
+        var xliffDocument = xliffMemoryStream.ToXliffDocument(file.GetXliffType());
         if (xliffDocument.TranslationUnits.Count == 0)
         {
             throw new InvalidOperationException("The XLIFF file does not contain any translation units.");

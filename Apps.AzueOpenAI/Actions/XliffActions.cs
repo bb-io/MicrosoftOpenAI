@@ -242,7 +242,10 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                 "2024-08-01-preview", promptRequest, ResponseFormats.GetProcessXliffResponseFormat()));
             usage += promptUsage;
 
-            result = FixTagIssues(result);
+            if(input.File.Name.EndsWith(".mxliff"))
+            {
+                result = FixTagIssues(result);
+            }
 
             TryCatchHelper.TryCatch(() =>
             {
@@ -338,7 +341,9 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
 
     private string FixTagIssues(string result)
     {
-        return result.Replace("1>", "1&gt;")
-            .Replace("<1", "&lt;1");
+        result = Regex.Replace(result, @"\{(\d+)>", "{$1&gt;");
+        result = Regex.Replace(result, @"<(\d+)}", "&lt;$1}");
+
+        return result;
     }
 }
