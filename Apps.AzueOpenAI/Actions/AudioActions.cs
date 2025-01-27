@@ -4,6 +4,7 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 using Apps.AzureOpenAI.Actions.Base;
 using Apps.AzureOpenAI.Models.Requests.Audio;
 using Apps.AzureOpenAI.Models.Responses.Audio;
+using Apps.AzureOpenAI.Utils;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Utils.Extensions.Files;
@@ -21,13 +22,14 @@ namespace Apps.AzureOpenAI.Actions
         {
             var fileStream = await _fileManagementClient.DownloadAsync(input.File);
             var fileBytes = await fileStream.GetByteData();
-            var translation = await Client.GetAudioTranslationAsync(
-                new AudioTranslationOptions(DeploymentName, new BinaryData(fileBytes))
-                {
-                    Prompt = input.Prompt,
-                    Temperature = input.Temperature,
-                    ResponseFormat = AudioTranslationFormat.Verbose
-                });
+            var translation = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetAudioTranslationAsync(
+                    new AudioTranslationOptions(DeploymentName, new BinaryData(fileBytes))
+                    {
+                        Prompt = input.Prompt,
+                        Temperature = input.Temperature,
+                        ResponseFormat = AudioTranslationFormat.Verbose
+                    }));
+
             return new()
             {
                 TranslatedText = translation.Value.Text
@@ -40,14 +42,14 @@ namespace Apps.AzureOpenAI.Actions
         {
             var fileStream = await _fileManagementClient.DownloadAsync(input.File);
             var fileBytes = await fileStream.GetByteData();
-            var transcription = await Client.GetAudioTranscriptionAsync(
+            var transcription = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetAudioTranscriptionAsync(
                 new AudioTranscriptionOptions(DeploymentName, new BinaryData(fileBytes))
                 {
                     Language = input.Language,
                     Prompt = input.Prompt,
                     Temperature = input.Temperature,
                     ResponseFormat = AudioTranscriptionFormat.Verbose
-                });
+                }));
             return new()
             {
                 Transcription = transcription.Value.Text
