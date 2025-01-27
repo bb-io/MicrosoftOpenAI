@@ -6,6 +6,7 @@ using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Apps.AzureOpenAI.Actions.Base;
 using Apps.AzureOpenAI.Utils;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Newtonsoft.Json;
 using TiktokenSharp;
@@ -22,16 +23,17 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
     public async Task<CompletionResponse> CreateCompletion([ActionParameter] CompletionRequest input)
     {
         var test = "x";
-        var completion = await Client.GetCompletionsAsync(
+        var completion = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetCompletionsAsync(
             new CompletionsOptions(DeploymentName,
-                new List<string>() { input.Prompt })
+                new List<string> { input.Prompt })
             {
                 DeploymentName = DeploymentName,
                 MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
-            });
+            }));
+
         return new()
         {
             CompletionText = completion.Value.Choices.First().Text
@@ -41,7 +43,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
     [Action("Chat", Description = "Gives a response given a chat message")]
     public async Task<ChatResponse> ChatMessageRequest([ActionParameter] ChatRequest input)
     {
-        var response = await Client.GetChatCompletionsAsync(
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
                 new List<ChatMessage>() { new ChatMessage(ChatRole.User, input.Message) })
             {
@@ -50,7 +52,8 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
-            });
+            }));
+
         return new()
         {
             Message = response.Value.Choices.First().Message.Content
@@ -61,7 +64,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
         Description = "Gives a response given a chat message and a configurable system prompt")]
     public async Task<ChatResponse> ChatWithSystemMessageRequest([ActionParameter] SystemChatRequest input)
     {
-        var response = await Client.GetChatCompletionsAsync(
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
                 new List<ChatMessage>()
                 {
@@ -73,7 +76,8 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
-            });
+            }));
+
         return new()
         {
             Message = response.Value.Choices.First().Message.Content
@@ -94,7 +98,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 Summary:
             ";
 
-        var completion = await Client.GetCompletionsAsync(
+        var completion = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetCompletionsAsync(
             new CompletionsOptions(DeploymentName,
                 new List<string>() { prompt })
             {
@@ -103,7 +107,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
-            });
+            }));
 
         return new()
         {
@@ -122,7 +126,8 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                     Instruction: {input.Instruction}
                     Edited text:
                     ";
-        var response = await Client.GetChatCompletionsAsync(
+
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
                 new List<ChatMessage>()
                     { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
@@ -132,7 +137,8 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
-            });
+            }));
+
         return new()
         {
             EditText = response.Value.Choices.First().Message.Content
@@ -144,7 +150,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
     {
         var (messages, _) = BlackbirdPromptParser.ParseBlackbirdPrompt(input.Prompt);
 
-        var response = await Client.GetChatCompletionsAsync(
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName, messages)
             {
                 DeploymentName = DeploymentName,
@@ -152,7 +158,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty,
-            });
+            }));
 
         return new()
         {
@@ -182,11 +188,12 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
             {input.TargetText}
         ";
 
-        var response = await Client.GetChatCompletionsAsync(
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>()
-                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
-            { DeploymentName = DeploymentName });
+                    new List<ChatMessage>
+                        { new(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
+                { DeploymentName = DeploymentName }));
+
         return new()
         {
             EditText = response.Value.Choices.First().Message.Content
@@ -212,15 +219,16 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
             {input.TargetText}
         ";
 
-        var response = await Client.GetChatCompletionsAsync(
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>()
-                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
+                new List<ChatMessage>
+                    { new(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
                 MaxTokens = input.MaximumTokens ?? 5000,
                 Temperature = input.Temperature ?? 0.5f,
                 DeploymentName = DeploymentName,
-            });
+            }));
+
         return new()
         {
             Message = response.Value.Choices.First().Message.Content
@@ -251,7 +259,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
         var userPrompt =
             $"{(input.SourceLanguage != null ? $"The {input.SourceLanguage} " : "")}\"{input.SourceText}\" was translated as \"{input.TargetText}\"{(input.TargetLanguage != null ? $" into {input.TargetLanguage}" : "")}.{(input.TargetAudience != null ? $" The target audience is {input.TargetAudience}" : "")}";
 
-        var response = await Client.GetChatCompletionsAsync(
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
                 new List<ChatMessage>()
                     { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
@@ -259,7 +267,8 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 MaxTokens = input.MaximumTokens ?? 5000,
                 Temperature = input.Temperature ?? 0.5f,
                 DeploymentName = DeploymentName,
-            });
+            }));
+
         return new()
         {
             Message = response.Value.Choices.First().Message.Content
@@ -292,22 +301,23 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
         var userPrompt =
             $"{(input.SourceLanguage != null ? $"The {input.SourceLanguage} " : "")}\"{input.SourceText}\" was translated as \"{input.TargetText}\"{(input.TargetLanguage != null ? $" into {input.TargetLanguage}" : "")}.{(input.TargetAudience != null ? $" The target audience is {input.TargetAudience}" : "")}";
 
-        var response = await Client.GetChatCompletionsAsync(
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>()
-                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
+                new List<ChatMessage>
+                    { new(ChatRole.System, systemPrompt), new(ChatRole.User, userPrompt) })
             {
                 MaxTokens = input.MaximumTokens ?? 5000,
                 Temperature = input.Temperature ?? 0.5f,
                 DeploymentName = DeploymentName,
-            });
+            }));
+
         try
         {
-            return JsonConvert.DeserializeObject<MqmAnalysis>(response.Value.Choices.First().Message.Content);
+            return JsonConvert.DeserializeObject<MqmAnalysis>(response.Value.Choices.First().Message.Content!)!;
         }
         catch
         {
-            throw new Exception(
+            throw new PluginApplicationException(
                 "Something went wrong parsing the output from OpenAI, most likely due to a hallucination!");
         }
     }
@@ -320,17 +330,19 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                     Locale: {input.Locale}
                     Localized text:
                     ";
+        
         var tikToken = await TikToken.GetEncodingAsync("cl100k_base");
         var maximumTokensNumber = tikToken.Encode(input.Text).Count + 100;
 
-        var response = await Client.GetChatCompletionsAsync(
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
             new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>() { new ChatMessage(ChatRole.User, prompt) })
+                new List<ChatMessage> { new(ChatRole.User, prompt) })
             {
                 MaxTokens = maximumTokensNumber,
                 DeploymentName = DeploymentName,
                 Temperature = 0.1f,
-            });
+            }));
+
         return new()
         {
             Message = response.Value.Choices.First().Message.Content

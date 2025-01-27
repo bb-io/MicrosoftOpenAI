@@ -7,7 +7,7 @@ public static class FileReferenceExtensions
 {
     public static XliffType GetXliffType(this FileReference fileReference)
     {
-        if (fileReference.Name.EndsWith(".xliff"))
+        if (fileReference.Name.EndsWith(".xliff") || fileReference.Name.EndsWith(".xlf"))
         {
             return XliffType.Xliff;
         }

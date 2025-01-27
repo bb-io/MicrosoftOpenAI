@@ -1,11 +1,9 @@
 ﻿using Blackbird.Applications.Sdk.Common.Actions;
-using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Newtonsoft.Json;
 using System.Net.Mime;
 using System.Text.RegularExpressions;
-using System.Text;
 using Apps.AzureOpenAI.Models.Requests.Xliff;
 using Apps.AzureOpenAI.Actions.Base;
 using Apps.AzureOpenAI.Constants;
@@ -13,13 +11,11 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 using Apps.AzureOpenAI.Models.Response.Xliff;
 using MoreLinq;
 using Blackbird.Xliff.Utils;
-using Blackbird.Xliff.Utils.Extensions;
 using Blackbird.Applications.Sdk.Glossaries.Utils.Converters;
 using Apps.AzureOpenAI.Models.Dto;
 using Apps.AzureOpenAI.Models.Entities;
 using Apps.AzureOpenAI.Models.Requests.Chat;
 using Apps.AzureOpenAI.Utils;
-using Azure.AI.OpenAI;
 using Blackbird.Applications.Sdk.Common.Exceptions;
 
 namespace Apps.AzureOpenAI.Actions;

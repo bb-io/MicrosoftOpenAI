@@ -1,6 +1,7 @@
 ﻿using Apps.AzureOpenAI.Actions.Base;
 using Apps.AzureOpenAI.Models.Requests.Analysis;
 using Apps.AzureOpenAI.Models.Responses.Analysis;
+using Apps.AzureOpenAI.Utils;
 using Azure.AI.OpenAI;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
@@ -19,10 +20,11 @@ public class TextAnalysisActions(InvocationContext invocationContext, IFileManag
                                               "text that it represents.")]
     public async Task<CreateEmbeddingResponse> CreateEmbedding([ActionParameter] EmbeddingRequest input)
     {
-        var embeddings = await Client.GetEmbeddingsAsync(new EmbeddingsOptions() {
+        var embeddings = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetEmbeddingsAsync(new EmbeddingsOptions() {
                 Input = new List<string>() { input.Text },
                 DeploymentName = DeploymentName 
-        });
+        }));
+        
         return new()
         {
             Embedding = embeddings.Value.Data.First().Embedding.ToArray(),
@@ -35,10 +37,9 @@ public class TextAnalysisActions(InvocationContext invocationContext, IFileManag
     public async Task<TokenizeTextResponse> TokenizeText([ActionParameter] TokenizeTextRequest input)
     {
         var encoding = input.Encoding ?? "cl100k_base";
-        var tikToken = await TikToken.GetEncodingAsync(encoding);
+        var tikToken = await TryCatchHelper.ExecuteWithErrorHandling(() => TikToken.GetEncodingAsync(encoding));
 
         var tokens = tikToken.Encode(input.Text);
-
         return new()
         {
             Tokens = tokens
