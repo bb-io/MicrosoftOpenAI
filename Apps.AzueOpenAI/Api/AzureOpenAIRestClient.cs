@@ -20,7 +20,7 @@ public class AzureOpenAiRestClient(IEnumerable<AuthenticationCredentialsProvider
     protected override Exception ConfigureErrorException(RestResponse response)
     {
         if (response.Content == null)
-            throw new Exception(response.ErrorMessage);
+            throw new PluginApplicationException(response?.ErrorMessage);
 
         var error = JsonConvert.DeserializeObject<ErrorDtoWrapper>(response.Content, JsonSettings);
 
