@@ -1,0 +1,1517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:metrics="urn:lisa-metrics-tags" xmlns:term="urn:xliff-term-extensions" xmlns:xref="urn:xmlintl-xref" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtm="urn:xliff-xtm-extensions" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://www.xtm-intl.com/docs/xliff-core-1.2-transitional.xsd">
+  <file source-language="en-GB" target-language="fr-FR" datatype="xml" original="4a4ebef8577e4c7ea741efa3148bf877" xtm:xliff-identifier="ec032b8cc42a447c9e0a6536184b7a60" product-name="XTM International Limited xml:tm" product-version="2.0" tool="xtm-intl_XLIFF_Extract" xml:space="default" xtm:populate-target-with-source="yes">
+    <header>
+      <skl>
+        <internal-file crc="6476ece">
+L+NZPPSyapGdkZ6iff0q0FRyGF5GbMoITwVnm9Pgq41uUANYwqAXmS3locQ4w64On9TNr/Vc5Lq2
+qC8P1J/mKM+vrxVNoATRzUPY6V3DN+bmN/zpdBeFqR1BMJhPIkXp6F+dv+x/MKj/ePr6aRRgEDZ1
+V7TkpQXh1GPc51LAo7wW0r4TxDPLPMI6OyyUmBt566gPWP97t0MOYBfYPbsBj2buWj7XX589gjE6
+bLOs+du98N6HH7jTw3PKl8DKU8AjHKKTGtbl/D4Ad6P25VAZcYSdYUWi40rE1BNkUXWWKMC72J30
+GARNrF7CUXGjPpcnqyJhnrRLjygu/xwmuMGaaNMdilg2ExGCpSxVZC3Rwla4R2FW+pRHta4Emth4
+LOqKLLHjp4wZp8DE3e7tKXPTWENBkx2qbfR2jgH18mS8Zxpfybl90j40KxGXV7qNHjRu73oNQ41D
+H4V5O7vC06EC5r3xrdT5Fo+L+C4g2lwRkKzyTvyKaQnTHd2D/4XUAzYdN2r9tmy77yDQwNhzbyVC
+oMG7diN5SY2BkvEUrkHMZXUBxk1Gi2abEJvLZOoKi/2Xy4SJqz9BiKD5wNzwQzFhlV8fzEqlloqN
+ZM1pR5FqrUfMD9Oq0s2gd2pd8DfbkshxSrJZjCjqncP5K17BNos+WyejggsiSrd5Y3Ku+6i/sPfU
+4ZXBBJz26Xu/9gCFovxdNhlpVsju0i059xk79TTcgb9ss84ApEqZhAujBARUQzZVKTlXasUPSOfY
+G4F/49hJY1zBsxPX1d9Agk9qgRZYYWFGHAflGQc1pL1lv3+OGA9CZC6ceTYlVBU2xoIn1AjEhouj
+IMfKVuCEjnuNvHtq2jphxMCHLM/jCUFjwmGbb35uyocImXfkTvmR+bCoN7VRz62c7wlnpPRjJrOt
+NwOGwgD9vXy9p1oqzksXV+LVXCMsoGPlO5sQEGr2B3ZTU+c38H5dIXAkdo5hlQpBNnT5Oa+p8s8B
+/criYKhnU09ud3itY168r7+hNEzxrJ8HCVGLJAmGPRdK9YBov+ilsNBn+KBvflhkRdJztR29anc1
+r/gP3wKxLQWOu0t4Jmk1uWiNGzMVhMPwAfVVmIhtmheXdwDRROZGkQU5q669ug/HJoqUuPJlSj73
+lC5YO9w/Imk/30nv9PbFvBgGkZyjsFE7iKdFCrRXNsUpyGVL24AVseofePgXBZ9t52Dsn39eOuUX
+m36VpthQ7J2bFfoKWwfL+T6yxIThFtgRwugF3xe5s4Ze0bpBPOqaJO6eFHluIvkMQAPGTShUoLu8
+W24EDi+SlKo593yMrqZjsGjXTNEZlGdbgHuM4wrhfl1RI3Lp3PWSJZfnfH0Dy2Fena41mdRBhyUl
+qfGcovCQDcLkoVoCdV6iwbST1RFXSnA0hl0csNWYt2N//BFyb5raYL049+qW1vtlrkjJBH+bmkpA
+OsGEMmVtZLNSHraipS9Xy320Fwee70BM7O0+wZOjGrmggKXL/1DCIeVTshDtmVYZfU+GmKuvUSkE
+LlutnKcBadvlQgJQHfrPcYPX3wLZ1P/1cjw5bL/rVrg0UVWXn0HG8XmXaIomtz737MW7KOjBd3HM
+/EOhx6ElCo6ybPRzPvhtAFwvv9P+X5/Y0v5lwHGYJDVnk8qqW8kXeXF078oEzYA8yi1nYyyA9gGB
+ICZUBMW9h8Rh7klF3BtmufRhSyPm0Hmd/Hcji5LC4MLWj5sS4rzU2fn3aU/kqz6dUCHFbq5O6zs/
+paQbxu6o434lTbJ7rYk1HneVKPBuR0U85/vamY3FZh6iaUZcLmPSz2QW0OUzHMPGUwKFu5vJQjEn
+GYI3Dw75ZzRG3uHFb4Ot9C+QbPFdNEGahzQ8CQod5DV80xq9PWn5YioO0pcHza90zjv7/bl8qy8J
+IMt19vh73U4A15a9Pou5LI/+pe4ZRi9KkuwnAwnUskhu7dNCgedIQdGQOZVwYMk5s0fJ7E7Ceej2
+abhjC6VERUYEoxUR/B+aT1FMyWvQISXVHj8jLmrVVhtLj5bBHQmk5TS4utYQsTvRhyj420nwnu6z
+gF+VUeNq3xsaYKaI5JZJ8tVUwvzolmRZzA4WrGMZySAd9lzRUWA3dyOwcXrCL+Bf/enObmzaoPR7
+0srqsAtroecdhafVdFi2pERaX2ZJXWGouToU9JC0+4Vl/vmLjjYHXJNwXHziIkjlqED4x9x95HEi
+VnhGh4qnw5eKxO5+/kN9Y/96nd3n1TpYj6oai9RR+34nedihjfRisNKFsGIC+py9GSZVeHSUenQ7
+WsLw6rhQlG3gyYvvXGpdTYGSGitmm3rX5h3zfKgrKjIatWKTiG6VkDfAjeY/gZg9q+a5R0MYaPMh
+GS/918nmXCbE9EHey7IpPHV9b2H5aWsvsHKEmQwXn/V8fxasF0eFpvlFOwy/RtA7coVn30MwhxYr
+Qomk57kFKsfyEbW0DvkJEOj9unjTklSYYhfkO1BgiGn/rFT0MiOnEQwDeN/OFlJZ7O+W1Cr8VIxp
+Gb+131jNtw+daiI19J+dsOuYuugkpyXobCezYnAHGrd82kZjxw9wIEsLqXb4r6K9Rev6vB6+aUtU
+FWG1kXustCV5t/UDKU8eiscZvOvmfU02QIvZ6cmlej5ak+RYZfLhUpHZAuceAqHRu7vKgMeMb9uf
+k/fh4S5Sz6538hFxS9jx5KdzIV2AWnTK1Fs5WlVomRrHeN9KqkSqlBDsYfz5VFVsvd6o8j39pof7
+AATUvLNgcap3CR/7aJfZM8PBH1v1uFErxB7rmji+J7czf3TrBvxNlCtTPlp0KCXbYPSNySKsKGgL
+56XD4t+lrW0zHZjj40mTHl93CieTcrdXZaJ25LEgK9GLcsI6yto30t4FIwpCmwkCYeoNbkMRWxJU
+ACUI8FwEPyvQ6W1/SEgRQa1dnwnZ1Qv3/Z69sWBAPbgMTaKxVaCyeqqFjQkGcFtJ98VsPVzR4v4E
+223MTbgMQhe4z5uSLz3qGDq57guZ2139Mm9eZqEkE+KN4RdTglcnnFvB0pYnMvprMongwSwPgx1b
+0JArMK01KWSewcDq1nQfCZQn6ElHhYuFAxi/ZiOlZlPnFftDwVF1+dCuNms/2LR6SVAJJoNusf8C
+9EwHA92kLbzMi3VS+SzRPI6bLkEzXR/LAp6CCAalNqarMDco1MaMLexOl+/iHmT2Qg6DwV/Z8lQ3
+iE+Q0fchYiyerMhrC758HXVNj0TmPsWbGtSf7QQJosEUwj387/fe+RPbeyC8RXDXN7B2np7rr52Y
+9VywKodVm31RwmnZAU/o69V05DKG/495ylNa7PX9IZ46OAbsEgxcXM9Pn3PvSZaMgpuHO5PWIffd
+KTuf87RL8GhYWRAXo75QpeL6Qk1a8mCcNn45ykZ9sXEpBnu5tHzCMm1ybdmaHteicQIWZKMl40Ge
+qQirhsxYTnCEV8Lc9YCctNA+qcBebBQTNuKDp/MF20hzQQ4jckUsdHTYDlpXfRSkFaP8kU+kqfIV
+d/a/B63lb2hvpWIGxfM+ZZpZk3V126CYchOpHIivz5Jq5Ae5x4MV821yP0jIb3p2URPBhJEpDMH3
+SwTmdTnIWml5UUC+CJjrAjHmzAq2Qz+XWjJciVyFdiAEyBgkDUdh1AQvxTAL0jPtX9MhlG68um8x
+k5ihCZwWMTFQxJMUOQyRKAjT76tFPL1c6KiJAivYaFjbkBRRFAnxsGHF/5AZaIM/Xfzzk6Qzu4cJ
+PlKDduXLCNFuKOaaUt3zGBrUhufSUC3oLicLYkCYmP+voo2HLg3/mlZFLBXdbej/giLUCr4yU2Js
+c+bVPuM6QB1h+CHcUWHj4/84c8kio5aPuYDkydV73tlfC8mnods4XbG2YcfVx/DFdZ8Dei0qXeAY
+0Ap4F2stSNEeuYgB728zbrq505AwPuuJxrKvO7TDMbPMYWvTvfW53tpamSiBAQQLpqf3fqnkPq/C
+axgA6NFzMAZAXKWRuHtlXeWr1KNvP7tQZxQws3oiRIneAmbWFyP/Av8PKYOhBQvVXihEuUgzLfo6
+LeuRj118GJFqNTY1evbxD4DBL2x6VvscnDAuKBss6z70rSoWLUx05dhT+ka6d0vVG9ncQYI+LTXp
+D2QKiswrx+kFDOg6+GCGROp/0rGVQLbfk1s2of+TxKDIsMi766NFMI6mByXVCKEs7fDejw9pa7Vw
+NYmMdD2gGnZxh/4RG6USYPTBL60w53dYVE0oTlWHMf6uOWPM7GhZIM9FXdRSj+TrJvDdUdEyv1ql
+vTx0AEumhof3UyKnmJZD8bWSvuiPlDntbw8JBV/+Z/m1tnV66mib7YE9NE7rHHoD1FjJ8zOL7zm9
+xGO5wv/sdB75edH9CxJQYu0Q3Qz76xMJbqHyMCsjdy4Xokrp79uu+pYg5XUj1H+h1OZOm4pp4gkN
+74DZ4AP0jbdLmcX7CcGfb7pSF6zgj60fbdPktQqN/tNsBiHtBJz2N0XgCkr20LtuwWlNDQlqSaCJ
+4KZXSFfvjJGQoq5LloWqRY22hRDUIKTscTR2MAHNxXVU2KBw0Ixhwy80o1lbpal5uKt/pLbVV8Jg
+M/7i/7W7fETt09RDI56IEjmCv0dsdIhbY/jYsGO5OOW+AfLChRZdzo71dGEf+bK9ECWx4CyJIn9g
+kc261SX/hb0DqXXsdcvMsBD/jO4TLAGYLfwgj636tDGGE/Q/krJWeeUTqMQcf44Cfm5qQ6xUPy0S
+HBjIn73grXQAMv9CD5l/NBvwO4tXC+tFK0RChDDiTigLeM4yi1mEs9j0sthqirSRVOxcRXivOyrs
+hn2Oxa5v0+lGG3760kgd+ezYwYEI6VrH4F0nDlFIKWVQRRs7fkbvdJVJiMCd2ZW8ashIhrZG2n/n
+kO+bpby2NkDET7p3ycJhDvxqE13keoY76VDgfzn0dE9itnwPiofQaX6SfrOQ5OKU7PfcpuVtv32z
+Q8qACxUtkRTWAPXniA4vZcKCbTD9eQ/1iXNjQszIw4ErDjNW7TEXRYjEZnWo4VX43dxf1Pkn0KEc
+lWMDGEi+s0sDHp0ihbCCdMmhHwCSK/Y+VeRxh/kIN9TTUKk64I5f1Jr3/ake2cv6DZTwbBrONkYM
+dj3gFeq03NTB295Ih+C8lmppFGcI2EX9qljI9m/7psI3JiWllrqHpxx1DSEJllV9N2pGnOA7s8I2
+0E/EYZ9ZwqzXZrbzqSc8iX6xM8Cs6DDz87mg6FthrWBeq1P2VhUFwItCYwhBSXYU5i1sFvOOSL5b
+goKgLtchWnjbFHD5tonBZtjDbMqDDekjndM4XTFvC/aK7OqKus8F2sQmZVxozwnUIzTAuG7vnQJw
+etofsoufFTZ/9GXYOkIyjXRtHeE8VLLhXadabfWiwEpH1shHBuayvF5qp1WQbugy/8X1kP4YsWYm
+V7iIkBBjIes+TfIi0UESaffzt5HB8x2N4WAfaCmrC6gHB0S4XFQxODs21pwG78Pu7zbzAlb6e9Dh
+2iaRwjbdjtSUI8zCC2FuBQBt3rjhYjiw8CcHxtW0vVnAOHfPtVJ9OslYbehVZQvKr+03QIj1yer6
+XZeBcNdDPk3ZyFMJEvZMI7QpB1ec0fNGib6+tPzvYGbfP/rOCy6mXQu4I6kC8JYuDxRH5quTHAND
+RtYGAX9+EDqPCQ7B5sgAOWd7ODfa1ipxe3ZXGXzPiEonizGIAUvVMdA8ERk9i30nA5iAMw1SrGbo
+joJjSdDWNbcGpK+BeD/LHwNJHo47p94TvQfhMafphezVGax3C0HpbB1VbcASxVJLVq2EXm7Nctv8
+cunKIkDa35MHjizup/noc6XN5+e9mri3YFE0DUoqYXv39N6vyhQW6v/S7v77MuQMxbBtDXAX/uNv
+QdvS8YhreksFmH64qb6PYeiDDI7rV/ira7hPpr7Ctp8cZ3k+pRuLO0yHo5JMwy9sqYo5/qFw1EOz
+kpLEqI3AVnW+71UMQVEB/GOe5LnEsHCtaciEo7slSmvXn+TpEF/8wZdbdlyGItqi9wTThE3XCv/u
+5pS5pG//BYjZuUvIJSm8Q/gKYLgYpbvWOmCc9xLynqy1bDl0RIwzV56RzUpQ9uyOyL3tol6bE2C6
+QQHV1xZUEkDc+BMdo1YEemBfrrdmZCK5ofAcs+qFPyw35rgIL381a65uJIhCw9i2Z1+Z+sFyjxAC
+ph48X8Ps/zx1Ko3CQ15tri/dC3Q1bVJ+OcUrcw5YnK6mWoPqfoNj2C/hXTypjQeujJIZQGi3QTEo
+yh0pkG1TvR35tCdPlrY/kMMxKYiikGwrpsnc2sUtjB4PbWKPIB5dGLmLklkrtusmrhC8uCmET6/6
+V6O68jDjB1lgbmnVKe0eFOlb8M1Qy4ALtCxmXEDC5g3Yu220xZAVMrvKXnPnW+MWOK8OxlGQ7tct
+Ylia5M41qDc4MGmBgVHf8j38Lnq0EIjJ19h8hiRtTNL61eOVixlXXMcV3tv+dWCZkX7EFp5T3jVk
+y/WsP0TcmB53VIwGOQA+obvtXx2Fq6D3m4RQAa1dvUA9TEtGwa3CtnzJ/6qMuxgKkDa8D4xMBMsA
+bxJRon53ev1XQW8K9ZO+8nXW0w/71Tjj96jLX9vdpDbwzt/faVIr8DGPZyL1HcelQ76qyB+2bwRx
+bPJc72QTNSY8nZx2IbnRk0051xB3N+yhvC3ZAO7lhbptMuPootJHhw4SfCSGt3I7+zYZz9ro7xv7
+kwsunXw1Ym3bzir6XsV9xJXGzo1Ub8gyKSgNZ27cEj3ebjKFh2NgRvuQ7E/WfMBaqP7uqw3bdYWX
+d1jrU7JvESFn79Ig4Benm2z2ib9oLQyjmGbuxCP6C65ljNBtyYdgk8tRLRqolytf6sDi+gwGFya0
+vLuReXcJZ1OQrPgs1n5wk3hcbdTtXO1waPp4+XbpuwFdy+bTftpzZuxa9Afy93W3fktQjgqwhhXc
+oON7MxnmG8fE1wnkCrCZgVpqOZmmASrl9K10nBqgvH/Hy7URoZbv8XgGrNMNi7W5XapIuGjwPMjY
+q2zQXt8QiuySuIMRWlV4lPjV1BmZ9pRsfCEWOvsvNI52ftpRrE+8aJDCRUdRJRJU21gzA67XjXGG
+2XfKmrL3CKOvD421HkE4Vc+UQG2TeLPQt8+hqyuOQmeTQKDgeVr/VTCsknMoi8PElvYHKuQSEJi+
+gYT/ms1hgITelj9dntKhGiywry4nB8bmgygyWnHbAVUBYhdnevgjkLKWblATeRel+Uy4HqCrAb7X
+unnfzbbzILg05o/ZXS5wk+RTg6ZztyQONCMdrqVDQULvtmoHwSuTHXcjNRiCI00Q6Auf77Cs23YB
+jmjIz4+7Cj6lZoIcYfe3f65r68h2EcIAHDK8s+n/hQtudpFoM0Rnk1rskn3r6XmeV+blJF/q8F2y
+rLzcGN/yW6pzwmhHLuPw0KFNqFasxv8+JusMrRwx7fXVCgs6y/R5W9JN6FMAsi3Le5fXgWMDeZbf
+icBE/C2huo45zhFImxhJ5HkkFt11jYuKg7sDPbySOqlpykrtIRbM7JzO4zkK9xyqsDCXYdMAYNGa
+wuMPJdtJbNKJV/NbdxcpoAO9y8kgQc32q/ENhYfU/sV52nbO7FzLT5w1Q+pHxNSJeJJsvsHSULx4
+UQCPR1hLMtmGAf4tafrhbx5QXuEXQKDMfDnDyn0X7h28qZmWR6KMsgXUVUJo2zZ5Kl5Hsp6CKZ23
+YSOc8dzskCe/tgGdol4IX+E93Lk/Em+SwvNTn7vb+hNwsxUfmPtiPIgw2Ub3JMYaClxbXmvDtn9V
+nAt95YIU+lmpsk2LTcjpca4wtYnVuCETk2yGQ2rek0ggirLueBfsEaVU07i0LOI6GwIbFUgjqu/y
+b6xCMHBNeIzoGRxlFWqVdMOUMp9B1NkfVaqNAJD7g5fwdKlgRmdCy1pObGIDHDbrFub0cjIaMB+1
+pSXyGLfJi/T+DtzPOWqAXMMNWVDJvYqOiS60MZxy7v1sNpIQb728h22aoDr7rBMcbO0aDNkIn2Je
+m/4yRCJyI8+krhpiyJr5sU6WtEYc7dwGnF8VHD4F4ez3nofGMKVm3cp6WYHJ+oIkSx39KswHbWL0
+PZl8vgdGmu4iboui1Ty83QuzlcjMp3i5KlRAMNZsC9Ryv0wjNqO3wwVr0Rqq0e/3kB7tHXOBklIu
+RcBBBN8WU1Q5TGIcVAb9Pu1sUJyJbcp9zYj1bj4cFT9Mzc4K+g6R3bd73aIyZm8XP8BDDTHNJuI8
+ANDQDrorI0cg03sxIHfeIPNMVkoXP7VzhtIauatUsNV6inzUVr2OjHsnQ29OxzLlJh8c5uEqDVqS
+3S3pSu5xLk7cuEDkUTD1cOsLH9REOgKEBfEm0lWAnMHc4py/6oEVwHygk7LXj+t+qLuAbdhRmZBh
+9QodUTn5lt137bVTfdJ57TqBplWm3WwjcPxIlkLlSU0Md6elHNi0ikc5AvI6ru2FCL/iKiM9T8Pg
+p3UTq1tzCCK25Nfw6lnaWblIKveqN+4dEQiZN72yYOasFHf8oK7gX+/bHBcQztXmG+sYDE3QQrur
+vGbxZkqGFAqef8/ccgL5bcKHQvqrTDagCxkZ9kIyYR5kUPGgmyfLbG7WYf4h6npeTzuuHHQCffWs
+yLlCFrN2HJWQFAjC+E6Y/Ey4iPqwTym6uA/b7tIPIeY4bgGOkfgerkt2rn2rPRg+VdlDejes9NEx
+SKpHAiV8mGzMYnyK6YKf11X0sO431DDUeVK7hULE2g7QJG2fmdNNqUM1NDG/JGPdxbKqzQo/E+pn
+OE7DSScz9Nu9Jyw17yRxnvqlEm/IQXkLEhu65+ZNs6QZkC4ClMLCmAQXazCEeftngKEkgD5I8Srp
+K0NfJ5E/cdrvqhEJ/TYH22bVGFD5w71Ew7isFUclYITekYY2RlPKH/XV76NSt8DTb7/jCEkwcpLw
+D1idoVC2vnR8i1rSYkmQa9LKYbsgbJRuVHM+WzMWDkylUXDqjvfEhjfyzL2baonwwAhQAR5i4Qlp
+wdVC7wIsBXNzb8prqTBddq8VZy7eXdkApAwBpBv6k4gO/+2uLTLUu84A8b8Ycn1qMbyprh4pfRmA
+sz5I0xIDPtNiG1r2343yjtMfetOuBJjkyzO69/0h/2qsMSM32251gURJCudvgwD24AEUWiLFhaHy
+GcN1c+uBjhwLU7+uRxWdzDMSz8Xdyu1cLJ2M/GA9R6ZBUBGkEPMM7DIByxU/jV3AdmcXn7Bntqo9
+hqRe/xOE+CzKnRrGLTgqkE8zvFOma5v+xIvlZTTCtLI2mq/lbS//MEHdsiyT1OfdLxY6hx+GRQ8/
+B5VO6dewvC8wQsCRqWF6q2g3dyoXTWGMNjjYW3rotzV4BHdJpwZmvkf0LIzZO7P487FNzIW4AxqK
+4TuKJy45STNEdlU+e/MUKxgF5jq2FqFymntTs501mgb6mNvWVPj9uE2qFh5FxMr0obe2N5y3Y6al
+v36yelEqtollwm0I3hn8B1HVTJh7gRRcjz1lD48tRmMkGf0eX3bkTzpbizs6TStp/N07zTmAIn9D
+jPmtJm+QBSB9hQNIqCDkC9CaKzT5z3GJvgui9pXJNt9M6vSbDTZ+i+K3xGVIM/rvmXDTubHBg/hO
+HknlZRyshz4UhcmSVPN9Mg5ObsdPFXIObYl74uOSeEDOFpe1f8BgEePSRWW7BrPUEhbpsMvNOUAi
+pwr7p/pRryS+tSHiN6ZBKp+QFr3dQKhlllvJmlOAat1QGwYi0OWjuRh+pl8UPO4x8h23fxp46neS
+Nkda73RtWDI+9C27Y5IBECHI9yYakpr5ybL4GbOzvjm9TN/7NGmUcfuF0xzma8b1gWq2BmnKFX1Y
+s6vAgIxQMlmPhs7GWbeT6ct7v0Pwjuvahh3lWtQ6lJMbGE4GZvdyGhg04Cxg3WnL1cuT39nlEZrF
+PoHc7IaC2On9oJ0tJasdHX7A9YAMgqrrOHi9Z2Rw50xhwhMfP0rzSC9nD9jEm9YSvSBOsSV289Cd
+bh/9aRwzbBsSWbYcBh2a/+zWHwabew9zO0q2xgjBXMTuDfzU8PWiiimW4l7qD0ihggt1KzIL8PJd
+LXGsjBPMJ25tQP3c3XxPic2VQ7x9Q++4Q+RS+AcWxfA8gNFt7sDSweZLkPx0PmdnH3OS6PuJt3A3
+btF1Z+ap7tfrFiDgJISJ9I8y3cF6vs+3xRwLRWFPP1TM1BwKvF+tlyEHb593ri9On0CLW3qD87UK
+GuaoJaDBE35zzLJYYOGvQgcWVIvxvf696MzYEY6dyEA+kjqBbNjVAdl02hUHkUr4+7AC6NQj4Wsj
+SmsOHyyLKqj2ZMp7BxRNbfss8Ya2pFA/o1P1ZOe1h5vGBGAwRXjSQCVWN3scpLrkhkRSWbFg4yYE
+++OCl45r9b4Qlqi29C3vE4At9ywlDYKwttWJVCoF/YdBzTWHp066a2cra4OaDgqTaot53Ebhjj20
+IQyMjRE+9UvAEADNbkH2ZMaQnuzA/KL+sF+XoaVSfZnK5cBYdNh64nqw3HBBfgSxH8n/aapkSp2o
+d2WRGt4GvdOvseQNGoL+9w2bpd1ArP+1zmpc9X75G87Z0O8dryXaF9mjuLnZA3aH5f8P3hU3dlH8
+lZzwLdZwH+rxMWm0eSVnW3MX7uQYMkb6tK8zoWUAZ0cBaGIilPPc9FeHO+RaFUwR96Im5X45186k
+In3pAFGvhsgHuufOBI2t4PHMAdXNZ1fJC6upLWfq9Tl0lh8fA+Zh2rIiPUUaKpvBcwR/Fftdybsq
+pXan+XMtXcqn6avJNn2aKtGy+zgaEHbNgqL6P2U50/ZcPlY7mufqNT/0kOHcEKXB+fZk6uaoPz1j
+zjVOUyXycoKvwEwzuVINdWEG9Xz50MYlv41Lv7E07/4mH4oRdhRN1+MW+jaxHo4Qnc19iYr+RytL
+hOcPy2MDcVocxxBMsnPJER3MMaGW5GL0X2LfXfgygLhGsrb+adjrVvoE1K6pSvgsS70s+qWtmtg4
+lmzov29oekocOoddfvF04BMkb1blBkI0GDogpZeme7krC4GlDcpEy0wJw4xsYNHrxc+OWx2jAmga
+vsTcF2xMQ5ZBLBIFwP7gtW9K5ElAOacfHxIqUtZ3lPmpfuS4CBqbnTkhTkT5b7m3e3wwv2YiJA5Z
+LBxK/OW+QaLo3+fhEbo8xfYYL3PKlGcEvAW67GHKFxZmeDFEB7COHVl0u0akLomNC/EGBigI8aq3
+84hIlRVLFXvww1fHSesrtnMUOi5aX7CkhZLDA+aZW67ZCF2JDqgZHggzU5PCdE5gRV8xnNjUsy+a
+WZhTql9Cj/8rl3g4gEp1cT0iMpjSwS29/1sJB8bII71paqEUfYqgIajpr8IEBfT7FG+u3fOULoGK
+9dCxzcijZZEn66xpelsnpUpMTn4jIb3vt2pduEt8JYEaOX5uSZygqrj+3y3Z1sPFMUlHq9Xa/L05
+ldvtwBGxgyUrIBM95UHmS9sfMq4Mi2J8PrEC9yo4YHufTY67xh+DfdCot+Dlzr+19m2ZxXLiEHkA
+njkPvNdZwdqvS7OMJRXNPdmOtr3Zo/I9kUL6j2jPvT8kIJecZFJIRtU72qosvik3QPMZmK9LnSaX
+XuzMZ2shKzcgmP0p6uWtjLiX2chzLvMPaG1RzyWqJ2u/sZdSXFf6GsKh1kvFAdRwfWmBml86rZmF
+qQZUW5kXD65NM27lwo+I3wGaHJt26lMjBD+ifcPgIV7cAfWn6QGkrcxC3rA628DrTZ/FzBoCZaB/
+4EP1lPxvquMZI+OHDmE7Pvbct6vtdQ7y0oLa1JnVgsumH5jyclfHzxXnFunao2l585EEjJyqQH+d
+HnyRo0wRLa2Jse+N+tRuC3o5EP+1IeooXXAIbPZt0C3IAEqhAzpP1T5A/UisUkl085Kf0p1aoWOi
+32yLvrnUPV1/g2ydTbymLPzO6JNXj41eJsnPUjgXrtM4I5KW5T/582tA58A//B0I1naTHkgjd5kE
+IkaQunQIbA6SAfrst3ojuWr3ydUu0uz69zIhEo6DqCNx7jXFomlgAlXZVSZ7R5s+frMtw2fVrp3H
+apsqwCOZm2vK86JTRZzVGtKfk7FUxUAa2aZgWe2vZ9gqlQX/lMjrD1CXJBFjCjfIYt1B50aQSTAX
+2nb3XPoYPBoxd/wwxoxrbFL9I99YOk4/Px6ZYahaiuYNvcUjcvP8lShft8W8gAAnrUAGIswxjLH1
+NY8RaKaxHX9faq7nrIZyU6NPk4zljATj1KkZ1d3lx5gWmSkA12yAJeR7934lJBxkBdmhJdm+jLl+
+6UMZZ+4VUI1GYNhOLZHBaIzDscLlX2D4/31+70NCI4Q6PDBBn0C5EWBhzcHFL/Ris489T6jmDsti
+BxhVHEnp+Kkcn6kfAq0ZDGY1OaCJQlqGg/aj4u6VAce1tBWbNOnyimF6qcnJGcgwXXsb7kYMqlgb
+IE4LrHBE2uIc0uZEryiXEIf2QVO+anJoO2AhRv14zAAKiU5w7zAsNyJn3pouOV98ckOXvrFmWq5l
+GTR1+u21O0pbjG/j2JNhEg/FRkO9HQbMv92FS71dwkWd77GonNwkcZXum8+UFRG/9RdQ8PehK984
+LTYIm+EIQXpLixYeRBSMu26m7yWWWOzW1Me3B16WPjJ1XF/US03Yj53RF17uou+D642eYvXzN3AD
+nd+WFr7lR3HtRJcsQH6H/uQk6T7/XovrGX/YzLZxg7e0DLQXLpHWtRfSLFaV3ZjtBMs6QYomoDZl
+v5JIHrG3Gh1nS4Ew/BlxEIr5qx22/7RlobfsHgztitTjSeAuf0/WTQzYHkDiFSn4frVa/RDJJ5po
+nNxbTvdR11FeC4WT8EynNG6Rtf1QVnGD7Red7tuSdts5/nQ7F6a+L4bO+S/PGUssiA17ABCpw88f
+Gyep/IA0hqxbyTR9r2I2H5xtaJ+zybB76aQM+BEZ/v7uZgTV/e32QkzeLKt+MvPz+99qEoGLUrgb
+Xw1io3aFSeAX+nKe6RMjSjUq4Ngkj6abkoQW7vV6uGsEh6pYtX1OB9Nukdbz/NyjxMw/4M6+xNrv
+QMZRrYtFEU7nmd0JAP16QnJ2XdC+YW5gdzrZamsq79eCwfHLN3/nDWYTsBRvIp+D8FKOz1ejZuwH
+E9WRZmQJLxhFisPp3BptmtXJ72iA4hmAYAbd7qF2Ht9L6X1qeetMoWHEsFpdk/8nJoZbobCnh+w/
+n1T3JYI9kjK5F1dVgXErutYXiaQ+caty6YswjAr3FjfS2XqvanKg1VJPokkJWiz9TVmbLclN0Stz
+syex1eU8NA4nwJz/DiemJuLoX9axddJPWTtdQ5+1sNZaF7pLFl5l1zg3oxIn36p3fOe7ClwVzpr6
+HN5ALM/PWnsyvOkYeOumuWL790pfTgdlmJqUZmnChffqK8IWcwmgCQ83k7xUuQLZ0KbNovfYeeKF
+wA5D9RoNnOuo9aGUTWSgbsamCogtzPCJiRDf2HnDb6HAcgki/jQ9/wTTCX06dF2/q8wTEEOsy32B
+PMwMrNDOmhrISvMbfcAyTq5C8zIog7Pxxz87xoOtxUlIMNZ5XncLLwlfll5UJwvVj4zKgcJoFO+8
+pA/TSjxYUQmakq05KcdQGBeYpHJDTqcD/QOTxv+9otzpkhkABleSJ3aUSJomWPPvBr1DKAPpogXQ
+ppHVQ7/2dlPvplzdVkYg/Ib1dDxV/QnTdTAxkynqbJPjTgetomYtig2JJm7KTAkQxLfOm1rDirns
+fcLj2ylrg+ZWyC6Edw3mwLCYT45odF62mfqPXclDdAAQ30uZ59c1WSWPVeosrfuSiVmrw7ATBPgD
+XogVlKoxlemHx7Crtht+WPIUxazB6sGdq48WChDtBeWU3Bbiho4VN2/QUQ9Y1gBw7dKwjh8WlKzU
+V4jB4lj5vlshpD4E8BmkhPgosCoih4YdfEQ3NkSJm+jK0ZVmNxcCX6bFOd5oCjr2L32IHI0nmbFP
+0PHM6/i9HTZiqQtF4ykhffkU4jYrFRNA0M01f+GEeKmwfgPnSczfS4iNJHW4ZOSmRvfhEniNuX7z
+TzsgiYy90rxViTvyz6SkO+A70+QB+aR7PMEt1Z8wOcZsZIZhfyDIJBok+FGKGL3nqP6lCtFdqy13
+ZVf1EnEO6ZNYD/WeqA6wAgpJP8vptH47e6+FtkADyN+zd7t1PMA4mn6o/jNbBOGy1htXxdoAkxwS
+AXxYGrZxGTXGIMUAP5tNYy2d6dYMtFrYi4yORyQtlgAYtFZT8EveAV8wSpkY5EBZCWFGCoYZhzzW
+/L+veyY++xvtjm0Dnb8pGhTm14GMUJdGV10Xaa8qadZslDsLqBFqnRQu30FyW3DqfCH88XdyLFJl
+hVxKwkK0Ie25xWeCBSnJZY6U7Kd05uNPx7NIEBPkFsf52/ocMojVAIT0Q+2PrP5W1l1AXJ9ifFB/
+h2GFINFrHr6huYCMmInkcU4eEhmA+RdkJW/R+DZndwoWC/dm6BeimWwZXeXHwVHaIq3cSsCPt2QK
+ih3qrrEGlSQhZZVXxh/Isdm8L8nbtwPmV5r6Dj0bQG4Shym7GN0iENJUrnA7U1dP6XNiA1agYEBY
+0QfFoIFcM1xZpyw2qzdur1q73U5ZjipLpO1L6UZPyylZM/oMOH7XrE0zJqhdwE288ShfUnCAgIWU
+r64U9FZrb6B+v8I/vM6G5c8aVefSQ7KOG9EJDdgjhTaZfHfHgKLMIVxyC/ELbZkRixBz65mrQfM2
+HgXz/5qv9lsMzRe1+9A/b9eWdJJmQpQUFhwbjxbgc8E8gcquRam2W15+E4F3vqV+FC1s4MGk0+IU
+6qrC8hvdmogQd+ut6FOgL7XG7OTA1aKloFT4B9Mqu+2rjqqWg3lLLVf6l7swlrt5YzYDDW7bbQLZ
+uHutXA1uKNz+SyrXC4S12J8RmYGhFtjjOocKpZ56qNC2so/yWLvleQI/lB2zrueohsEBgVSR+L6d
+tRIOJq+w7KnGSwlqdfwbdVw6FBGXnUBrRwpKEfurgrtEedYWi72Z0TtATcL/G3g1YUxCLbj9LjTF
+VeupgPkWVrz+hgz8CRIvuZBziMFHyD1LcXecQqQQMEXS+PcUeX/wG4zvuxHe3ZyQo4I8TQPdJNmY
+nDe9LKySW3TyHeksTy1wP/OyUXy93FzdOrfVGMHjK6KiRUVN2brkx6PV/bYOdElwfgG2NOWs4oyx
+go8UpWY3KSs8psaGdpskxpuNQMBX12Rzj0+VzDmrCpgAyXdeLGUV7FZhlyxQIXq6n+jJubXoyilz
+J/7v4tWqs0g2hEmSF245BZO8QpV/oqpEXGZ9RFk7eEU2A0k8ZXiT+60p6RnnObv+BFVXXxr/U6oZ
+8QNP1SbpgAW63D/AswMhJmCo7ZzZLa3chGdtv1VlEPReMcWlG0nowLPonjteF0/IszlYVf1/UNop
+43ZTtSMA05/UOpF19XqoaXVU4rmB8TniwA67H0STX7im7S0Y+HNvuofM6/DJVfs7W9w6FT22K3vV
+PqRBVdClgLRCGxpbUKRevrzHvqQkCkQ/kEhfUUHt4gacajgfwZtjbxSA6NRC5lgseoOt8jKwlByV
+S0T3JWzKhs5LHqm6nPwU4MzwQTrN7rw/7Qn2r71iub6jSEnreII1MPSbBKLq54/yZE9MuZteEUiV
+labRbW5zen6XuNebIalI0HPQaSm+B5OXE0qREvZSPHFmV/95/VEH7pbxhQz6gKVW3F/TJVp0ovkN
+RK6xd6bV243O3bE0Y+QNi8NGGGSs1gUqjpkZkYG+AWdpTIKDuOMCWfRPgeoDT0fUzRnDwJ5ppNDq
+jkByI7or9bt3goy3DeiSr7wGUkXP68TsDirLMzjiNranPBob2iPNNai07wOI9oqHTxNdkLYkd7/p
+5pHpNAr+byC102xTkBzmu0+oGP6ZkHi2sqpzLJoLAI5r4LOUUt4XwBPHPhXSYlLw8jd2Sl8i+/36
+63F95q2udHrvuNoQKtcW22O3qFcHxrrDq8+7lQJUJssJTu86JBdIyuovpWTpBLKGHJQbUaOjPnkt
+Cq5GfZQwkBCvKiXGw7CvaJWW1tUWOivfDl4Pzzoaqer10URV3XIaAvCk0+bQOdVr7fGgm8gokzWZ
+q0udGCi+6C+6hM8o54JzwZVxW4sLwqppA1AXJHUboiN0bXMdNoP9JCS8bUIo4hgf1vJyaajvzdp4
+PgT94Wn5ZMNhJOpgt2bhOfXHkcyBUEZ0cTLmeSI/I/x+vHYAYCeAc8AAPQr8ztwQWtiFIDAygfZJ
+6SFIwFnOLcjDtaY2/wF2JlPAtSGtP+M7TJ1Zll8nTvS5pgGL+h8+XPG4tVfJx6KTQ9HyIcyMxCXJ
+DUVrzfuxpnAxCjA/N6Kie4JJbfeyrZ4iTvr02utb6BhWBxzkFQDqvc/0H08EqTWVvIZ1y4URApVb
+HpJFoxvBQrZEKcK+I6WgwJioLKn1coCqyyLp0AzxSWQxTERM05DU4mZ15iAaq5W1Dp2hX3Dfroc+
+RQYFMo24Jp7Peh8PF0guJo0qVJ1UI8tx02g94WnKA+7OpHtM6BQYAKueouGGMHm7tPMwIBiu8EgF
+nv0GwlFaUzaLUCgQ1tYn5YnQ02Grb84Lz1egSrQsE1XcPCJH6z3VotkLM2NL7Fi+beT0OE3JRRwb
+Nhy8qCr/1Dn/qXF3Hvq42X0MixjOpZQXWgs4SPKoOKfurkAmKN00AfrJ6AZovYHCK8frQbxWHSVw
+pXb8Qw8go01W+7pSSLVHgAG26YiMm48xfVCVKwHEAy3yiSsRwahZlpttzyeDdfLMEWNhJXi4uxo8
+n8s0F1OJvY3tR+D89o084VsQ3MnZLCm/T+d+VHzV8KFZ5mo3K8WKss0Dko24Q2aT12iZKYrE48P6
+GUrwo1njUfKH5Vb4QTtlCjqLATfF3ZjjdNoarav+C6Z0LW2TEj03ZIFGdVc5bjhPOhq70UQO4V+M
+PfJicgJUWj8ADafGNYKM8EYfQH4Y23f/4scczqm5P/u9oBnbCn4JyzxFcA1qffawKAA/3p4NE88M
+x0CWpwopBaKcsROYXi6kcwYecs9kAvBAuQPbW8B+TjBab6vMIBEelb75sAhZqGedIok+4laK841k
+dXXf4Ekd7njJUFJg+QfXvCoqY4MR0VG4q5meBSmJDj18KH7+kHB4Vssy5v8xTtg778SVOK5foFoB
+uPG+Y5AHnaZWkAoSBGJ60bIhrurUuQjNmA0kPB9En07XFHcAEvl+Duq0j8dLSMqWfF/+LoqoSA==
+</internal-file>
+      </skl>
+      <xref:prop-group name="ref-maps">
+        <xref:prop prop-type="gmap">{i71=t105, i70=t104, i73=t108, i72=t107, i31=t42, i75=t111, i30=t41, i74=t110, i33=t45, i77=t114, i32=t44, i76=t113, i35=t49, i79=t118, i34=t47, i78=t116, i37=t52, i36=t50, i39=t55, i38=t53, i80=t120, i82=t123, i81=t122, i40=t57, i84=t127, i83=t125, i42=t59, i86=t130, i41=t58, i85=t128, i44=t62, i43=t60, i46=t65, i45=t64, i48=t68, i47=t67, i49=t70, i51=t73, i50=t71, i53=t76, i52=t75, i11=t14, i55=t79, i10=t13, i54=t78, i13=t16, i57=t83, i12=t15, i56=t81, i15=t19, i59=t86, i14=t17, i58=t84, i17=t22, i16=t21, i19=t24, i18=t23, i60=t87, i62=t91, i61=t89, i20=t25, i64=t94, i63=t92, i1=t2, i22=t28, i66=t97, i2=t4, i21=t26, i65=t95, i3=t5, i24=t31, i68=t101, i4=t6, i23=t29, i67=t99, i5=t7, i26=t34, i6=t8, i25=t33, i69=t102, i7=t9, i28=t37, i8=t10, i27=t36, i9=t12, i29=t39}</xref:prop>
+        <xref:prop prop-type="xmap">{x50=t82, x52=t85, x51=t84, x10=t27, x54=t88, x53=t87, x12=t30, x56=t90, x11=t29, x55=t89, x14=t32, x58=t93, x13=t31, x57=t92, x16=t35, x15=t34, x59=t95, x18=t38, x17=t37, x19=t39, x61=t97, x60=t96, x63=t99, x62=t98, x21=t42, x65=t102, x20=t40, x64=t100, x23=t45, x67=t105, x1=t2, x22=t43, x66=t103, x2=t3, x25=t47, x69=t108, x3=t10, x24=t46, x68=t106, x4=t11, x27=t50, x5=t17, x26=t48, x6=t18, x29=t53, x7=t19, x28=t51, x8=t20, x9=t26, x70=t109, x72=t112, x71=t111, x30=t54, x74=t115, x73=t114, x32=t56, x76=t117, x31=t55, x75=t116, x34=t61, x78=t119, x33=t60, x77=t118, x36=t63, x35=t62, x79=t120, x38=t66, x37=t65, x39=t68, x81=t123, x80=t121, x83=t125, x82=t124, x41=t71, x85=t128, x40=t69, x84=t126, x43=t73, x42=t72, x86=t129, x45=t76, x44=t74, x47=t79, x46=t77, x49=t81, x48=t80}</xref:prop>
+      </xref:prop-group>
+      <metrics:metrics source-language="en-GB" target-language="fr-FR" tool-name="xtm-intl_XLIFF_Extract" tool-version="1.0" version="1.0">
+        <metrics:stage date="20250224T230000Z" phase="initial" source-language="en-GB">
+          <metrics:count-group name="verifiable">
+            <metrics:count type="TextUnitCount" value="136" />
+            <metrics:count type="x-AlphanumericOnlyTextUnitCount" value="0" />
+            <metrics:count type="x-MeasurementOnlyTextUnitCount" value="0" />
+            <metrics:count type="x-NumericOnlyTextUnitCount" value="15" />
+            <metrics:count type="x-PunctuationOnlyTextUnitCount" value="0" />
+            <metrics:count type="x-ExactMatchedTextUnitCount" value="0" />
+            <metrics:count type="x-RealTextUnitCount" value="86" />
+            <metrics:count type="x-LeveragedMatchedTextUnitCount" value="0" />
+            <metrics:count type="RepetitionMatchedTextUnitCount" value="31" />
+            <metrics:count type="RepetitionMatchedTextUnitCount" category="95-99" value="0" />
+            <metrics:count type="RepetitionMatchedTextUnitCount" category="85-94" value="0" />
+            <metrics:count type="RepetitionMatchedTextUnitCount" category="75-84" value="4" />
+            <metrics:count type="x-FuzzyMatchedTextUnitCount" category="95-99" value="0" />
+            <metrics:count type="x-FuzzyMatchedTextUnitCount" category="85-94" value="0" />
+            <metrics:count type="x-FuzzyMatchedTextUnitCount" category="75-84" value="0" />
+            <metrics:count type="TranslatableInlineCount" value="213" />
+            <metrics:count type="TotalWordCount" value="812" />
+            <metrics:count type="AlphanumericOnlyTextUnitWordCount" value="0" />
+            <metrics:count type="MeasurementOnlyTextUnitWordCount" value="0" />
+            <metrics:count type="NumericOnlyTextUnitWordCount" value="15" />
+            <metrics:count type="ExactMatchedWordCount" value="0" />
+            <metrics:count type="x-RealWordCount" value="702" />
+            <metrics:count type="LeveragedMatchedWordCount" value="0" />
+            <metrics:count type="RepetitionMatchedWordCount" value="70" />
+            <metrics:count type="RepetitionMatchedWordCount" category="95-99" value="0" />
+            <metrics:count type="RepetitionMatchedWordCount" category="85-94" value="0" />
+            <metrics:count type="RepetitionMatchedWordCount" category="75-84" value="25" />
+            <metrics:count type="FuzzyMatchedWordCount" category="95-99" value="0" />
+            <metrics:count type="FuzzyMatchedWordCount" category="85-94" value="0" />
+            <metrics:count type="FuzzyMatchedWordCount" category="75-84" value="0" />
+            <metrics:count type="TotalCharacterCount" value="4788" />
+            <metrics:count type="PunctuationCharacterCount" value="277" />
+            <metrics:count type="WhiteSpaceCharacterCount" value="640" />
+            <metrics:count type="AlphanumericOnlyTextUnitCharacterCount" value="0" />
+            <metrics:count type="MeasurementOnlyTextUnitCharacterCount" value="0" />
+            <metrics:count type="NumericOnlyTextUnitCharacterCount" value="36" />
+            <metrics:count type="x-PunctuationOnlyTextUnitCharacterCount" value="0" />
+            <metrics:count type="ExactMatchedCharacterCount" value="0" />
+            <metrics:count type="x-RealCharacterCount" value="4103" />
+            <metrics:count type="LeveragedMatchedCharacterCount" value="0" />
+            <metrics:count type="RepetitionMatchedCharacterCount" value="344" />
+            <metrics:count type="RepetitionMatchedCharacterCount" category="95-99" value="0" />
+            <metrics:count type="RepetitionMatchedCharacterCount" category="85-94" value="0" />
+            <metrics:count type="RepetitionMatchedCharacterCount" category="75-84" value="136" />
+            <metrics:count type="FuzzyMatchedCharacterCount" category="95-99" value="0" />
+            <metrics:count type="FuzzyMatchedCharacterCount" category="85-94" value="0" />
+            <metrics:count type="FuzzyMatchedCharacterCount" category="75-84" value="0" />
+          </metrics:count-group>
+        </metrics:stage>
+        <metrics:stage date="20250224T230000Z" phase="translation" source-language="en-GB">
+          <metrics:count-group name="verifiable">
+            <metrics:count type="x-UnitsDone" value="15" />
+            <metrics:count type="x-WordsDone" value="15" />
+            <metrics:count type="x-CharactersDone" value="298" />
+          </metrics:count-group>
+        </metrics:stage>
+      </metrics:metrics>
+    </header>
+    <body>
+      <group id="g1">
+        <trans-unit id="t1" translate="yes" xtm:x-previous-crc="0" xtm:x-next-crc="5b521882">
+          <source xml:lang="en-GB">Evaluation (Medical survey)</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Évaluation (Enquête médicale)</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Evaluation (Medical survey)</source>
+            <target xml:lang="fr-FR">Évaluation (Enquête médicale)</target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g2">
+        <trans-unit id="t2" translate="yes" xtm:x-previous-crc="55119d29" xtm:x-next-crc="198ce0c1">
+          <source xml:lang="en-GB"><g id="i1"><x id="x1" /></g>1.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i1"><x id="x1" /></g>1.</target>
+        </trans-unit>
+        <trans-unit id="t3" translate="yes" xtm:x-previous-crc="5b521882" xtm:x-next-crc="91f27bb1">
+          <source xml:lang="en-GB">Patient Information:<x id="x2" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Informations destinées aux patients :<x id="x2" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Patient Information:<x id="x2" /></source>
+            <target xml:lang="fr-FR">Informations destinées aux patients :<x id="x2" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g3">
+        <trans-unit id="t4" translate="yes" xtm:x-previous-crc="198ce0c1" xtm:x-next-crc="43a66815">
+          <source xml:lang="en-GB"><g id="i2">Age:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i2">Âge:</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i2">Age:</g></source>
+            <target xml:lang="fr-FR"><g id="i2">Âge:</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g4">
+        <trans-unit id="t5" translate="yes" xtm:x-previous-crc="91f27bb1" xtm:x-next-crc="da6fb3f0">
+          <source xml:lang="en-GB"><g id="i3">Gender:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i3">Genre:</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i3">Gender:</g></source>
+            <target xml:lang="fr-FR"><g id="i3">Genre:</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g5">
+        <trans-unit id="t6" translate="yes" xtm:x-previous-crc="43a66815" xtm:x-next-crc="4bf95fd7">
+          <source xml:lang="en-GB"><g id="i4">Weight:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i4">Poids:</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i4">Weight:</g></source>
+            <target xml:lang="fr-FR"><g id="i4">Poids:</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g6">
+        <trans-unit id="t7" translate="yes" xtm:x-previous-crc="da6fb3f0" xtm:x-next-crc="18df29bc">
+          <source xml:lang="en-GB"><g id="i5">Height:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i5">Taille :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i5">Height:</g></source>
+            <target xml:lang="fr-FR"><g id="i5">Hauteur:</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g7">
+        <trans-unit id="t8" translate="yes" xtm:x-previous-crc="4bf95fd7" xtm:x-next-crc="a164eeaf">
+          <source xml:lang="en-GB"><g id="i6">Medical history (e.g., chronic diseases, allergies):</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i6">Antécédents médicaux (par exemple, maladies chroniques, allergies) :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i6">Medical history (e.g., chronic diseases, allergies):</g></source>
+            <target xml:lang="fr-FR"><g id="i6">Antécédents médicaux (par exemple, maladies chroniques, allergies) :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g8">
+        <trans-unit id="t9" translate="yes" xtm:x-previous-crc="18df29bc" xtm:x-next-crc="707f4b41">
+          <source xml:lang="en-GB"><g id="i7">Current medications (including over-the-counter and herbal supplements):</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i7">Médicaments actuels (y compris les médicaments en vente libre et les suppléments à base de plantes) :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i7">Current medications (including over-the-counter and herbal supplements):</g></source>
+            <target xml:lang="fr-FR"><g id="i7">Médicaments actuels (y compris les médicaments en vente libre et les suppléments à base de plantes) :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g9">
+        <trans-unit id="t10" translate="yes" xtm:x-previous-crc="a164eeaf" xtm:x-next-crc="c15cfdb2">
+          <source xml:lang="en-GB"><g id="i8"><x id="x3" /></g>2.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i8"><x id="x3" /></g>2.</target>
+        </trans-unit>
+        <trans-unit id="t11" translate="yes" xtm:x-previous-crc="707f4b41" xtm:x-next-crc="57c4f9f3">
+          <source xml:lang="en-GB">Medication Details:<x id="x4" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Détails du médicament :<x id="x4" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Medication Details:<x id="x4" /></source>
+            <target xml:lang="fr-FR">Détails du médicament :<x id="x4" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g10">
+        <trans-unit id="t12" translate="yes" xtm:x-previous-crc="c15cfdb2" xtm:x-next-crc="7a7ca217">
+          <source xml:lang="en-GB"><g id="i9">Name of the medication: Adalimumab-adbm</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i9">Nom du médicament : Adalimumab-adbm</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i9">Name of the medication: Adalimumab-adbm</g></source>
+            <target xml:lang="fr-FR"><g id="i9">Nom de la medication: Adalimumab-adbm</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g11">
+        <trans-unit id="t13" translate="yes" xtm:x-previous-crc="57c4f9f3" xtm:x-next-crc="54146522">
+          <source xml:lang="en-GB"><g id="i10">Dosage:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i10">Dosage:</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i10">Dosage:</g></source>
+            <target xml:lang="fr-FR"><g id="i10">Dosage:</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g12">
+        <trans-unit id="t14" translate="yes" xtm:x-previous-crc="7a7ca217" xtm:x-next-crc="ce7ab2f">
+          <source xml:lang="en-GB"><g id="i11">Frequency of administration:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i11">Fréquence d'administration :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i11">Frequency of administration:</g></source>
+            <target xml:lang="fr-FR"><g id="i11">Fréquence d'administration :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g13">
+        <trans-unit id="t15" translate="yes" xtm:x-previous-crc="54146522" xtm:x-next-crc="7c3aa3ae">
+          <source xml:lang="en-GB"><g id="i12">Duration of use:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i12">Durée d'utilisation :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i12">Duration of use:</g></source>
+            <target xml:lang="fr-FR"><g id="i12">Durée d'utilisation :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g14">
+        <trans-unit id="t16" translate="yes" xtm:x-previous-crc="ce7ab2f" xtm:x-next-crc="69647a00">
+          <source xml:lang="en-GB"><g id="i13">Indication for use (condition being treated): Rheumatoid Arthritis</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i13">Indication d'utilisation (condition à traiter) : Polyarthrite rhumatoïde</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i13">Indication for use (condition being treated): Rheumatoid Arthritis</g></source>
+            <target xml:lang="fr-FR"><g id="i13">Indication d'utilisation (condition étant treated): Rheumatoid Arthrite</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g15">
+        <trans-unit id="t17" translate="yes" xtm:x-previous-crc="7c3aa3ae" xtm:x-next-crc="727eb6d4">
+          <source xml:lang="en-GB"><g id="i14"><x id="x5" /></g>3.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i14"><x id="x5" /></g>3.</target>
+        </trans-unit>
+        <trans-unit id="t18" translate="yes" xtm:x-previous-crc="69647a00" xtm:x-next-crc="337844c8">
+          <source xml:lang="en-GB">Adverse Event Reporting:<x id="x6" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Déclaration des événements indésirables :<x id="x6" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Adverse Event Reporting:<x id="x6" /></source>
+            <target xml:lang="fr-FR">Déclaration des événements indésirables :<x id="x6" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g16">
+        <trans-unit id="t19" translate="yes" xtm:x-previous-crc="727eb6d4" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i15"><x id="x7" /></g>Have you experienced any adverse events (e.g., erythema, pruritus, or anaphylaxis) since starting this medication for Rheumatoid Arthritis?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i15"><x id="x7" /></g>Avez-vous ressenti des effets indésirables (par exemple, érythème, prurit ou anaphylaxie) depuis le début de ce traitement contre la polyarthrite rhumatoïde ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i15"><x id="x7" /></g>Have you experienced any adverse events (e.g., erythema, pruritus, or anaphylaxis) since starting this medication for Rheumatoid Arthritis?</source>
+            <target xml:lang="fr-FR"><g id="i15"><x id="x7" /></g>Avez-vous ressenti des effets indésirables (par exemple, érythème, prurit ou anaphylaxie) depuis le début du traitement par ce médicament contre la polyarthrite rhumatoïde ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t20" translate="yes" xtm:x-previous-crc="337844c8" xtm:x-next-crc="67c60831">
+          <source xml:lang="en-GB">(Yes/No)<x id="x8" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x8" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">(Yes/No)<x id="x8" /></source>
+            <target xml:lang="fr-FR">(Yes/No)<x id="x8" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g17">
+        <trans-unit id="t21" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="5d880ac4">
+          <source xml:lang="en-GB"><g id="i16">If yes, please describe the adverse event(s):</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i16">Si oui, veuillez décrire le(s) événement(s) indésirable(s) :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i16">If yes, please describe the adverse event(s):</g></source>
+            <target xml:lang="fr-FR"><g id="i16">Si oui, veuillez décrire le(s) événement(s) indésirable(s) :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g18">
+        <trans-unit id="t22" translate="yes" xtm:x-previous-crc="67c60831" xtm:x-next-crc="4095db1">
+          <source xml:lang="en-GB"><g id="i17">Date of onset of the adverse event(s):</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i17">Date d'apparition de l'événement(s) indésirable(s) :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i17">Date of onset of the adverse event(s):</g></source>
+            <target xml:lang="fr-FR"><g id="i17">Date d'apparition de l'événement(s) indésirable(s) :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g19">
+        <trans-unit id="t23" translate="yes" xtm:x-previous-crc="5d880ac4" xtm:x-next-crc="46ec2ea1">
+          <source xml:lang="en-GB"><g id="i18">Duration of the adverse event(s):</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i18">Durée de l'événement(s) indésirable(s) :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i18">Duration of the adverse event(s):</g></source>
+            <target xml:lang="fr-FR"><g id="i18">Durée de l'événement(s) indésirable(s) :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g20">
+        <trans-unit id="t24" translate="yes" xtm:x-previous-crc="4095db1" xtm:x-next-crc="c2b65aed">
+          <source xml:lang="en-GB"><g id="i19">Severity of the adverse event(s) (mild, moderate, severe):</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i19">Gravité de l'événement(s) indésirable(s) (légère, modérée, sévère) :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i19">Severity of the adverse event(s) (mild, moderate, severe):</g></source>
+            <target xml:lang="fr-FR"><g id="i19">Gravité de l'événement(s) indésirable(s) (légère, modérée, sévère) :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g21">
+        <trans-unit id="t25" translate="yes" xtm:x-previous-crc="46ec2ea1" xtm:x-next-crc="1f180f5b">
+          <source xml:lang="en-GB"><g id="i20">Outcome of the adverse event(s) (resolved, ongoing, worsened):</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i20">Résultat de l'événement(s) indésirable(s) (résolu, en cours, aggravé) :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i20">Outcome of the adverse event(s) (resolved, ongoing, worsened):</g></source>
+            <target xml:lang="fr-FR"><g id="i20">Résultat de l'événement(s) indésirable(s) (résolu, en cours, aggravé) :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g22">
+        <trans-unit id="t26" translate="yes" xtm:x-previous-crc="c2b65aed" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i21"><x id="x9" /></g>Did you seek medical attention for the adverse event(s)?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i21"><x id="x9" /></g>Avez-vous consulté un professionnel de santé pour ces événements indésirables ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i21"><x id="x9" /></g>Did you seek medical attention for the adverse event(s)?</source>
+            <target xml:lang="fr-FR"><g id="i21"><x id="x9" /></g>Avez-vous consulté un médecin pour les événements indésirables ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t27" translate="yes" xtm:x-previous-crc="1f180f5b" xtm:x-next-crc="5a3fe6b2">
+          <source xml:lang="en-GB">(Yes/No)<x id="x10" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x10" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x10" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x10" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x10" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g23">
+        <trans-unit id="t28" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="2625ecc7">
+          <source xml:lang="en-GB"><g id="i22">If yes, please provide details of the medical intervention:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i22">Si oui, veuillez fournir des détails sur l'intervention médicale :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i22">If yes, please provide details of the medical intervention:</g></source>
+            <target xml:lang="fr-FR"><g id="i22">Si oui, veuillez fournir des détails sur l'intervention médicale :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g24">
+        <trans-unit id="t29" translate="yes" xtm:x-previous-crc="5a3fe6b2" xtm:x-next-crc="6bd23b03">
+          <source xml:lang="en-GB"><g id="i23"><x id="x11" /></g>4.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i23"><x id="x11" /></g>4.</target>
+        </trans-unit>
+        <trans-unit id="t30" translate="yes" xtm:x-previous-crc="2625ecc7" xtm:x-next-crc="1ec87218">
+          <source xml:lang="en-GB">Impact on Daily Life:<x id="x12" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Impact sur la vie quotidienne :<x id="x12" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Impact on Daily Life:<x id="x12" /></source>
+            <target xml:lang="fr-FR">Impact sur la vie quotidienne :<x id="x12" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g25">
+        <trans-unit id="t31" translate="yes" xtm:x-previous-crc="6bd23b03" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i24"><x id="x13" /></g>Did the adverse event(s) impact your daily activities related to managing Rheumatoid Arthritis?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i24"><x id="x13" /></g>Les événements indésirables ont-ils eu un impact sur vos activités quotidiennes liées à la gestion de la polyarthrite rhumatoïde ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i24"><x id="x13" /></g>Did the adverse event(s) impact your daily activities related to managing Rheumatoid Arthritis?</source>
+            <target xml:lang="fr-FR"><g id="i24"><x id="x13" /></g>Les événements indésirables ont-ils eu un impact sur vos activités quotidiennes liées à la gestion de la polyarthrite rhumatoïde ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t32" translate="yes" xtm:x-previous-crc="1ec87218" xtm:x-next-crc="93169e48">
+          <source xml:lang="en-GB">(Yes/No)<x id="x14" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x14" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x14" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x14" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x14" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g26">
+        <trans-unit id="t33" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="4162bc5">
+          <source xml:lang="en-GB"><g id="i25">If yes, please describe how your daily activities were affected:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i25">Si oui, veuillez décrire comment vos activités quotidiennes ont été affectées :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i25">If yes, please describe how your daily activities were affected:</g></source>
+            <target xml:lang="fr-FR"><g id="i25">Si oui, veuillez décrire comment vos activités quotidiennes ont été affectées :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g27">
+        <trans-unit id="t34" translate="yes" xtm:x-previous-crc="93169e48" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i26"><x id="x15" /></g>Did the adverse event(s) cause you to miss work or school?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i26"><x id="x15" /></g>Les événements indésirables vous ont-ils obligé à vous absenter du travail ou de l’école ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i26"><x id="x15" /></g>Did the adverse event(s) cause you to miss work or school?</source>
+            <target xml:lang="fr-FR"><g id="i26"><x id="x15" /></g>Les événements indésirables vous ont-ils obligé à vous absenter du travail ou de l’école ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t35" translate="yes" xtm:x-previous-crc="4162bc5" xtm:x-next-crc="6fb03a25">
+          <source xml:lang="en-GB">(Yes/No)<x id="x16" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x16" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x16" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x16" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x16" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g28">
+        <trans-unit id="t36" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="3f3edd86">
+          <source xml:lang="en-GB"><g id="i27">If yes, please specify the number of days missed:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i27">Si oui, veuillez préciser le nombre de jours d'absence :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i27">If yes, please specify the number of days missed:</g></source>
+            <target xml:lang="fr-FR"><g id="i27">Si oui, veuillez préciser le nombre de jours d'absence :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g29">
+        <trans-unit id="t37" translate="yes" xtm:x-previous-crc="6fb03a25" xtm:x-next-crc="1b6024c">
+          <source xml:lang="en-GB"><g id="i28"><x id="x17" /></g>5.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i28"><x id="x17" /></g>5.</target>
+        </trans-unit>
+        <trans-unit id="t38" translate="yes" xtm:x-previous-crc="3f3edd86" xtm:x-next-crc="ac3178b4">
+          <source xml:lang="en-GB">Medication Adherence:<x id="x18" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Observance du traitement médicamenteux :<x id="x18" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Medication Adherence:<x id="x18" /></source>
+            <target xml:lang="fr-FR">Observance du traitement médicamenteux :<x id="x18" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g30">
+        <trans-unit id="t39" translate="yes" xtm:x-previous-crc="1b6024c" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i29"><x id="x19" /></g>Have you missed any doses of the medication for Rheumatoid Arthritis?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i29"><x id="x19" /></g>Avez-vous oublié des doses du médicament contre la polyarthrite rhumatoïde ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i29"><x id="x19" /></g>Have you missed any doses of the medication for Rheumatoid Arthritis?</source>
+            <target xml:lang="fr-FR"><g id="i29"><x id="x19" /></g>Avez-vous oublié des doses du médicament contre la polyarthrite rhumatoïde ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t40" translate="yes" xtm:x-previous-crc="ac3178b4" xtm:x-next-crc="cabe8df0">
+          <source xml:lang="en-GB">(Yes/No)<x id="x20" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x20" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x20" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x20" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x20" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g31">
+        <trans-unit id="t41" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="ff80f00">
+          <source xml:lang="en-GB"><g id="i30">If yes, please specify the reason(s) for missing doses:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i30">Si oui, veuillez préciser la ou les raisons des doses manquantes :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i30">If yes, please specify the reason(s) for missing doses:</g></source>
+            <target xml:lang="fr-FR"><g id="i30">Si oui, veuillez préciser la ou les raisons des doses manquantes :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g32">
+        <trans-unit id="t42" translate="yes" xtm:x-previous-crc="cabe8df0" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i31"><x id="x21" /></g>Have you altered the dosage or frequency of the medication without consulting your healthcare provider?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i31"><x id="x21" /></g>Avez-vous modifié la posologie ou la fréquence du médicament sans consulter votre professionnel de la santé ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i31"><x id="x21" /></g>Have you altered the dosage or frequency of the medication without consulting your healthcare provider?</source>
+            <target xml:lang="fr-FR"><g id="i31"><x id="x21" /></g>Avez-vous modifié la posologie ou la fréquence du médicament sans consulter votre professionnel de la santé ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t43" translate="yes" xtm:x-previous-crc="ff80f00" xtm:x-next-crc="2e3c219a">
+          <source xml:lang="en-GB">(Yes/No)<x id="x22" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x22" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x22" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x22" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x22" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g33">
+        <trans-unit id="t44" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="14138e45">
+          <source xml:lang="en-GB"><g id="i32">If yes, please explain why:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i32">Si oui, veuillez expliquer pourquoi :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i32">If yes, please explain why:</g></source>
+            <target xml:lang="fr-FR"><g id="i32">Si oui, veuillez expliquer pourquoi :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g34">
+        <trans-unit id="t45" translate="yes" xtm:x-previous-crc="2e3c219a" xtm:x-next-crc="c18bb4cb">
+          <source xml:lang="en-GB"><g id="i33"><x id="x23" /></g>6.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i33"><x id="x23" /></g>6.</target>
+        </trans-unit>
+        <trans-unit id="t46" translate="yes" xtm:x-previous-crc="14138e45" xtm:x-next-crc="fd0d116b">
+          <source xml:lang="en-GB">Communication with Healthcare Provider:<x id="x24" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Communication avec le prestataire de soins de santé :<x id="x24" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Communication with Healthcare Provider:<x id="x24" /></source>
+            <target xml:lang="fr-FR">Communication avec le prestataire de soins de santé :<x id="x24" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g35">
+        <trans-unit id="t47" translate="yes" xtm:x-previous-crc="c18bb4cb" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i34"><x id="x25" /></g>Have you reported the adverse event(s) to your healthcare provider managing your Rheumatoid Arthritis?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i34"><x id="x25" /></g>Avez-vous signalé les événements indésirables à votre professionnel de la santé qui gère votre polyarthrite rhumatoïde ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i34"><x id="x25" /></g>Have you reported the adverse event(s) to your healthcare provider managing your Rheumatoid Arthritis?</source>
+            <target xml:lang="fr-FR"><g id="i34"><x id="x25" /></g>Avez-vous signalé les événements indésirables à votre professionnel de la santé qui gère votre polyarthrite rhumatoïde ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t48" translate="yes" xtm:x-previous-crc="fd0d116b" xtm:x-next-crc="103a84d8">
+          <source xml:lang="en-GB">(Yes/No)<x id="x26" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x26" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x26" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x26" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x26" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g36">
+        <trans-unit id="t49" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="31621608">
+          <source xml:lang="en-GB"><g id="i35">If yes, please describe the response or advice given by your healthcare provider:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i35">Si oui, veuillez décrire la réponse ou le conseil donné par votre prestataire de soins de santé :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i35">If yes, please describe the response or advice given by your healthcare provider:</g></source>
+            <target xml:lang="fr-FR"><g id="i35">Si oui, veuillez décrire la réponse ou le conseil donné par votre prestataire de soins de santé :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g37">
+        <trans-unit id="t50" translate="yes" xtm:x-previous-crc="103a84d8" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i36"><x id="x27" /></g>Did your healthcare provider recommend any changes to your medication regimen?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i36"><x id="x27" /></g>Votre prestataire de soins de santé vous a-t-il recommandé des changements à votre régime de médicaments ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i36"><x id="x27" /></g>Did your healthcare provider recommend any changes to your medication regimen?</source>
+            <target xml:lang="fr-FR"><g id="i36"><x id="x27" /></g>Votre prestataire de soins de santé vous a-t-il recommandé des changements à votre régime de médicaments ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t51" translate="yes" xtm:x-previous-crc="31621608" xtm:x-next-crc="eb067842">
+          <source xml:lang="en-GB">(Yes/No)<x id="x28" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x28" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x28" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x28" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x28" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g38">
+        <trans-unit id="t52" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="d08bf04">
+          <source xml:lang="en-GB"><g id="i37">If yes, please specify the changes recommended:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i37">Si oui, veuillez préciser les modifications recommandées :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i37">If yes, please specify the changes recommended:</g></source>
+            <target xml:lang="fr-FR"><g id="i37">Si oui, veuillez préciser les modifications recommandées :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g39">
+        <trans-unit id="t53" translate="yes" xtm:x-previous-crc="eb067842" xtm:x-next-crc="9b2aac91">
+          <source xml:lang="en-GB"><g id="i38"><x id="x29" /></g>7.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i38"><x id="x29" /></g>7.</target>
+        </trans-unit>
+        <trans-unit id="t54" translate="yes" xtm:x-previous-crc="d08bf04" xtm:x-next-crc="ae6513ba">
+          <source xml:lang="en-GB">Additional Information:<x id="x30" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Informations Complémentaires:<x id="x30" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Additional Information:<x id="x30" /></source>
+            <target xml:lang="fr-FR">Informations Complémentaires:<x id="x30" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g40">
+        <trans-unit id="t55" translate="yes" xtm:x-previous-crc="9b2aac91" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i39"><x id="x31" /></g>Have you experienced any other side effects or issues not mentioned above while treating Rheumatoid Arthritis?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i39"><x id="x31" /></g>Avez-vous ressenti d’autres effets secondaires ou problèmes non mentionnés ci-dessus lors du traitement de la polyarthrite rhumatoïde ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i39"><x id="x31" /></g>Have you experienced any other side effects or issues not mentioned above while treating Rheumatoid Arthritis?</source>
+            <target xml:lang="fr-FR"><g id="i39"><x id="x31" /></g>Avez-vous ressenti d’autres effets secondaires ou problèmes non mentionnés ci-dessus lors du traitement de la polyarthrite rhumatoïde ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t56" translate="yes" xtm:x-previous-crc="ae6513ba" xtm:x-next-crc="3291d44f">
+          <source xml:lang="en-GB">(Yes/No)<x id="x32" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x32" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x32" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x32" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x32" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g41">
+        <trans-unit id="t57" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="d3634e7">
+          <source xml:lang="en-GB"><g id="i40">If yes, please describe:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i40">Si oui, veuillez décrire :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i40">If yes, please describe:</g></source>
+            <target xml:lang="fr-FR"><g id="i40">Si oui, veuillez décrire :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g42">
+        <trans-unit id="t58" translate="yes" xtm:x-previous-crc="3291d44f" xtm:x-next-crc="1494aca0">
+          <source xml:lang="en-GB"><g id="i41">Do you have any suggestions for improving the safety and monitoring of this medication?</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i41">Avez-vous des suggestions pour améliorer la sécurité et le suivi de ce médicament ?</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i41">Do you have any suggestions for improving the safety and monitoring of this medication?</g></source>
+            <target xml:lang="fr-FR"><g id="i41">Avez-vous des suggestions pour améliorer la sécurité et le suivi de ce médicament ?</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g43">
+        <trans-unit id="t59" translate="yes" xtm:x-previous-crc="d3634e7" xtm:x-next-crc="8a90a3cb">
+          <source xml:lang="en-GB"><g id="i42">Any additional comments or concerns:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i42">Des commentaires ou des préoccupations supplémentaires :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i42">Any additional comments or concerns:</g></source>
+            <target xml:lang="fr-FR"><g id="i42">Des commentaires ou des préoccupations supplémentaires :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g44">
+        <trans-unit id="t60" translate="yes" xtm:x-previous-crc="1494aca0" xtm:x-next-crc="b0a44840">
+          <source xml:lang="en-GB"><g id="i43"><x id="x33" /></g>8.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i43"><x id="x33" /></g>8.</target>
+        </trans-unit>
+        <trans-unit id="t61" translate="yes" xtm:x-previous-crc="8a90a3cb" xtm:x-next-crc="2b2229b8">
+          <source xml:lang="en-GB">Pharmacokinetics and Pharmacodynamics:<x id="x34" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Pharmacocinétique et pharmacodynamique :<x id="x34" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Pharmacokinetics and Pharmacodynamics:<x id="x34" /></source>
+            <target xml:lang="fr-FR">Pharmacocinétique et pharmacodynamique :<x id="x34" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g45">
+        <trans-unit id="t62" translate="yes" xtm:x-previous-crc="b0a44840" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i44"><x id="x35" /></g>Have you noticed any changes in the effectiveness of Adalimumab-adbm over time?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i44"><x id="x35" /></g>Avez-vous remarqué des changements dans l’efficacité de l’Adalimumab-adbm au fil du temps ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i44"><x id="x35" /></g>Have you noticed any changes in the effectiveness of Adalimumab-adbm over time?</source>
+            <target xml:lang="fr-FR"><g id="i44"><x id="x35" /></g>Avez-vous remarqué des changements dans l’efficacité de l’Adalimumab-adbm au fil du temps ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t63" translate="yes" xtm:x-previous-crc="2b2229b8" xtm:x-next-crc="7752bb36">
+          <source xml:lang="en-GB">(Yes/No)<x id="x36" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x36" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x36" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x36" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x36" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g46">
+        <trans-unit id="t64" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="101872b5">
+          <source xml:lang="en-GB"><g id="i45">If yes, please describe the changes:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i45">Si oui, veuillez décrire les changements :</g></target>
+          <alt-trans extype="fuzzy-forward" match-quality="75%" origin="57">
+            <source xml:lang="en-GB"><g id="i40">If yes, please describe:</g></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB"><g id="i45">If yes, please describe the changes:</g></source><target xml:lang="fr-FR"><g id="i45">Si oui, veuillez décrire les changements :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g47">
+        <trans-unit id="t65" translate="yes" xtm:x-previous-crc="7752bb36" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i46"><x id="x37" /></g>Have you experienced any fluctuations in the plasma concentration of the medication?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i46"><x id="x37" /></g>Avez-vous constaté des fluctuations dans la concentration plasmatique du médicament ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i46"><x id="x37" /></g>Have you experienced any fluctuations in the plasma concentration of the medication?</source>
+            <target xml:lang="fr-FR"><g id="i46"><x id="x37" /></g>Avez-vous constaté des fluctuations dans la concentration plasmatique du médicament ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t66" translate="yes" xtm:x-previous-crc="101872b5" xtm:x-next-crc="b027538b">
+          <source xml:lang="en-GB">(Yes/No)<x id="x38" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x38" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x38" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x38" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x38" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g48">
+        <trans-unit id="t67" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="7aa1d8fc">
+          <source xml:lang="en-GB"><g id="i47">If yes, please provide details:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i47">Si oui, veuillez fournir des détails :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i47">If yes, please provide details:</g></source>
+            <target xml:lang="fr-FR"><g id="i47">Si oui, veuillez fournir des détails :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g49">
+        <trans-unit id="t68" translate="yes" xtm:x-previous-crc="b027538b" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i48"><x id="x39" /></g>Have you undergone any pharmacogenomic testing to determine your response to Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i48"><x id="x39" /></g>Avez-vous subi des tests pharmacogénomiques pour déterminer votre réponse à l’Adalimumab-adbm ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i48"><x id="x39" /></g>Have you undergone any pharmacogenomic testing to determine your response to Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i48"><x id="x39" /></g>Avez-vous subi des tests pharmacogénomiques pour déterminer votre réponse à l’Adalimumab-adbm ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t69" translate="yes" xtm:x-previous-crc="7aa1d8fc" xtm:x-next-crc="2cb7fec9">
+          <source xml:lang="en-GB">(Yes/No)<x id="x40" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x40" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x40" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x40" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x40" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g50">
+        <trans-unit id="t70" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="938b928a">
+          <source xml:lang="en-GB"><g id="i49">If yes, please provide the results:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i49">Si oui, veuillez fournir les résultats :</g></target>
+          <alt-trans extype="fuzzy-forward" match-quality="75%" origin="67">
+            <source xml:lang="en-GB"><g id="i47">If yes, please provide details:</g></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB"><g id="i49">If yes, please provide the results:</g></source><target xml:lang="fr-FR"><g id="i49">Si oui, veuillez fournir les résultats :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g51">
+        <trans-unit id="t71" translate="yes" xtm:x-previous-crc="2cb7fec9" xtm:x-next-crc="20cb7b8d">
+          <source xml:lang="en-GB"><g id="i50"><x id="x41" /></g>9.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i50"><x id="x41" /></g>9.</target>
+        </trans-unit>
+        <trans-unit id="t72" translate="yes" xtm:x-previous-crc="938b928a" xtm:x-next-crc="11c0c1d7">
+          <source xml:lang="en-GB">Immunogenicity:<x id="x42" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Immunogénicité :<x id="x42" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Immunogenicity:<x id="x42" /></source>
+            <target xml:lang="fr-FR">Immunogénicité :<x id="x42" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g52">
+        <trans-unit id="t73" translate="yes" xtm:x-previous-crc="20cb7b8d" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i51"><x id="x43" /></g>Have you developed any anti-drug antibodies (ADAs) while on Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i51"><x id="x43" /></g>Avez-vous développé des anticorps anti-médicament (ADA) pendant que vous étiez sous Adalimumab-adbm ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i51"><x id="x43" /></g>Have you developed any anti-drug antibodies (ADAs) while on Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i51"><x id="x43" /></g>Avez-vous développé des anticorps anti-médicament (ADA) pendant que vous étiez sous Adalimumab-adbm ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t74" translate="yes" xtm:x-previous-crc="11c0c1d7" xtm:x-next-crc="910ad3a3">
+          <source xml:lang="en-GB">(Yes/No)<x id="x44" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x44" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x44" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x44" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x44" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g53">
+        <trans-unit id="t75" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="e17e37bf">
+          <source xml:lang="en-GB"><g id="i52">If yes, please describe the impact of ADAs on the efficacy and safety of the medication:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i52">Si oui, veuillez décrire l’impact des ADA sur l’efficacité et la sécurité du médicament :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i52">If yes, please describe the impact of ADAs on the efficacy and safety of the medication:</g></source>
+            <target xml:lang="fr-FR"><g id="i52">Si oui, veuillez décrire l’impact des ADA sur l’efficacité et la sécurité du médicament :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g54">
+        <trans-unit id="t76" translate="yes" xtm:x-previous-crc="910ad3a3" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i53"><x id="x45" /></g>Have you experienced any infusion-related reactions or hypersensitivity reactions?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i53"><x id="x45" /></g>Avez-vous eu des réactions liées à la perfusion ou des réactions d’hypersensibilité ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i53"><x id="x45" /></g>Have you experienced any infusion-related reactions or hypersensitivity reactions?</source>
+            <target xml:lang="fr-FR"><g id="i53"><x id="x45" /></g>Avez-vous eu des réactions liées à la perfusion ou des réactions d’hypersensibilité ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t77" translate="yes" xtm:x-previous-crc="e17e37bf" xtm:x-next-crc="b027538b">
+          <source xml:lang="en-GB">(Yes/No)<x id="x46" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x46" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x46" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x46" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x46" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g55">
+        <trans-unit id="t78" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="d9786d89">
+          <source xml:lang="en-GB"><g id="i54">If yes, please provide details:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i54">Si oui, veuillez fournir des détails :</g></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="67">
+            <source xml:lang="en-GB"><g id="i54">If yes, please provide details:</g></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="fuzzy-forward" match-quality="75%" origin="70"><source xml:lang="en-GB"><g id="i49">If yes, please provide the results:</g></source><target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB"><g id="i54">If yes, please provide details:</g></source><target xml:lang="fr-FR"><g id="i54">Si oui, veuillez fournir des détails :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g56">
+        <trans-unit id="t79" translate="yes" xtm:x-previous-crc="b027538b" xtm:x-next-crc="d29b08d4">
+          <source xml:lang="en-GB"><g id="i55"><x id="x47" /></g>10.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i55"><x id="x47" /></g>10.</target>
+        </trans-unit>
+        <trans-unit id="t80" translate="yes" xtm:x-previous-crc="d9786d89" xtm:x-next-crc="e89f33ce">
+          <source xml:lang="en-GB">Biomarkers and Clinical Outcomes:<x id="x48" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Biomarqueurs et résultats cliniques :<x id="x48" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Biomarkers and Clinical Outcomes:<x id="x48" /></source>
+            <target xml:lang="fr-FR">Biomarqueurs et résultats cliniques :<x id="x48" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g57">
+        <trans-unit id="t81" translate="yes" xtm:x-previous-crc="d29b08d4" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i56"><x id="x49" /></g>Have you been monitored for any specific biomarkers (e.g., C-reactive protein, ESR) while on Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i56"><x id="x49" /></g>Avez-vous été surveillé pour des biomarqueurs spécifiques (par exemple, protéine C-réactive, VS) pendant que vous étiez sous Adalimumab-adbm ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i56"><x id="x49" /></g>Have you been monitored for any specific biomarkers (e.g., C-reactive protein, ESR) while on Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i56"><x id="x49" /></g>Avez-vous été surveillé pour des biomarqueurs spécifiques (par exemple, protéine C-réactive, VS) pendant que vous étiez sous Adalimumab-adbm ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t82" translate="yes" xtm:x-previous-crc="e89f33ce" xtm:x-next-crc="e6f3d085">
+          <source xml:lang="en-GB">(Yes/No)<x id="x50" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x50" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x50" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x50" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x50" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g58">
+        <trans-unit id="t83" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="4d4d2db3">
+          <source xml:lang="en-GB"><g id="i57">If yes, please provide the results and their correlation with clinical outcomes:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i57">Si oui, veuillez fournir les résultats et leur corrélation avec les résultats cliniques :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i57">If yes, please provide the results and their correlation with clinical outcomes:</g></source>
+            <target xml:lang="fr-FR"><g id="i57">Si oui, veuillez fournir les résultats et leur corrélation avec les résultats cliniques :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g59">
+        <trans-unit id="t84" translate="yes" xtm:x-previous-crc="e6f3d085" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i58"><x id="x51" /></g>Have you participated in any clinical trials or observational studies involving Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i58"><x id="x51" /></g>Avez-vous participé à des essais cliniques ou à des études observationnelles impliquant l’Adalimumab-adbm ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i58"><x id="x51" /></g>Have you participated in any clinical trials or observational studies involving Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i58"><x id="x51" /></g>Avez-vous participé à des essais cliniques ou à des études observationnelles impliquant l’Adalimumab-adbm ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t85" translate="yes" xtm:x-previous-crc="4d4d2db3" xtm:x-next-crc="2e6fb88b">
+          <source xml:lang="en-GB">(Yes/No)<x id="x52" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x52" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x52" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x52" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x52" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g60">
+        <trans-unit id="t86" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="c0635cc8">
+          <source xml:lang="en-GB"><g id="i59">If yes, please describe your experience and the outcomes:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i59">Si oui, veuillez décrire votre expérience et les résultats :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i59">If yes, please describe your experience and the outcomes:</g></source>
+            <target xml:lang="fr-FR"><g id="i59">Si oui, veuillez décrire votre expérience et les résultats :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g61">
+        <trans-unit id="t87" translate="yes" xtm:x-previous-crc="2e6fb88b" xtm:x-next-crc="650f3996">
+          <source xml:lang="en-GB"><g id="i60"><x id="x53" /></g>11.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i60"><x id="x53" /></g>11.</target>
+        </trans-unit>
+        <trans-unit id="t88" translate="yes" xtm:x-previous-crc="c0635cc8" xtm:x-next-crc="8f7fcdd9">
+          <source xml:lang="en-GB">Drug-Drug Interactions:<x id="x54" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Interactions médicamenteuses :<x id="x54" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Drug-Drug Interactions:<x id="x54" /></source>
+            <target xml:lang="fr-FR">Interactions médicamenteuses :<x id="x54" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g62">
+        <trans-unit id="t89" translate="yes" xtm:x-previous-crc="650f3996" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i61"><x id="x55" /></g>Are you taking any other medications that could potentially interact with Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i61"><x id="x55" /></g>Prenez-vous d’autres médicaments qui pourraient potentiellement interagir avec l’Adalimumab-adbm ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i61"><x id="x55" /></g>Are you taking any other medications that could potentially interact with Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i61"><x id="x55" /></g>Prenez-vous d’autres médicaments qui pourraient potentiellement interagir avec l’Adalimumab-adbm ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t90" translate="yes" xtm:x-previous-crc="8f7fcdd9" xtm:x-next-crc="91382022">
+          <source xml:lang="en-GB">(Yes/No)<x id="x56" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x56" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x56" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x56" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x56" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g63">
+        <trans-unit id="t91" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="d77e2e92">
+          <source xml:lang="en-GB"><g id="i62">If yes, please list the medications and describe any observed interactions:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i62">Si oui, veuillez énumérer les médicaments et décrire les interactions observées :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i62">If yes, please list the medications and describe any observed interactions:</g></source>
+            <target xml:lang="fr-FR"><g id="i62">Si oui, veuillez énumérer les médicaments et décrire les interactions observées :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g64">
+        <trans-unit id="t92" translate="yes" xtm:x-previous-crc="91382022" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i63"><x id="x57" /></g>Have you experienced any changes in the efficacy or side effects of Adalimumab-adbm due to these interactions?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i63"><x id="x57" /></g>Avez-vous constaté des changements dans l’efficacité ou les effets secondaires de l’Adalimumab-adbm en raison de ces interactions ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i63"><x id="x57" /></g>Have you experienced any changes in the efficacy or side effects of Adalimumab-adbm due to these interactions?</source>
+            <target xml:lang="fr-FR"><g id="i63"><x id="x57" /></g>Avez-vous constaté des changements dans l’efficacité ou les effets secondaires de l’Adalimumab-adbm en raison de ces interactions ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t93" translate="yes" xtm:x-previous-crc="d77e2e92" xtm:x-next-crc="b027538b">
+          <source xml:lang="en-GB">(Yes/No)<x id="x58" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x58" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x58" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x58" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x58" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g65">
+        <trans-unit id="t94" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="eb4e0f0b">
+          <source xml:lang="en-GB"><g id="i64">If yes, please provide details:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i64">Si oui, veuillez fournir des détails :</g></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="67">
+            <source xml:lang="en-GB"><g id="i64">If yes, please provide details:</g></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="fuzzy-forward" match-quality="75%" origin="70"><source xml:lang="en-GB"><g id="i49">If yes, please provide the results:</g></source><target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB"><g id="i64">If yes, please provide details:</g></source><target xml:lang="fr-FR"><g id="i64">Si oui, veuillez fournir des détails :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g66">
+        <trans-unit id="t95" translate="yes" xtm:x-previous-crc="b027538b" xtm:x-next-crc="1c1b3ed0">
+          <source xml:lang="en-GB"><g id="i65"><x id="x59" /></g>12.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i65"><x id="x59" /></g>12.</target>
+        </trans-unit>
+        <trans-unit id="t96" translate="yes" xtm:x-previous-crc="eb4e0f0b" xtm:x-next-crc="92011ed9">
+          <source xml:lang="en-GB">Long-Term Safety:<x id="x60" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Sécurité à long terme :<x id="x60" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Long-Term Safety:<x id="x60" /></source>
+            <target xml:lang="fr-FR">Sécurité à long terme :<x id="x60" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g67">
+        <trans-unit id="t97" translate="yes" xtm:x-previous-crc="1c1b3ed0" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i66"><x id="x61" /></g>Have you been on Adalimumab-adbm for an extended period (e.g., more than one year)?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i66"><x id="x61" /></g>Prenez-vous de l’Adalimumab-adbm depuis une période prolongée (par exemple, plus d’un an) ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i66"><x id="x61" /></g>Have you been on Adalimumab-adbm for an extended period (e.g., more than one year)?</source>
+            <target xml:lang="fr-FR"><g id="i66"><x id="x61" /></g>Prenez-vous de l’Adalimumab-adbm depuis une période prolongée (par exemple, plus d’un an) ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t98" translate="yes" xtm:x-previous-crc="92011ed9" xtm:x-next-crc="e4c9a907">
+          <source xml:lang="en-GB">(Yes/No)<x id="x62" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x62" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x62" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x62" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x62" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g68">
+        <trans-unit id="t99" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i67"><x id="x63" /></g>If yes, have you experienced any long-term side effects or complications?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i67"><x id="x63" /></g>Si oui, avez-vous ressenti des effets secondaires ou des complications à long terme ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i67"><x id="x63" /></g>If yes, have you experienced any long-term side effects or complications?</source>
+            <target xml:lang="fr-FR"><g id="i67"><x id="x63" /></g>Si oui, avez-vous ressenti des effets secondaires ou des complications à long terme ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t100" translate="yes" xtm:x-previous-crc="e4c9a907" xtm:x-next-crc="cce02ee0">
+          <source xml:lang="en-GB">(Yes/No)<x id="x64" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x64" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x64" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x64" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x64" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g69">
+        <trans-unit id="t101" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="ce53964">
+          <source xml:lang="en-GB"><g id="i68">If yes, please describe the long-term side effects or complications:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i68">Si oui, veuillez décrire les effets secondaires ou les complications à long terme :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i68">If yes, please describe the long-term side effects or complications:</g></source>
+            <target xml:lang="fr-FR"><g id="i68">Si oui, veuillez décrire les effets secondaires ou les complications à long terme :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g70">
+        <trans-unit id="t102" translate="yes" xtm:x-previous-crc="cce02ee0" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i69"><x id="x65" /></g>Have you undergone any regular monitoring (e.g., liver function tests, complete blood count) while on Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i69"><x id="x65" /></g>Avez-vous subi une surveillance régulière (par exemple, des tests de la fonction hépatique, une numération globulaire complète) pendant que vous prenez de l'Adalimumab-adbm ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i69"><x id="x65" /></g>Have you undergone any regular monitoring (e.g., liver function tests, complete blood count) while on Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i69"><x id="x65" /></g>Avez-vous subi une surveillance régulière (par exemple, des tests de la fonction hépatique, une numération globulaire complète) pendant que vous prenez de l'Adalimumab-adbm ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t103" translate="yes" xtm:x-previous-crc="ce53964" xtm:x-next-crc="5c0266d0">
+          <source xml:lang="en-GB">(Yes/No)<x id="x66" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x66" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x66" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x66" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x66" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g71">
+        <trans-unit id="t104" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="f2553e4a">
+          <source xml:lang="en-GB"><g id="i70">If yes, please provide the results and any significant findings:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i70">Si oui, veuillez fournir les résultats et toute constatation significative :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i70">If yes, please provide the results and any significant findings:</g></source>
+            <target xml:lang="fr-FR"><g id="i70">Si oui, veuillez fournir les résultats et toute constatation significative :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g72">
+        <trans-unit id="t105" translate="yes" xtm:x-previous-crc="5c0266d0" xtm:x-next-crc="e6971299">
+          <source xml:lang="en-GB"><g id="i71"><x id="x67" /></g>13.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i71"><x id="x67" /></g>13.</target>
+        </trans-unit>
+        <trans-unit id="t106" translate="yes" xtm:x-previous-crc="f2553e4a" xtm:x-next-crc="ba8e80a7">
+          <source xml:lang="en-GB">Quality of Life:<x id="x68" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Qualité de vie:<x id="x68" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Quality of Life:<x id="x68" /></source>
+            <target xml:lang="fr-FR">Qualité de vie:<x id="x68" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g73">
+        <trans-unit id="t107" translate="yes" xtm:x-previous-crc="e6971299" xtm:x-next-crc="8adf4eeb">
+          <source xml:lang="en-GB"><g id="i72">How has Adalimumab-adbm impacted your overall quality of life while managing Rheumatoid Arthritis?</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i72">Comment l’Adalimumab-adbm a-t-il eu un impact sur votre qualité de vie globale pendant la prise en charge de la polyarthrite rhumatoïde ?</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i72">How has Adalimumab-adbm impacted your overall quality of life while managing Rheumatoid Arthritis?</g></source>
+            <target xml:lang="fr-FR"><g id="i72">Comment l’Adalimumab-adbm a-t-il eu un impact sur votre qualité de vie globale pendant la prise en charge de la polyarthrite rhumatoïde ?</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g74">
+        <trans-unit id="t108" translate="yes" xtm:x-previous-crc="ba8e80a7" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i73"><x id="x69" /></g>Have you noticed any improvements in your symptoms or daily functioning?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i73"><x id="x69" /></g>Avez-vous remarqué une amélioration de vos symptômes ou de votre fonctionnement quotidien ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i73"><x id="x69" /></g>Have you noticed any improvements in your symptoms or daily functioning?</source>
+            <target xml:lang="fr-FR"><g id="i73"><x id="x69" /></g>Avez-vous remarqué une amélioration de vos symptômes ou de votre fonctionnement quotidien ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t109" translate="yes" xtm:x-previous-crc="8adf4eeb" xtm:x-next-crc="9ac44379">
+          <source xml:lang="en-GB">(Yes/No)<x id="x70" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x70" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x70" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x70" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x70" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g75">
+        <trans-unit id="t110" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="49059e62">
+          <source xml:lang="en-GB"><g id="i74">If yes, please describe the improvements:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i74">Si oui, veuillez décrire les améliorations :</g></target>
+          <alt-trans extype="fuzzy-forward" match-quality="75%" origin="64">
+            <source xml:lang="en-GB"><g id="i45">If yes, please describe the changes:</g></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="fuzzy-forward" match-quality="75%" origin="21"><source xml:lang="en-GB"><g id="i16">If yes, please describe the adverse event(s):</g></source><target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB"><g id="i74">If yes, please describe the improvements:</g></source><target xml:lang="fr-FR"><g id="i74">Si oui, veuillez décrire les améliorations :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g76">
+        <trans-unit id="t111" translate="yes" xtm:x-previous-crc="9ac44379" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i75"><x id="x71" /></g>Have you experienced any negative impacts on your quality of life due to the medication?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i75"><x id="x71" /></g>Avez-vous ressenti des effets négatifs sur votre qualité de vie en raison du médicament ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i75"><x id="x71" /></g>Have you experienced any negative impacts on your quality of life due to the medication?</source>
+            <target xml:lang="fr-FR"><g id="i75"><x id="x71" /></g>Avez-vous ressenti des effets négatifs sur votre qualité de vie en raison du médicament ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t112" translate="yes" xtm:x-previous-crc="49059e62" xtm:x-next-crc="78f7f971">
+          <source xml:lang="en-GB">(Yes/No)<x id="x72" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x72" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x72" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x72" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x72" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g77">
+        <trans-unit id="t113" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="bd14a88d">
+          <source xml:lang="en-GB"><g id="i76">If yes, please describe the negative impacts:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i76">Si oui, veuillez décrire les impacts négatifs :</g></target>
+          <alt-trans extype="fuzzy-forward" match-quality="75%" origin="110">
+            <source xml:lang="en-GB"><g id="i74">If yes, please describe the improvements:</g></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB"><g id="i76">If yes, please describe the negative impacts:</g></source><target xml:lang="fr-FR"><g id="i76">Si oui, veuillez décrire les impacts négatifs :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g78">
+        <trans-unit id="t114" translate="yes" xtm:x-previous-crc="78f7f971" xtm:x-next-crc="c9f0de87">
+          <source xml:lang="en-GB"><g id="i77"><x id="x73" /></g>14.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i77"><x id="x73" /></g>14.</target>
+        </trans-unit>
+        <trans-unit id="t115" translate="yes" xtm:x-previous-crc="bd14a88d" xtm:x-next-crc="47bdac54">
+          <source xml:lang="en-GB">Patient Satisfaction:<x id="x74" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Satisfaction des patients :<x id="x74" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Patient Satisfaction:<x id="x74" /></source>
+            <target xml:lang="fr-FR">Satisfaction des patients :<x id="x74" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g79">
+        <trans-unit id="t116" translate="yes" xtm:x-previous-crc="c9f0de87" xtm:x-next-crc="8958812a">
+          <source xml:lang="en-GB"><g id="i78"><x id="x75" /></g>How satisfied are you with the effectiveness of Adalimumab-adbm in managing your Rheumatoid Arthritis?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i78"><x id="x75" /></g>Dans quelle mesure êtes-vous satisfait de l’efficacité de l’Adalimumab-adbm dans la gestion de votre polyarthrite rhumatoïde ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i78"><x id="x75" /></g>How satisfied are you with the effectiveness of Adalimumab-adbm in managing your Rheumatoid Arthritis?</source>
+            <target xml:lang="fr-FR"><g id="i78"><x id="x75" /></g>Dans quelle mesure êtes-vous satisfait de l’efficacité de l’Adalimumab-adbm dans la gestion de votre polyarthrite rhumatoïde ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t117" translate="yes" xtm:x-previous-crc="47bdac54" xtm:x-next-crc="2d72606f">
+          <source xml:lang="en-GB">(Very satisfied, Satisfied, Neutral, Dissatisfied, Very dissatisfied)<x id="x76" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Très satisfait, Satisfait, Neutre, Insatisfait, Très insatisfait)<x id="x76" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">(Very satisfied, Satisfied, Neutral, Dissatisfied, Very dissatisfied)<x id="x76" /></source>
+            <target xml:lang="fr-FR">(Très satisfait, Satisfait, Neutre, Insatisfait, Très insatisfait)<x id="x76" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g80">
+        <trans-unit id="t118" translate="yes" xtm:x-previous-crc="8958812a" xtm:x-next-crc="8958812a">
+          <source xml:lang="en-GB"><g id="i79"><x id="x77" /></g>How satisfied are you with the safety profile of Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i79"><x id="x77" /></g>Dans quelle mesure êtes-vous satisfait du profil de sécurité de l’Adalimumab-adbm ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i79"><x id="x77" /></g>How satisfied are you with the safety profile of Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i79"><x id="x77" /></g>Dans quelle mesure êtes-vous satisfait du profil de sécurité de l’Adalimumab-adbm ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t119" translate="yes" xtm:x-previous-crc="2d72606f" xtm:x-next-crc="2f0ddeff">
+          <source xml:lang="en-GB">(Very satisfied, Satisfied, Neutral, Dissatisfied, Very dissatisfied)<x id="x78" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Très satisfait, Satisfait, Neutre, Insatisfait, Très insatisfait)<x id="x78" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="117">
+            <source xml:lang="en-GB">(Very satisfied, Satisfied, Neutral, Dissatisfied, Very dissatisfied)<x id="x78" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Very satisfied, Satisfied, Neutral, Dissatisfied, Very dissatisfied)<x id="x78" /></source><target xml:lang="fr-FR">(Très satisfait, Satisfait, Neutre, Insatisfait, Très insatisfait)<x id="x78" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g81">
+        <trans-unit id="t120" translate="yes" xtm:x-previous-crc="8958812a" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i80"><x id="x79" /></g>Would you recommend Adalimumab-adbm to other patients with Rheumatoid Arthritis?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i80"><x id="x79" /></g>Recommanderiez-vous l’Adalimumab-adbm à d’autres patients atteints de polyarthrite rhumatoïde ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i80"><x id="x79" /></g>Would you recommend Adalimumab-adbm to other patients with Rheumatoid Arthritis?</source>
+            <target xml:lang="fr-FR"><g id="i80"><x id="x79" /></g>Recommanderiez-vous l’Adalimumab-adbm à d’autres patients atteints de polyarthrite rhumatoïde ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t121" translate="yes" xtm:x-previous-crc="2f0ddeff" xtm:x-next-crc="e13612c5">
+          <source xml:lang="en-GB">(Yes/No)<x id="x80" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x80" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x80" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x80" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x80" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g82">
+        <trans-unit id="t122" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="a40f99cc">
+          <source xml:lang="en-GB"><g id="i81">Any additional comments or suggestions for improving the medication or its administration:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i81">Des commentaires ou suggestions supplémentaires pour améliorer le médicament ou son administration :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i81">Any additional comments or suggestions for improving the medication or its administration:</g></source>
+            <target xml:lang="fr-FR"><g id="i81">Des commentaires ou suggestions supplémentaires pour améliorer le médicament ou son administration :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g83">
+        <trans-unit id="t123" translate="yes" xtm:x-previous-crc="e13612c5" xtm:x-next-crc="18c43d9c">
+          <source xml:lang="en-GB"><g id="i82"><x id="x81" /></g>15.</source>
+          <target state="signed-off" state-qualifier="x-numeric" xml:lang="fr-FR"><g id="i82"><x id="x81" /></g>15.</target>
+        </trans-unit>
+        <trans-unit id="t124" translate="yes" xtm:x-previous-crc="a40f99cc" xtm:x-next-crc="1121785c">
+          <source xml:lang="en-GB">Genetic Factors:<x id="x82" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Facteurs génétiques :<x id="x82" /></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Genetic Factors:<x id="x82" /></source>
+            <target xml:lang="fr-FR">Facteurs génétiques :<x id="x82" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g84">
+        <trans-unit id="t125" translate="yes" xtm:x-previous-crc="18c43d9c" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i83"><x id="x83" /></g>Have you undergone any genetic testing to identify potential genetic factors that may influence your response to Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i83"><x id="x83" /></g>Avez-vous subi des tests génétiques pour identifier les facteurs génétiques potentiels susceptibles d’influencer votre réponse à l’Adalimumab-adbm ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i83"><x id="x83" /></g>Have you undergone any genetic testing to identify potential genetic factors that may influence your response to Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i83"><x id="x83" /></g>Avez-vous subi des tests génétiques pour identifier les facteurs génétiques potentiels susceptibles d’influencer votre réponse à l’Adalimumab-adbm ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t126" translate="yes" xtm:x-previous-crc="1121785c" xtm:x-next-crc="64e54bd">
+          <source xml:lang="en-GB">(Yes/No)<x id="x84" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x84" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x84" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x84" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x84" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g85">
+        <trans-unit id="t127" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="bdb5e534">
+          <source xml:lang="en-GB"><g id="i84">If yes, please provide the results and their impact on your treatment plan:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i84">Si oui, veuillez fournir les résultats et leur impact sur votre plan de traitement :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i84">If yes, please provide the results and their impact on your treatment plan:</g></source>
+            <target xml:lang="fr-FR"><g id="i84">Si oui, veuillez fournir les résultats et leur impact sur votre plan de traitement :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g86">
+        <trans-unit id="t128" translate="yes" xtm:x-previous-crc="64e54bd" xtm:x-next-crc="3d35febe">
+          <source xml:lang="en-GB"><g id="i85"><x id="x85" /></g>Have any genetic polymorphisms been identified that affect the metabolism or efficacy of Adalimumab-adbm?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i85"><x id="x85" /></g>Des polymorphismes génétiques affectant le métabolisme ou l’efficacité de l’Adalimumab-adbm ont-ils été identifiés ?</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i85"><x id="x85" /></g>Have any genetic polymorphisms been identified that affect the metabolism or efficacy of Adalimumab-adbm?</source>
+            <target xml:lang="fr-FR"><g id="i85"><x id="x85" /></g>Des polymorphismes génétiques affectant le métabolisme ou l’efficacité de l’Adalimumab-adbm ont-ils été identifiés ?</target>
+          </alt-trans>
+        </trans-unit>
+        <trans-unit id="t129" translate="yes" xtm:x-previous-crc="bdb5e534" xtm:x-next-crc="f12377fa">
+          <source xml:lang="en-GB">(Yes/No)<x id="x86" /></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">(Yes/No)<x id="x86" /></target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="20">
+            <source xml:lang="en-GB">(Yes/No)<x id="x86" /></source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">(Yes/No)<x id="x86" /></source><target xml:lang="fr-FR">(Yes/No)<x id="x86" /></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g87">
+        <trans-unit id="t130" translate="yes" xtm:x-previous-crc="3d35febe" xtm:x-next-crc="89c859f3">
+          <source xml:lang="en-GB"><g id="i86">If yes, please describe the polymorphisms and their effects:</g></source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR"><g id="i86">Si oui, veuillez décrire les polymorphismes et leurs effets :</g></target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB"><g id="i86">If yes, please describe the polymorphisms and their effects:</g></source>
+            <target xml:lang="fr-FR"><g id="i86">Si oui, veuillez décrire les polymorphismes et leurs effets :</g></target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g88">
+        <trans-unit id="t131" translate="yes" xtm:x-previous-crc="f12377fa" xtm:x-next-crc="89c859f3">
+          <source xml:lang="en-GB">Inadequate</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Inadéquat</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Inadequate</source>
+            <target xml:lang="fr-FR">Inadéquat</target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g89">
+        <trans-unit id="t132" translate="yes" xtm:x-previous-crc="89c859f3" xtm:x-next-crc="1258b0da">
+          <source xml:lang="en-GB">Inadequate</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Inadéquat</target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="131">
+            <source xml:lang="en-GB">Inadequate</source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">Inadequate</source><target xml:lang="fr-FR">Inadéquat</target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g90">
+        <trans-unit id="t133" translate="yes" xtm:x-previous-crc="89c859f3" xtm:x-next-crc="1258b0da">
+          <source xml:lang="en-GB">Passable</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Passable</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Passable</source>
+            <target xml:lang="fr-FR">Passable</target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g91">
+        <trans-unit id="t134" translate="yes" xtm:x-previous-crc="1258b0da" xtm:x-next-crc="20e63862">
+          <source xml:lang="en-GB">Passable</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Passable</target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="133">
+            <source xml:lang="en-GB">Passable</source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">Passable</source><target xml:lang="fr-FR">Passable</target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g92">
+        <trans-unit id="t135" translate="yes" xtm:x-previous-crc="1258b0da" xtm:x-next-crc="20e63862">
+          <source xml:lang="en-GB">Excellent</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Excellent</target>
+          <alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt">
+            <source xml:lang="en-GB">Excellent</source>
+            <target xml:lang="fr-FR">Excellent</target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+      <group id="g93">
+        <trans-unit id="t136" translate="yes" xtm:x-previous-crc="20e63862" xtm:x-next-crc="0">
+          <source xml:lang="en-GB">Excellent</source>
+          <target state="signed-off" state-qualifier="mt-suggestion" xml:lang="fr-FR">Excellent</target>
+          <alt-trans extype="leveraged-inherited" match-quality="100%" origin="135">
+            <source xml:lang="en-GB">Excellent</source>
+            <target xml:lang="fr-FR" /></alt-trans><alt-trans extype="MACHINE-TRANSLATION" match-quality="nmt"><source xml:lang="en-GB">Excellent</source><target xml:lang="fr-FR">Excellent</target>
+          </alt-trans>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
