@@ -187,7 +187,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         catch (Exception ex)
         {
 
-            new PluginApplicationException(ex.Message);
+            throw new PluginApplicationException(ex.Message);
         }
         
     }
