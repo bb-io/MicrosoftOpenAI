@@ -1,0 +1,9 @@
+{
+    {
+        "ConnectionDefinition": {
+            "url": "",
+            "deployment": "",
+            "apiKey": ""
+        },
+        "TestFolder": "C:\\Users\\..."
+    }

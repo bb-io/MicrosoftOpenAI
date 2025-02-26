@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apps.AzureOpenAI", "Apps.Az
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.AzureOpenAI", "Tests.AzureOpenaI\Tests.AzureOpenAI.csproj", "{59C61256-3355-4960-B687-06EA95D48744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C01AB3A3-F84A-4B21-84CA-ABB3CC97D57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C61256-3355-4960-B687-06EA95D48744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C61256-3355-4960-B687-06EA95D48744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C61256-3355-4960-B687-06EA95D48744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C61256-3355-4960-B687-06EA95D48744}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
