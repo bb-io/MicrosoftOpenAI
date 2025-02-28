@@ -81,115 +81,106 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                  "Specify the number of translation units to be processed at once. Default value: 1500. (See our documentation for an explanation)")]
         int? bucketSize = 1500)
     {
-        try
+        var xliffDocument = await DownloadXliffDocumentAsync(input.File);
+        string criteriaPrompt = string.IsNullOrEmpty(prompt)
+            ? "accuracy, fluency, consistency, style, grammar and spelling"
+            : prompt;
+        
+        var batches = xliffDocument.TranslationUnits.Batch((int)bucketSize);
+        var src = input.SourceLanguage ?? xliffDocument.SourceLanguage;
+        var tgt = input.TargetLanguage ?? xliffDocument.TargetLanguage;
+        
+        var usage = new UsageDto();
+        var results = new Dictionary<string, float>();
+        foreach (var batch in batches)
         {
-            var xliffDocument = await DownloadXliffDocumentAsync(input.File);
-            string criteriaPrompt = string.IsNullOrEmpty(prompt)
-                ? "accuracy, fluency, consistency, style, grammar and spelling"
-                : prompt;
+            var userPrompt = PromptConstants.GetQualityScorePrompt(criteriaPrompt, src, tgt,
+                JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target }).ToList()));
+            var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt, "2024-08-01-preview",
+                promptRequest, ResponseFormats.GetQualityScoreXliffResponseFormat()));
+            usage += promptUsage;
 
-            var batches = xliffDocument.TranslationUnits.Batch((int)bucketSize);
-            var src = input.SourceLanguage ?? xliffDocument.SourceLanguage;
-            var tgt = input.TargetLanguage ?? xliffDocument.TargetLanguage;
-
-            var usage = new UsageDto();
-            var results = new Dictionary<string, float>();
-            foreach (var batch in batches)
+            if (string.IsNullOrEmpty(result))
             {
-                var userPrompt = PromptConstants.GetQualityScorePrompt(criteriaPrompt, src, tgt,
-                    JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target }).ToList()));
-                var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt, "2024-08-01-preview",
-                    promptRequest, ResponseFormats.GetQualityScoreXliffResponseFormat()));
-                usage += promptUsage;
-
-                if (string.IsNullOrEmpty(result))
-                {
-                    throw new PluginApplicationException("Azure Open AI give us an empty response.");
-                }
-
-                TryCatchHelper.TryCatch(() =>
-                {
-                    var deserializeResult = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
-                    foreach (var entity in deserializeResult.Translations)
-                    {
-                        results.Add(entity.TranslationId, entity.QualityScore);
-                    }
-                }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
+                throw new PluginApplicationException("Azure Open AI give us an empty response.");
             }
-
-            results.ForEach(x =>
+            
+            TryCatchHelper.TryCatch(() =>
             {
-                var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x.Key);
+                var deserializeResult = JsonConvert.DeserializeObject<TranslationEntities>(result)!;
+                foreach (var entity in deserializeResult.Translations)
+                {
+                    results.Add(entity.TranslationId, entity.QualityScore);
+                }
+            }, $"Failed to deserialize the response from OpenAI, try again later. Response: {result}");
+        }
+        
+        results.ForEach(x =>
+        {
+            var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x.Key);
+            if (translationUnit != null)
+            {
+                var attribute = translationUnit.Attributes.FirstOrDefault(x => x.Key == "extradata");
+                if (!string.IsNullOrEmpty(attribute.Key))
+                {
+                    translationUnit.Attributes.Remove(attribute.Key);
+                    translationUnit.Attributes.Add("extradata", x.Value.ToString());
+                }
+                else
+                {
+                    translationUnit.Attributes.Add("extradata", x.Value.ToString());
+                }
+            }
+        });
+
+        if (input.Threshold != null && input.Condition != null && input.State != null)
+        {
+            var filteredTUs = new List<string>();
+            switch (input.Condition)
+            {
+                case ">":
+                    filteredTUs = results.Where(x => x.Value > input.Threshold).Select(x => x.Key).ToList();
+                    break;
+                case ">=":
+                    filteredTUs = results.Where(x => x.Value >= input.Threshold).Select(x => x.Key).ToList();
+                    break;
+                case "=":
+                    filteredTUs = results.Where(x => x.Value == input.Threshold).Select(x => x.Key).ToList();
+                    break;
+                case "<":
+                    filteredTUs = results.Where(x => x.Value < input.Threshold).Select(x => x.Key).ToList();
+                    break;
+                case "<=":
+                    filteredTUs = results.Where(x => x.Value <= input.Threshold).Select(x => x.Key).ToList();
+                    break;
+            }
+            
+            filteredTUs.ForEach(x =>
+            {
+                var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x);
                 if (translationUnit != null)
                 {
-                    var attribute = translationUnit.Attributes.FirstOrDefault(x => x.Key == "extradata");
-                    if (!string.IsNullOrEmpty(attribute.Key))
+                    var stateAttribute = translationUnit.Attributes.FirstOrDefault(x => x.Key == "state");
+                    if (!string.IsNullOrEmpty(stateAttribute.Key))
                     {
-                        translationUnit.Attributes.Remove(attribute.Key);
-                        translationUnit.Attributes.Add("extradata", x.Value.ToString());
+                        translationUnit.Attributes.Remove(stateAttribute.Key);
+                        translationUnit.Attributes.Add("state", input.State);
                     }
                     else
                     {
-                        translationUnit.Attributes.Add("extradata", x.Value.ToString());
+                        translationUnit.Attributes.Add("state", input.State);
                     }
                 }
             });
-
-            if (input.Threshold != null && input.Condition != null && input.State != null)
-            {
-                var filteredTUs = new List<string>();
-                switch (input.Condition)
-                {
-                    case ">":
-                        filteredTUs = results.Where(x => x.Value > input.Threshold).Select(x => x.Key).ToList();
-                        break;
-                    case ">=":
-                        filteredTUs = results.Where(x => x.Value >= input.Threshold).Select(x => x.Key).ToList();
-                        break;
-                    case "=":
-                        filteredTUs = results.Where(x => x.Value == input.Threshold).Select(x => x.Key).ToList();
-                        break;
-                    case "<":
-                        filteredTUs = results.Where(x => x.Value < input.Threshold).Select(x => x.Key).ToList();
-                        break;
-                    case "<=":
-                        filteredTUs = results.Where(x => x.Value <= input.Threshold).Select(x => x.Key).ToList();
-                        break;
-                }
-
-                filteredTUs.ForEach(x =>
-                {
-                    var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x);
-                    if (translationUnit != null)
-                    {
-                        var stateAttribute = translationUnit.Attributes.FirstOrDefault(x => x.Key == "state");
-                        if (!string.IsNullOrEmpty(stateAttribute.Key))
-                        {
-                            translationUnit.Attributes.Remove(stateAttribute.Key);
-                            translationUnit.Attributes.Add("state", input.State);
-                        }
-                        else
-                        {
-                            translationUnit.Attributes.Add("state", input.State);
-                        }
-                    }
-                });
-            }
-
-            var stream = xliffDocument.ToStream();
-            return new ScoreXliffResponse
-            {
-                AverageScore = results.Average(x => x.Value),
-                File = await FileManagementClient.UploadAsync(stream, MediaTypeNames.Text.Xml, input.File.Name),
-                Usage = usage,
-            };
         }
-        catch (Exception ex)
+
+        var stream = xliffDocument.ToStream();
+        return new ScoreXliffResponse
         {
-
-            throw new PluginApplicationException(ex.Message);
-        }
-        
+            AverageScore = results.Average(x => x.Value),
+            File = await FileManagementClient.UploadAsync(stream, MediaTypeNames.Text.Xml, input.File.Name),
+            Usage = usage,
+        };
     }
 
     [Action("Post-edit XLIFF file",
