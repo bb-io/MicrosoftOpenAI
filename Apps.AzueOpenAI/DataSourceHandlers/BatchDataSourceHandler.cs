@@ -14,7 +14,7 @@ public class BatchDataSourceHandler(InvocationContext invocationContext)
         CancellationToken cancellationToken)
     {
         var restClient = new AzureOpenAiRestClient(InvocationContext.AuthenticationCredentialsProviders);
-        var request = new AzureOpenAiRequest("/openai/batches?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
+        var request = new AzureOpenAIRequest("/openai/batches?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
         
         var batches = await restClient.ExecuteWithErrorHandling<BatchPaginationResponse>(request);
         var modelsDictionary = batches.Data

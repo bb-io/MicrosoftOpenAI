@@ -15,7 +15,7 @@ public class TextChatModelDataSourceHandler(InvocationContext invocationContext)
         CancellationToken cancellationToken)
     {
         var restClient = new AzureOpenAiRestClient(InvocationContext.AuthenticationCredentialsProviders);
-        var request = new AzureOpenAiRequest("/openai/models?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
+        var request = new AzureOpenAIRequest("/openai/models?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
         
         var models = await restClient.ExecuteWithErrorHandling<ModelsList>(request);
         var modelsDictionary = models.Data

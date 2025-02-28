@@ -30,7 +30,7 @@ public class BatchPollingList(InvocationContext invocationContext) : BaseActions
             };
         }
         
-        var getBatchRequest = new AzureOpenAiRequest($"/batches/{identifier.BatchId}", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
+        var getBatchRequest = new AzureOpenAIRequest($"/batches/{identifier.BatchId}", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
         var batch = await RestClient.ExecuteWithErrorHandling<BatchResponse>(getBatchRequest);
         var triggered = batch.Status == "completed" && !request.Memory.Triggered;
         return new()
