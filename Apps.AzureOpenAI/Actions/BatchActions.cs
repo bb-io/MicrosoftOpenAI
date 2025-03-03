@@ -229,7 +229,7 @@ public class BatchActions(InvocationContext invocationContext, IFileManagementCl
 
         var bytes = memoryStream.ToArray();
 
-        var uploadFileRequest = new AzureOpenAiRequest("/openai/files?api-version=2024-08-01-preview", Method.Post, InvocationContext.AuthenticationCredentialsProviders)
+        var uploadFileRequest = new AzureOpenAIRequest("/openai/files?api-version=2024-08-01-preview", Method.Post, InvocationContext.AuthenticationCredentialsProviders)
             .AddFile("file", bytes, $"{Guid.NewGuid()}.jsonl", "application/jsonl")
             .AddParameter("purpose", "batch");
         var file = await RestClient.ExecuteWithErrorHandling<FileDto>(uploadFileRequest);
@@ -237,11 +237,11 @@ public class BatchActions(InvocationContext invocationContext, IFileManagementCl
         do
         {
             await Task.Delay(3000);
-            var getFileRequest = new AzureOpenAiRequest($"/openai/files/{file.Id}?api-version=2024-07-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
+            var getFileRequest = new AzureOpenAIRequest($"/openai/files/{file.Id}?api-version=2024-07-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
             file = await RestClient.ExecuteWithErrorHandling<FileDto>(getFileRequest);
         } while (file.Status == "pending");
 
-        var createBatchRequest = new AzureOpenAiRequest("/openai/batches?api-version=2024-08-01-preview", Method.Post, InvocationContext.AuthenticationCredentialsProviders)
+        var createBatchRequest = new AzureOpenAIRequest("/openai/batches?api-version=2024-08-01-preview", Method.Post, InvocationContext.AuthenticationCredentialsProviders)
             .WithJsonBody(new
             {
                 input_file_id = file.Id,
@@ -253,7 +253,7 @@ public class BatchActions(InvocationContext invocationContext, IFileManagementCl
     
     private async Task<List<BatchRequestDto>> GetBatchRequestsAsync(string batchId)
     {
-        var getBatchRequest = new AzureOpenAiRequest($"/openai/batches/{batchId}?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
+        var getBatchRequest = new AzureOpenAIRequest($"/openai/batches/{batchId}?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
         var batch = await RestClient.ExecuteWithErrorHandling<BatchResponse>(getBatchRequest);
     
         if (batch.Status != "completed")
@@ -269,7 +269,7 @@ public class BatchActions(InvocationContext invocationContext, IFileManagementCl
         }
 
         var fileContentResponse = await RestClient.ExecuteWithErrorHandling(
-            new AzureOpenAiRequest($"/openai/files/{batch.OutputFileId}/content?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders));
+            new AzureOpenAIRequest($"/openai/files/{batch.OutputFileId}/content?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders));
 
         var batchRequests = new List<BatchRequestDto>();
         using var reader = new StringReader(fileContentResponse.Content!);
