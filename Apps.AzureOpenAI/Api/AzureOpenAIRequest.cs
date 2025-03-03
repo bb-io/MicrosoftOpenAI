@@ -4,7 +4,7 @@ using RestSharp;
 
 namespace Apps.AzureOpenAI.Api;
 
-public class AzureOpenAiRequest(
+public class AzureOpenAIRequest(
     string resource,
     Method method,
     IEnumerable<AuthenticationCredentialsProvider> creds)
