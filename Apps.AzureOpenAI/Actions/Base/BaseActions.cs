@@ -72,7 +72,7 @@ public class BaseActions : BaseInvocable
     {
         var restClient = new AzureOpenAiRestClient(InvocationContext.AuthenticationCredentialsProviders);
         var request =
-            new AzureOpenAiRequest(
+            new AzureOpenAIRequest(
                 "/openai/deployments/" + DeploymentName + $"/chat/completions?api-version={parameters.ApiVersion}",
                 Method.Post, InvocationContext.AuthenticationCredentialsProviders);
 
