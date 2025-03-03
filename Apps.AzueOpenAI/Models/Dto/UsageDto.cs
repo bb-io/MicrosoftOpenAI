@@ -31,10 +31,10 @@ public class UsageDto
         CompletionTokens = usageMetadata.CompletionTokens;
     }
     
-    public UsageDto(Azure.AI.OpenAI.CompletionsUsage usageMetadata)
-    {
-        PromptTokens = usageMetadata.PromptTokens;
-        TotalTokens = usageMetadata.TotalTokens;
-        CompletionTokens = usageMetadata.CompletionTokens;
-    }
+    //public UsageDto(Azure.AI.OpenAI.CompletionsUsage usageMetadata)
+    //{
+    //    PromptTokens = usageMetadata.PromptTokens;
+    //    TotalTokens = usageMetadata.TotalTokens;
+    //    CompletionTokens = usageMetadata.CompletionTokens;
+    //}
 }

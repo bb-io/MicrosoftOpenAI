@@ -20,14 +20,12 @@ public class TextAnalysisActions(InvocationContext invocationContext, IFileManag
                                               "text that it represents.")]
     public async Task<CreateEmbeddingResponse> CreateEmbedding([ActionParameter] EmbeddingRequest input)
     {
-        var embeddings = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetEmbeddingsAsync(new EmbeddingsOptions() {
-                Input = new List<string>() { input.Text },
-                DeploymentName = DeploymentName 
-        }));
+        var embeddings = await TryCatchHelper.ExecuteWithErrorHandling(async () => await EmbeddingClient.GenerateEmbeddingsAsync(new List<string>() { input.Text }));
         
         return new()
         {
-            Embedding = embeddings.Value.Data.First().Embedding.ToArray(),
+            Embedding = embeddings.Value.First().ToFloats().ToArray()
+            //Embedding = embeddings.Value.Data.First().Embedding.ToArray(),
         };
     }
 

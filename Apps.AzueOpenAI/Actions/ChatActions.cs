@@ -10,6 +10,9 @@ using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Newtonsoft.Json;
 using TiktokenSharp;
+using OpenAI.Chat;
+using Apps.AzureOpenAI.Models.Dto;
+using Azure;
 
 namespace Apps.AzureOpenAI.Actions;
 
@@ -23,12 +26,10 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
     public async Task<CompletionResponse> CreateCompletion([ActionParameter] CompletionRequest input)
     {
         var test = "x";
-        var completion = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetCompletionsAsync(
-            new CompletionsOptions(DeploymentName,
-                new List<string> { input.Prompt })
+        var completion = await TryCatchHelper.ExecuteWithErrorHandling(() => ChatClient.CompleteChatAsync(new List<ChatMessage> { new UserChatMessage(input.Prompt) },
+            new ChatCompletionOptions()
             {
-                DeploymentName = DeploymentName,
-                MaxTokens = input.MaximumTokens,
+                MaxOutputTokenCount = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -36,19 +37,17 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
 
         return new()
         {
-            CompletionText = completion.Value.Choices.First().Text
+            CompletionText = completion.Value.Content.First().Text
         };
     }
 
     [Action("Chat", Description = "Gives a response given a chat message")]
     public async Task<ChatResponse> ChatMessageRequest([ActionParameter] ChatRequest input)
     {
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>() { new ChatMessage(ChatRole.User, input.Message) })
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>() { new UserChatMessage(input.Message) },
+            new ChatCompletionOptions()
             {
-                DeploymentName = DeploymentName,
-                MaxTokens = input.MaximumTokens,
+                MaxOutputTokenCount = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -56,7 +55,8 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
 
         return new()
         {
-            Message = response.Value.Choices.First().Message.Content
+            Message = response.Value.Content.First().Text
+            //Message = response.Value.Choices.First().Message.Content
         };
     }
 
@@ -64,15 +64,13 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
         Description = "Gives a response given a chat message and a configurable system prompt")]
     public async Task<ChatResponse> ChatWithSystemMessageRequest([ActionParameter] SystemChatRequest input)
     {
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>()
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>()
                 {
-                    new ChatMessage(ChatRole.System, input.SystemPrompt), new ChatMessage(ChatRole.User, input.Message)
-                })
+                    new UserChatMessage(input.SystemPrompt), new UserChatMessage (input.Message)
+                },
+                new ChatCompletionOptions()
             {
-                DeploymentName = DeploymentName,
-                MaxTokens = input.MaximumTokens,
+                MaxOutputTokenCount = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -80,7 +78,8 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
 
         return new()
         {
-            Message = response.Value.Choices.First().Message.Content
+            //Message = response.Value.Choices.First().Message.Content
+            Message = response.Value.Content.First().Text
         };
     }
 
@@ -98,12 +97,10 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 Summary:
             ";
 
-        var completion = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetCompletionsAsync(
-            new CompletionsOptions(DeploymentName,
-                new List<string>() { prompt })
+        var completion = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>() { new UserChatMessage(prompt) },
+            new ChatCompletionOptions()
             {
-                DeploymentName = DeploymentName,
-                MaxTokens = input.MaximumTokens,
+                MaxOutputTokenCount = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -111,7 +108,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
 
         return new()
         {
-            Summary = completion.Value.Choices.First().Text
+            Summary = completion.Value.Content.First().Text
         };
     }
 
@@ -127,13 +124,11 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                     Edited text:
                     ";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>()
-                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>()
+                    { new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
+            new ChatCompletionOptions()
             {
-                DeploymentName = DeploymentName,
-                MaxTokens = input.MaximumTokens,
+                MaxOutputTokenCount = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -141,7 +136,8 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
 
         return new()
         {
-            EditText = response.Value.Choices.First().Message.Content
+            //EditText = response.Value.Choices.First().Message.Content
+            EditText = response.Value.Content.First().Text
         };
     }
 
@@ -150,11 +146,10 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
     {
         var (messages, _) = BlackbirdPromptParser.ParseBlackbirdPrompt(input.Prompt);
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName, messages)
-            {
-                DeploymentName = DeploymentName,
-                MaxTokens = input.MaximumTokens,
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(async ()=> await ChatClient.CompleteChatAsync(messages,
+            new ChatCompletionOptions()
+            {   
+                MaxOutputTokenCount = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty,
@@ -162,7 +157,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
 
         return new()
         {
-            Message = response.Value.Choices.First().Message.Content
+            Message = response.Value.Content.First().Text
         };
     }
 
@@ -188,15 +183,13 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
             {input.TargetText}
         ";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName,
-                    new List<ChatMessage>
-                        { new(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
-                { DeploymentName = DeploymentName }));
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>
+        { new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
+            new ChatCompletionOptions()));
 
         return new()
         {
-            EditText = response.Value.Choices.First().Message.Content
+            EditText = response.Value.Content.First().Text
         };
     }
 
@@ -219,19 +212,17 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
             {input.TargetText}
         ";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>
-                    { new(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>
+                    { new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
+                    new ChatCompletionOptions()
             {
-                MaxTokens = input.MaximumTokens ?? 5000,
+                MaxOutputTokenCount = input.MaximumTokens ?? 5000,
                 Temperature = input.Temperature ?? 0.5f,
-                DeploymentName = DeploymentName,
             }));
 
         return new()
         {
-            Message = response.Value.Choices.First().Message.Content
+            Message = response.Value.Content.First().Text
         };
     }
 
@@ -259,19 +250,16 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
         var userPrompt =
             $"{(input.SourceLanguage != null ? $"The {input.SourceLanguage} " : "")}\"{input.SourceText}\" was translated as \"{input.TargetText}\"{(input.TargetLanguage != null ? $" into {input.TargetLanguage}" : "")}.{(input.TargetAudience != null ? $" The target audience is {input.TargetAudience}" : "")}";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>()
-                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>(){ new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
+            new ChatCompletionOptions()
             {
-                MaxTokens = input.MaximumTokens ?? 5000,
-                Temperature = input.Temperature ?? 0.5f,
-                DeploymentName = DeploymentName,
+                MaxOutputTokenCount = input.MaximumTokens ?? 5000,
+                Temperature = input.Temperature ?? 0.5f
             }));
 
         return new()
         {
-            Message = response.Value.Choices.First().Message.Content
+            Message = response.Value.Content.First().Text
         };
     }
 
@@ -301,19 +289,16 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
         var userPrompt =
             $"{(input.SourceLanguage != null ? $"The {input.SourceLanguage} " : "")}\"{input.SourceText}\" was translated as \"{input.TargetText}\"{(input.TargetLanguage != null ? $" into {input.TargetLanguage}" : "")}.{(input.TargetAudience != null ? $" The target audience is {input.TargetAudience}" : "")}";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage>
-                    { new(ChatRole.System, systemPrompt), new(ChatRole.User, userPrompt) })
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => ChatClient.CompleteChatAsync(new List<ChatMessage>{ new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
+            new ChatCompletionOptions()
             {
-                MaxTokens = input.MaximumTokens ?? 5000,
-                Temperature = input.Temperature ?? 0.5f,
-                DeploymentName = DeploymentName,
+                MaxOutputTokenCount = input.MaximumTokens ?? 5000,
+                Temperature = input.Temperature ?? 0.5f
             }));
 
         try
         {
-            return JsonConvert.DeserializeObject<MqmAnalysis>(response.Value.Choices.First().Message.Content!)!;
+            return JsonConvert.DeserializeObject<MqmAnalysis>(response.Value.Content.First().Text!)!;
         }
         catch
         {
@@ -334,18 +319,16 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
         var tikToken = await TikToken.GetEncodingAsync("cl100k_base");
         var maximumTokensNumber = tikToken.Encode(input.Text).Count + 100;
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
-            new ChatCompletionsOptions(DeploymentName,
-                new List<ChatMessage> { new(ChatRole.User, prompt) })
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => ChatClient.CompleteChatAsync(new List<ChatMessage> { new UserChatMessage(prompt) },
+            new ChatCompletionOptions()
             {
-                MaxTokens = maximumTokensNumber,
-                DeploymentName = DeploymentName,
+                MaxOutputTokenCount = maximumTokensNumber,
                 Temperature = 0.1f,
             }));
 
         return new()
         {
-            Message = response.Value.Choices.First().Message.Content
+            Message = response.Value.Content.First().Text
         };
     }
 
