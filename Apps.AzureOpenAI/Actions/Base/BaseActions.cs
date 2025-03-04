@@ -26,10 +26,6 @@ namespace Apps.AzureOpenAI.Actions.Base;
 public class BaseActions : BaseInvocable
 {
     protected readonly AzureOpenAIClient Client;
-    protected readonly ChatClient ChatClient;
-    protected readonly AudioClient AudioClient;
-    protected readonly EmbeddingClient EmbeddingClient;
-    protected readonly ImageClient ImageClient;
     protected readonly AzureOpenAiRestClient RestClient;
     protected readonly string DeploymentName;
     protected readonly IFileManagementClient FileManagementClient;
@@ -43,10 +39,6 @@ public class BaseActions : BaseInvocable
             new Uri(InvocationContext.AuthenticationCredentialsProviders.First(x => x.KeyName == "url").Value),
             new AzureKeyCredential(InvocationContext.AuthenticationCredentialsProviders
                 .First(x => x.KeyName == "apiKey").Value));
-        ChatClient = Client.GetChatClient("chatgpt"); //TODO: fill out deployment
-        AudioClient = Client.GetAudioClient("audio"); //TODO: fill out deployment
-        EmbeddingClient = Client.GetEmbeddingClient("embedding"); //TODO: fill out deployment
-        ImageClient = Client.GetImageClient("image"); //TODO: fill out deployment
         RestClient = new(invocationContext.AuthenticationCredentialsProviders);
         FileManagementClient = fileManagementClient;
     }

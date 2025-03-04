@@ -12,10 +12,15 @@ using OpenAI.Audio;
 
 namespace Apps.AzureOpenAI.Actions
 {
-    public class AudioActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
-        : BaseActions(invocationContext, fileManagementClient)
+    public class AudioActions : BaseActions
     {
-        private readonly IFileManagementClient _fileManagementClient = fileManagementClient;
+        private readonly IFileManagementClient _fileManagementClient;
+        protected readonly AudioClient AudioClient;
+        public AudioActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : base(invocationContext, fileManagementClient)
+        {
+            _fileManagementClient = fileManagementClient;
+            AudioClient = Client.GetAudioClient(DeploymentName);
+        }
 
         [Action("Create English translation", Description = "Generates a translation into English given an audio or " +
                                                             "video file (mp3, mp4, mpeg, mpga, m4a, wav, or webm).")]

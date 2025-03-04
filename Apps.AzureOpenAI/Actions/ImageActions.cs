@@ -12,9 +12,15 @@ using OpenAI.Images;
 namespace Apps.AzureOpenAI.Actions
 {
     [ActionList]
-    public class ImageActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
-        : BaseActions(invocationContext, fileManagementClient)
+    public class ImageActions : BaseActions
     {
+        protected readonly ImageClient ImageClient;
+
+        public ImageActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient):base(invocationContext, fileManagementClient)
+        {
+            ImageClient = Client.GetImageClient(DeploymentName);
+        }
+
         [Action("Generate image", Description = "Generates an image based on a prompt")]
         public async Task<ImageResponse> GenerateImage([ActionParameter] ImageRequest input)
         {
