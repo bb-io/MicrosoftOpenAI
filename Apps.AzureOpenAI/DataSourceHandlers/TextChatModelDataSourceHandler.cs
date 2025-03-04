@@ -9,18 +9,17 @@ using RestSharp;
 namespace Apps.AzureOpenAI.DataSourceHandlers;
 
 public class TextChatModelDataSourceHandler(InvocationContext invocationContext)
-    : BaseInvocable(invocationContext), IAsyncDataSourceHandler
+    : BaseInvocable(invocationContext), IAsyncDataSourceItemHandler
 {
-    public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
-        CancellationToken cancellationToken)
+    async Task<IEnumerable<DataSourceItem>> IAsyncDataSourceItemHandler.GetDataAsync(DataSourceContext context, CancellationToken cancellationToken)
     {
-        var restClient = new AzureOpenAiRestClient(InvocationContext.AuthenticationCredentialsProviders);
+        var restClient = new AzureOpenAIRestClient(InvocationContext.AuthenticationCredentialsProviders);
         var request = new AzureOpenAIRequest("/openai/models?api-version=2024-08-01-preview", Method.Get, InvocationContext.AuthenticationCredentialsProviders);
-        
+
         var models = await restClient.ExecuteWithErrorHandling<ModelsList>(request);
         var modelsDictionary = models.Data
             .Where(model => context.SearchString == null || model.Id.Contains(context.SearchString))
-            .ToDictionary(model => model.Id, model => model.Id);
+            .Select(model => new DataSourceItem(model.Id,model.Id));
         return modelsDictionary;
     }
 }

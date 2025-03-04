@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace Apps.AzureOpenAI.Api;
 
-public class AzureOpenAiRestClient(IEnumerable<AuthenticationCredentialsProvider> credentials) : BlackBirdRestClient(
+public class AzureOpenAIRestClient(IEnumerable<AuthenticationCredentialsProvider> credentials) : BlackBirdRestClient(
     new()
     {
         ThrowOnAnyError = false,

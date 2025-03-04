@@ -26,7 +26,7 @@ namespace Apps.AzureOpenAI.Actions.Base;
 public class BaseActions : BaseInvocable
 {
     protected readonly AzureOpenAIClient Client;
-    protected readonly AzureOpenAiRestClient RestClient;
+    protected readonly AzureOpenAIRestClient RestClient;
     protected readonly string DeploymentName;
     protected readonly IFileManagementClient FileManagementClient;
 
@@ -62,7 +62,7 @@ public class BaseActions : BaseInvocable
     protected async Task<(string result, UsageDto usage)> ExecuteOpenAIRequestAsync(
         ExecuteOpenAIRequestParameters parameters)
     {
-        var restClient = new AzureOpenAiRestClient(InvocationContext.AuthenticationCredentialsProviders);
+        var restClient = new AzureOpenAIRestClient(InvocationContext.AuthenticationCredentialsProviders);
         var request =
             new AzureOpenAIRequest(
                 "/openai/deployments/" + DeploymentName + $"/chat/completions?api-version={parameters.ApiVersion}",
