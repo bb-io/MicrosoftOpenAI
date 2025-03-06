@@ -14,15 +14,9 @@ using TiktokenSharp;
 namespace Apps.AzureOpenAI.Actions;
 
 [ActionList]
-public class ChatActions:BaseActions
+public class ChatActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
+    : BaseActions(invocationContext, fileManagementClient)
 {
-    protected readonly ChatClient ChatClient;
-
-    public ChatActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient):base(invocationContext, fileManagementClient)
-    {
-        ChatClient = Client.GetChatClient(DeploymentName);
-    }
-
     #region Chat actions
 
     [Action("Generate completion", Description = "Completes the given prompt")]

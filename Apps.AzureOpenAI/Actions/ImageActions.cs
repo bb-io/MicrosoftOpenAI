@@ -11,15 +11,9 @@ using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 namespace Apps.AzureOpenAI.Actions
 {
     [ActionList]
-    public class ImageActions : BaseActions
+    public class ImageActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
+        : BaseActions(invocationContext, fileManagementClient)
     {
-        protected readonly ImageClient ImageClient;
-
-        public ImageActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient):base(invocationContext, fileManagementClient)
-        {
-            ImageClient = Client.GetImageClient(DeploymentName);
-        }
-
         [Action("Generate image", Description = "Generates an image based on a prompt")]
         public async Task<ImageResponse> GenerateImage([ActionParameter] ImageRequest input)
         {
