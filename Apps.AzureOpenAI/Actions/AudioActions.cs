@@ -8,7 +8,6 @@ using Apps.AzureOpenAI.Utils;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Utils.Extensions.Files;
-using OpenAI.Audio;
 
 namespace Apps.AzureOpenAI.Actions
 {
@@ -27,8 +26,9 @@ namespace Apps.AzureOpenAI.Actions
         public async Task<TranslationResponse> CreateTranslation([ActionParameter] TranslationRequest input)
         {
             var fileStream = await _fileManagementClient.DownloadAsync(input.File);
-            var translation = await TryCatchHelper.ExecuteWithErrorHandling(async () => await AudioClient.TranslateAudioAsync(fileStream, input.File.Name,
-                    new AudioTranslationOptions()
+            var fileBytes = await fileStream.GetByteData();
+            var translation = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetAudioTranslationAsync(
+                    new AudioTranslationOptions(DeploymentName, new BinaryData(fileBytes))
                     {
                         Prompt = input.Prompt,
                         Temperature = input.Temperature,
@@ -46,8 +46,9 @@ namespace Apps.AzureOpenAI.Actions
         public async Task<TranscriptionResponse> CreateTranscription([ActionParameter] TranscriptionRequest input)
         {
             var fileStream = await _fileManagementClient.DownloadAsync(input.File);
-            var transcription = await TryCatchHelper.ExecuteWithErrorHandling(async () => await AudioClient.TranscribeAudioAsync(fileStream,input.File.Name,
-                new AudioTranscriptionOptions()
+            var fileBytes = await fileStream.GetByteData();
+            var transcription = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetAudioTranscriptionAsync(
+                new AudioTranscriptionOptions(DeploymentName, new BinaryData(fileBytes))
                 {
                     Language = input.Language,
                     Prompt = input.Prompt,

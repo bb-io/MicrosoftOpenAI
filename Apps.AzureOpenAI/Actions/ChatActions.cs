@@ -10,9 +10,6 @@ using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Newtonsoft.Json;
 using TiktokenSharp;
-using OpenAI.Chat;
-using Apps.AzureOpenAI.Models.Dto;
-using Azure;
 
 namespace Apps.AzureOpenAI.Actions;
 
@@ -32,10 +29,12 @@ public class ChatActions:BaseActions
     public async Task<CompletionResponse> CreateCompletion([ActionParameter] CompletionRequest input)
     {
         var test = "x";
-        var completion = await TryCatchHelper.ExecuteWithErrorHandling(() => ChatClient.CompleteChatAsync(new List<ChatMessage> { new UserChatMessage(input.Prompt) },
-            new ChatCompletionOptions()
+        var completion = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetCompletionsAsync(
+            new CompletionsOptions(DeploymentName,
+                new List<string> { input.Prompt })
             {
-                MaxOutputTokenCount = input.MaximumTokens,
+                DeploymentName = DeploymentName,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -43,17 +42,19 @@ public class ChatActions:BaseActions
 
         return new()
         {
-            CompletionText = completion.Value.Content.First().Text
+            CompletionText = completion.Value.Choices.First().Text
         };
     }
 
     [Action("Chat", Description = "Gives a response given a chat message")]
     public async Task<ChatResponse> ChatMessageRequest([ActionParameter] ChatRequest input)
     {
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>() { new UserChatMessage(input.Message) },
-            new ChatCompletionOptions()
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName,
+                new List<ChatMessage>() { new ChatMessage(ChatRole.User, input.Message) })
             {
-                MaxOutputTokenCount = input.MaximumTokens,
+                DeploymentName = DeploymentName,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -61,8 +62,7 @@ public class ChatActions:BaseActions
 
         return new()
         {
-            Message = response.Value.Content.First().Text
-            //Message = response.Value.Choices.First().Message.Content
+            Message = response.Value.Choices.First().Message.Content
         };
     }
 
@@ -70,13 +70,15 @@ public class ChatActions:BaseActions
         Description = "Gives a response given a chat message and a configurable system prompt")]
     public async Task<ChatResponse> ChatWithSystemMessageRequest([ActionParameter] SystemChatRequest input)
     {
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>()
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName,
+                new List<ChatMessage>()
                 {
-                    new UserChatMessage(input.SystemPrompt), new UserChatMessage (input.Message)
-                },
-                new ChatCompletionOptions()
+                    new ChatMessage(ChatRole.System, input.SystemPrompt), new ChatMessage(ChatRole.User, input.Message)
+                })
             {
-                MaxOutputTokenCount = input.MaximumTokens,
+                DeploymentName = DeploymentName,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -84,8 +86,7 @@ public class ChatActions:BaseActions
 
         return new()
         {
-            //Message = response.Value.Choices.First().Message.Content
-            Message = response.Value.Content.First().Text
+            Message = response.Value.Choices.First().Message.Content
         };
     }
 
@@ -103,10 +104,12 @@ public class ChatActions:BaseActions
                 Summary:
             ";
 
-        var completion = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>() { new UserChatMessage(prompt) },
-            new ChatCompletionOptions()
+        var completion = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetCompletionsAsync(
+            new CompletionsOptions(DeploymentName,
+                new List<string>() { prompt })
             {
-                MaxOutputTokenCount = input.MaximumTokens,
+                DeploymentName = DeploymentName,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -114,7 +117,7 @@ public class ChatActions:BaseActions
 
         return new()
         {
-            Summary = completion.Value.Content.First().Text
+            Summary = completion.Value.Choices.First().Text
         };
     }
 
@@ -130,11 +133,13 @@ public class ChatActions:BaseActions
                     Edited text:
                     ";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>()
-                    { new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
-            new ChatCompletionOptions()
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName,
+                new List<ChatMessage>()
+                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
-                MaxOutputTokenCount = input.MaximumTokens,
+                DeploymentName = DeploymentName,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty
@@ -142,8 +147,7 @@ public class ChatActions:BaseActions
 
         return new()
         {
-            //EditText = response.Value.Choices.First().Message.Content
-            EditText = response.Value.Content.First().Text
+            EditText = response.Value.Choices.First().Message.Content
         };
     }
 
@@ -152,10 +156,11 @@ public class ChatActions:BaseActions
     {
         var (messages, _) = BlackbirdPromptParser.ParseBlackbirdPrompt(input.Prompt);
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(async ()=> await ChatClient.CompleteChatAsync(messages,
-            new ChatCompletionOptions()
-            {   
-                MaxOutputTokenCount = input.MaximumTokens,
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName, messages)
+            {
+                DeploymentName = DeploymentName,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature,
                 PresencePenalty = input.PresencePenalty,
                 FrequencyPenalty = input.FrequencyPenalty,
@@ -163,7 +168,7 @@ public class ChatActions:BaseActions
 
         return new()
         {
-            Message = response.Value.Content.First().Text
+            Message = response.Value.Choices.First().Message.Content
         };
     }
 
@@ -189,13 +194,15 @@ public class ChatActions:BaseActions
             {input.TargetText}
         ";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>
-        { new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
-            new ChatCompletionOptions()));
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName,
+                    new List<ChatMessage>
+                        { new(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
+                { DeploymentName = DeploymentName }));
 
         return new()
         {
-            EditText = response.Value.Content.First().Text
+            EditText = response.Value.Choices.First().Message.Content
         };
     }
 
@@ -218,17 +225,19 @@ public class ChatActions:BaseActions
             {input.TargetText}
         ";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>
-                    { new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
-                    new ChatCompletionOptions()
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName,
+                new List<ChatMessage>
+                    { new(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
-                MaxOutputTokenCount = input.MaximumTokens ?? 5000,
+                MaxTokens = input.MaximumTokens ?? 5000,
                 Temperature = input.Temperature ?? 0.5f,
+                DeploymentName = DeploymentName,
             }));
 
         return new()
         {
-            Message = response.Value.Content.First().Text
+            Message = response.Value.Choices.First().Message.Content
         };
     }
 
@@ -256,16 +265,19 @@ public class ChatActions:BaseActions
         var userPrompt =
             $"{(input.SourceLanguage != null ? $"The {input.SourceLanguage} " : "")}\"{input.SourceText}\" was translated as \"{input.TargetText}\"{(input.TargetLanguage != null ? $" into {input.TargetLanguage}" : "")}.{(input.TargetAudience != null ? $" The target audience is {input.TargetAudience}" : "")}";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(async () => await ChatClient.CompleteChatAsync(new List<ChatMessage>(){ new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
-            new ChatCompletionOptions()
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName,
+                new List<ChatMessage>()
+                    { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
-                MaxOutputTokenCount = input.MaximumTokens ?? 5000,
-                Temperature = input.Temperature ?? 0.5f
+                MaxTokens = input.MaximumTokens ?? 5000,
+                Temperature = input.Temperature ?? 0.5f,
+                DeploymentName = DeploymentName,
             }));
 
         return new()
         {
-            Message = response.Value.Content.First().Text
+            Message = response.Value.Choices.First().Message.Content
         };
     }
 
@@ -295,16 +307,19 @@ public class ChatActions:BaseActions
         var userPrompt =
             $"{(input.SourceLanguage != null ? $"The {input.SourceLanguage} " : "")}\"{input.SourceText}\" was translated as \"{input.TargetText}\"{(input.TargetLanguage != null ? $" into {input.TargetLanguage}" : "")}.{(input.TargetAudience != null ? $" The target audience is {input.TargetAudience}" : "")}";
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => ChatClient.CompleteChatAsync(new List<ChatMessage>{ new SystemChatMessage(systemPrompt), new UserChatMessage(userPrompt) },
-            new ChatCompletionOptions()
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName,
+                new List<ChatMessage>
+                    { new(ChatRole.System, systemPrompt), new(ChatRole.User, userPrompt) })
             {
-                MaxOutputTokenCount = input.MaximumTokens ?? 5000,
-                Temperature = input.Temperature ?? 0.5f
+                MaxTokens = input.MaximumTokens ?? 5000,
+                Temperature = input.Temperature ?? 0.5f,
+                DeploymentName = DeploymentName,
             }));
 
         try
         {
-            return JsonConvert.DeserializeObject<MqmAnalysis>(response.Value.Content.First().Text!)!;
+            return JsonConvert.DeserializeObject<MqmAnalysis>(response.Value.Choices.First().Message.Content!)!;
         }
         catch
         {
@@ -325,16 +340,18 @@ public class ChatActions:BaseActions
         var tikToken = await TikToken.GetEncodingAsync("cl100k_base");
         var maximumTokensNumber = tikToken.Encode(input.Text).Count + 100;
 
-        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => ChatClient.CompleteChatAsync(new List<ChatMessage> { new UserChatMessage(prompt) },
-            new ChatCompletionOptions()
+        var response = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetChatCompletionsAsync(
+            new ChatCompletionsOptions(DeploymentName,
+                new List<ChatMessage> { new(ChatRole.User, prompt) })
             {
-                MaxOutputTokenCount = maximumTokensNumber,
+                MaxTokens = maximumTokensNumber,
+                DeploymentName = DeploymentName,
                 Temperature = 0.1f,
             }));
 
         return new()
         {
-            Message = response.Value.Content.First().Text
+            Message = response.Value.Choices.First().Message.Content
         };
     }
 

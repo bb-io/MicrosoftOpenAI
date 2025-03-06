@@ -27,12 +27,14 @@ public class TextAnalysisActions : BaseActions
                                               "text that it represents.")]
     public async Task<CreateEmbeddingResponse> CreateEmbedding([ActionParameter] EmbeddingRequest input)
     {
-        var embeddings = await TryCatchHelper.ExecuteWithErrorHandling(async () => await EmbeddingClient.GenerateEmbeddingsAsync(new List<string>() { input.Text }));
+        var embeddings = await TryCatchHelper.ExecuteWithErrorHandling(() => Client.GetEmbeddingsAsync(new EmbeddingsOptions() {
+                Input = new List<string>() { input.Text },
+                DeploymentName = DeploymentName 
+        }));
         
         return new()
         {
-            Embedding = embeddings.Value.First().ToFloats().ToArray()
-            //Embedding = embeddings.Value.Data.First().Embedding.ToArray(),
+            Embedding = embeddings.Value.Data.First().Embedding.ToArray(),
         };
     }
 

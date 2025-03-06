@@ -1,6 +1,5 @@
 using Apps.AzureOpenAI.Models.Responses;
 using Azure.AI.OpenAI;
-using OpenAI.Chat;
 
 namespace Apps.AzureOpenAI.Utils;
 
@@ -11,26 +10,26 @@ public static class BlackbirdPromptParser
         var promptSegments = inputPrompt.Split(";;");
 
         if (promptSegments.Length is 1)
-            return (new() { new UserChatMessage(promptSegments[0]) }, null);
+            return (new() { new(ChatRole.User, promptSegments[0]) }, null);
 
         if (promptSegments.Length is 2)
             return (new()
             {
-                new SystemChatMessage(promptSegments[0]),
-                new UserChatMessage(promptSegments[1])
+                new(ChatRole.System, promptSegments[0]),
+                new(ChatRole.User, promptSegments[1])
             }, null);
 
         if (promptSegments.Length is 3)
             return (new()
             {
-                new SystemChatMessage(promptSegments[0]),
-                new UserChatMessage(promptSegments[1])
+                new(ChatRole.System, promptSegments[0]),
+                new(ChatRole.User, promptSegments[1])
             }, new BlackbirdPromptAdditionalInfo()
             {
                 FileFormat = promptSegments[2]
             });
 
-        throw new("Wrong blackbird prompt format"); //TODO: format exception
+        throw new("Wrong blackbird prompt format");
     }
 
     public static string ParseFileFormat(string fileFormat)
@@ -38,7 +37,7 @@ public static class BlackbirdPromptParser
         return fileFormat switch
         {
             "Json" => "json_object",
-            _ => throw new("Wrong response file format") //TODO: format exception
+            _ => throw new("Wrong response file format")
         };
     }
 }

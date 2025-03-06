@@ -16,16 +16,12 @@ using Blackbird.Xliff.Utils;
 using Blackbird.Xliff.Utils.Extensions;
 using Newtonsoft.Json;
 using RestSharp;
-using OpenAI.Chat;
-using OpenAI.Audio;
-using OpenAI.Embeddings;
-using OpenAI.Images;
 
 namespace Apps.AzureOpenAI.Actions.Base;
 
 public class BaseActions : BaseInvocable
 {
-    protected readonly AzureOpenAIClient Client;
+    protected readonly OpenAIClient Client;
     protected readonly AzureOpenAIRestClient RestClient;
     protected readonly string DeploymentName;
     protected readonly IFileManagementClient FileManagementClient;
@@ -35,7 +31,7 @@ public class BaseActions : BaseInvocable
     {
         DeploymentName = InvocationContext.AuthenticationCredentialsProviders.First(x => x.KeyName == "deployment")
             .Value;
-        Client = new AzureOpenAIClient(
+        Client = new OpenAIClient(
             new Uri(InvocationContext.AuthenticationCredentialsProviders.First(x => x.KeyName == "url").Value),
             new AzureKeyCredential(InvocationContext.AuthenticationCredentialsProviders
                 .First(x => x.KeyName == "apiKey").Value));
