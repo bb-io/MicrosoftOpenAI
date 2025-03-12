@@ -17,6 +17,8 @@ using Apps.AzureOpenAI.Models.Entities;
 using Apps.AzureOpenAI.Models.Requests.Chat;
 using Apps.AzureOpenAI.Utils;
 using Blackbird.Applications.Sdk.Common.Exceptions;
+using Blackbird.Applications.Sdk.Common.Files;
+using System.Xml;
 
 namespace Apps.AzureOpenAI.Actions;
 
@@ -81,6 +83,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                  "Specify the number of translation units to be processed at once. Default value: 1500. (See our documentation for an explanation)")]
         int? bucketSize = 1500)
     {
+        await ValidateXliffFile(input.File);
         var xliffDocument = await DownloadXliffDocumentAsync(input.File);
         string criteriaPrompt = string.IsNullOrEmpty(prompt)
             ? "accuracy, fluency, consistency, style, grammar and spelling"
@@ -341,5 +344,39 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         result = Regex.Replace(result, @"<(\d+)}", "&lt;$1}");
 
         return result;
+    }
+
+
+    public async Task ValidateXliffFile(FileReference file)
+    {
+        var extension = Path.GetExtension(file.Name)?.ToLowerInvariant();
+        if (extension != ".xliff" && extension != ".xlf")
+        {
+            throw new PluginMisconfigurationException("Wrong format file. XLIFF file format expected.");
+        }
+
+        using (var fileStream = await FileManagementClient.DownloadAsync(file))
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                await fileStream.CopyToAsync(memoryStream);
+                memoryStream.Position = 0;
+
+                var xmlDoc = new XmlDocument();
+                try
+                {
+                    xmlDoc.Load(memoryStream);
+                }
+                catch (Exception ex)
+                {
+                    throw new PluginMisconfigurationException("File is not valid XML.", ex);
+                }
+
+                if (xmlDoc.DocumentElement == null || xmlDoc.DocumentElement.Name.ToLowerInvariant() != "xliff")
+                {
+                    throw new PluginMisconfigurationException("File is not XLIFF.");
+                }
+            }
+        }
     }
 }
