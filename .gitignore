@@ -364,5 +364,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /ConsoleApp1
-/Tests.AzureOpenAI/appsettings.json
 /Tests.AzureOpenAI/TestFiles/Output
+/Tests.AzureOpenaI/appsettings.json
