@@ -1,32 +1,29 @@
 ﻿using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tests.AzureOpenAI.Base;
+
 public class FileManager(string folderLocation) : IFileManagementClient
 {
-    public Task<Stream> DownloadAsync(FileReference reference)
-    {
-        var path = Path.Combine(folderLocation, @$"Input\{reference.Name}");
-        var bytes = File.ReadAllBytes(path);
+    private readonly string _folderLocation = folderLocation;
 
-        var stream = new MemoryStream(bytes);
-        return Task.FromResult((Stream)stream);
+    public async Task<Stream> DownloadAsync(FileReference reference)
+    {
+        var path = Path.Combine(_folderLocation, "Input", reference.Name);
+        var bytes = await File.ReadAllBytesAsync(path);
+        return new MemoryStream(bytes);
     }
 
-    public Task<FileReference> UploadAsync(Stream stream, string contentType, string fileName)
+    public async Task<FileReference> UploadAsync(Stream stream, string contentType, string fileName)
     {
-        var path = Path.Combine(folderLocation, @$"Output\{fileName}");
-        new FileInfo(path).Directory.Create();
+        var path = Path.Combine(_folderLocation, "Output", fileName);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        
         using (var fileStream = File.Create(path))
         {
-            stream.CopyTo(fileStream);
+            await stream.CopyToAsync(fileStream);
         }
 
-        return Task.FromResult(new FileReference() { Name = fileName });
+        return new FileReference { Name = fileName };
     }
 }

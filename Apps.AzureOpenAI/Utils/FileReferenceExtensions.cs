@@ -22,6 +22,11 @@ public static class FileReferenceExtensions
             return XliffType.MqXliff;
         }
 
+        if (fileReference.Name.EndsWith(".txlf"))
+        {
+            return XliffType.Xliff;
+        }
+
         throw new Exception($"There is no xliff type for given file name: {fileReference.Name}");
     }
 }

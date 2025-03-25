@@ -55,7 +55,7 @@ public class BaseActions : BaseInvocable
         return xliffDocument;
     }
 
-    protected async Task<(string result, UsageDto usage)> ExecuteOpenAIRequestAsync(
+    public async Task<(string result, UsageDto usage)> ExecuteOpenAIRequestAsync(
         ExecuteOpenAIRequestParameters parameters)
     {
         var restClient = new AzureOpenAiRestClient(InvocationContext.AuthenticationCredentialsProviders);

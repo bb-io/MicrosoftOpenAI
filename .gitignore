@@ -365,3 +365,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /ConsoleApp1
 /Tests.AzureOpenAI/appsettings.json
+/Tests.AzureOpenAI/TestFiles/Output

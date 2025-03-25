@@ -1,9 +1,4 @@
 ﻿using Blackbird.Applications.Sdk.Common.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tests.AzureOpenAI.Base;
 public static class Throws
@@ -13,7 +8,8 @@ public static class Throws
         try
         {
             await action();
-        } catch (PluginApplicationException ex)
+        }
+        catch (PluginApplicationException ex)
         {
             Console.WriteLine(ex.Message);
             return;

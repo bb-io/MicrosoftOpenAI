@@ -5,10 +5,10 @@ using Tests.AzureOpenAI.Base;
 namespace Tests.AzureOpenAI;
 
 [TestClass]
-public class ValidatorTests : TestBase
+public class ConnectionValidatorTests : TestBase
 {
     [TestMethod]
-    public async Task ValidatesCorrectConnection()
+    public async Task ValidateConnection_WithValidCredentials_ReturnsValid()
     {
         var validator = new ConnectionValidator();
 
@@ -18,7 +18,7 @@ public class ValidatorTests : TestBase
     }
 
     [TestMethod]
-    public async Task DoesNotValidateIncorrectConnection()
+    public async Task ValidateConnection_WithInvalidCredentials_ReturnsInvalid()
     {
         var validator = new ConnectionValidator();
 
