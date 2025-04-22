@@ -17,7 +17,7 @@ public static class TryCatchHelper
         }
         catch (Exception ex)
         {
-            throw new Exception($"Exception message: {ex.Message}. {message}");
+            throw new PluginApplicationException($"Exception message: {ex.Message}. {message}");
         }
     }
     

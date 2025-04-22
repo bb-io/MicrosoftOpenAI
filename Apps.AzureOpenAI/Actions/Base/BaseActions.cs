@@ -49,7 +49,7 @@ public class BaseActions : BaseInvocable
         var xliffDocument = xliffMemoryStream.ToXliffDocument(file.GetXliffType());
         if (xliffDocument.TranslationUnits.Count == 0)
         {
-            throw new InvalidOperationException("The XLIFF file does not contain any translation units.");
+            throw new PluginMisconfigurationException("The XLIFF file does not contain any translation units.");
         }
 
         return xliffDocument;

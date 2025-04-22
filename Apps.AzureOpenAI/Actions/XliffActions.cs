@@ -202,7 +202,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
                  "Specify the number of translation units to be processed at once. Default value: 1500. (See our documentation for an explanation)")]
         int? bucketSize = 1500)
     {
-        var xliffDocument = await DownloadXliffDocumentAsync(input.File);
+        var xliffDocument = await TryCatchHelper.ExecuteWithErrorHandling(() => DownloadXliffDocumentAsync(input.File));
 
         var batches = xliffDocument.TranslationUnits.Batch((int)bucketSize!).ToList();
         var src = input.SourceLanguage ?? xliffDocument.SourceLanguage;
@@ -219,8 +219,8 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             var glossaryPrompt = string.Empty;
             if (glossary?.Glossary != null)
             {
-                var glossaryStream = await FileManagementClient.DownloadAsync(glossary.Glossary);
-                var blackbirdGlossary = await glossaryStream.ConvertFromTbx();
+                var glossaryStream = await TryCatchHelper.ExecuteWithErrorHandling(() => FileManagementClient.DownloadAsync(glossary.Glossary));
+                var blackbirdGlossary = await TryCatchHelper.ExecuteWithErrorHandling(() => glossaryStream.ConvertFromTbx());
                 glossaryPrompt = GlossaryPrompts.GetGlossaryPromptPart(blackbirdGlossary,
                     string.Join(';', filteredBatch.Select(x => x.Source)), input.FilterGlossary);
                 if (!string.IsNullOrEmpty(glossaryPrompt))
@@ -237,8 +237,8 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             var userPrompt = PromptConstants.GetPostEditPrompt(prompt, glossaryPrompt, src, tgt,
                 json);
 
-            var (result, promptUsage) = await ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt,
-                "2024-08-01-preview", promptRequest, ResponseFormats.GetProcessXliffResponseFormat()));
+            var (result, promptUsage) = await TryCatchHelper.ExecuteWithErrorHandling(
+             () => ExecuteOpenAIRequestAsync(new(userPrompt, PromptConstants.DefaultSystemPrompt, "2024-08-01-preview", promptRequest, ResponseFormats.GetProcessXliffResponseFormat())));
             usage += promptUsage;
 
             if(input.File.Name.EndsWith(".mxliff"))
@@ -268,8 +268,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             }
         });
 
-        var fileReference =
-            await FileManagementClient.UploadAsync(xliffDocument.ToStream(), input.File.ContentType, input.File.Name);
+        var fileReference = await TryCatchHelper.ExecuteWithErrorHandling(()=>FileManagementClient.UploadAsync(xliffDocument.ToStream(), input.File.ContentType, input.File.Name));
         return new TranslateXliffResponse { File = fileReference, Usage = usage, Changes = changes};
     }
     
