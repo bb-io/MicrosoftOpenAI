@@ -73,7 +73,7 @@ public sealed class XliffActionsTests : TestBase
             {
                 File = new Blackbird.Applications.Sdk.Common.Files.FileReference
                 {
-                    Name = "test.xlf"
+                    Name = "Markdown entry #1_en-US-Default_HTML-nl-NL#TR_FQTF#.html.txlf"
                 },
             },
             "The input list as a whole is the extraction of a subtitle format, therefore:\r\n- For sentences spread across multiple inputs, consider the context of adjacent input texts when improving the translations.\r\n- Rearrange the order of words or phrases if necessary for better translation.\r\n- Ensure each translated text does not exceed 42 characters.",

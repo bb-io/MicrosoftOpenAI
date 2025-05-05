@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Blackbird.Xliff.Utils.Models;
 
 namespace Apps.AzureOpenAI.Utils.Xliff;
 
@@ -21,38 +22,10 @@ public static class Extensions
 
         return memoryStream;
     }
-    public static ParsedXliff ParseXLIFF(Stream file)
-    {
-        var xliffDocument = XDocument.Load(file);
-        XNamespace defaultNs = xliffDocument.Root.GetDefaultNamespace();
-        var tus = new List<TransUnit>();
-        
-        foreach (var tu in (from tu in xliffDocument.Descendants(defaultNs + "trans-unit") select tu).ToList())
-        {
-            string src = "";
-            if (tu.Elements().Any(x => x.Name == defaultNs + "seg-source"))
-            { src = RemoveExtraNewLines(Regex.Replace(tu.Element(defaultNs + "seg-source").ToString(), @"</?seg-source(.*?)>", @"")); }
-            else src = RemoveExtraNewLines(Regex.Replace(tu.Element(defaultNs + "source").ToString(), @"</?source(.*?)>", @""));
-            tus.Add(new TransUnit
-            {
-                Source = src,
-                Target = RemoveExtraNewLines(Regex.Replace(tu.Element(defaultNs + "target").ToString(), @"</?target(.*?)>", @"")),
-                Id = tu.Attribute("id").Value,
-                Tags = GetTags(src)
-            });
-        }        
 
-        return new ParsedXliff 
-        {
-            SourceLanguage = xliffDocument.Root?.Element(defaultNs + "file")?.Attribute("source-language")?.Value,
-            TargetLanguage = xliffDocument.Root?.Element(defaultNs + "file")?.Attribute("target-language")?.Value,
-            TranslationUnits = tus
-        };
-    }
-
-    private static List<Tag> GetTags(string src)
+    private static List<Blackbird.Xliff.Utils.Models.Tag> GetTags(string src)
     {
-        var parsedTags = new List<Tag>();
+        var parsedTags = new List<Blackbird.Xliff.Utils.Models.Tag>();
         var tags = Regex.Matches(src, "<(.*?) (.*?)>(.*?)<\\/\\1>");
         if (tags is null || tags.Count == 0 ) return parsedTags;
         var count = 0;
@@ -60,7 +33,7 @@ public static class Extensions
         {
             count++;
             var type = Regex.Match(tag, "<(.*?) ").Groups[1].Value;
-            parsedTags.Add(new Tag 
+            parsedTags.Add(new Blackbird.Xliff.Utils.Models.Tag 
             {
                 Position = count,
                 Id = Regex.Match(tag.ToLower(), "id=\"(.*?)\"").Groups[1].Value,
@@ -111,13 +84,13 @@ public static class Extensions
         }
         return new MemoryStream(encoding.GetBytes(fileContent));
     }
-    public static Dictionary<string, string> CheckTagIssues(List<TransUnit> translationUnits, Dictionary<string, string> results)
+    public static Dictionary<string, string> CheckTagIssues(List<TranslationUnit> translationUnits, Dictionary<string, string> results)
     {
         var changesToImplement = new Dictionary<string, string>();
         foreach (var update in results)
         {
             var newTags = GetTags(update.Value);
-            if (AreTagsOk(translationUnits.FirstOrDefault(x => x.Id == update.Key).Tags,newTags)) 
+            if (AreTagsOk(translationUnits.FirstOrDefault(x => x.Id == update.Key).Tags, newTags)) 
             {
                 changesToImplement.Add(update.Key, update.Value);
             }
@@ -126,7 +99,7 @@ public static class Extensions
         return changesToImplement;
     }
 
-    private static bool AreTagsOk(List<Tag> tags, List<Tag> newTags)
+    private static bool AreTagsOk(List<Blackbird.Xliff.Utils.Models.Tag> tags, List<Blackbird.Xliff.Utils.Models.Tag> newTags)
     {
         if (tags.Count != newTags.Count)
         { return false; }
