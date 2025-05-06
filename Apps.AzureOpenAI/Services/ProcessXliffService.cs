@@ -10,11 +10,10 @@ using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Xliff.Utils;
 using Blackbird.Xliff.Utils.Models;
-using DocumentFormat.OpenXml;
 
 namespace Apps.AzureOpenAI.Services;
 
-public class PostEditService(
+public class ProcessXliffService(
     IXliffService xliffService,
     IGlossaryService glossaryService,
     IOpenAICompletionService openaiService,
@@ -22,7 +21,7 @@ public class PostEditService(
     IPromptBuilderService promptBuilderService,
     IFileManagementClient fileManagementClient)
 {
-    public async Task<XliffResult> PostEditXliffAsync(OpenAiXliffInnerRequest request)
+    public async Task<XliffResult> ProcessXliffAsync(OpenAiXliffInnerRequest request)
     {
         var result = new XliffResult 
         {
@@ -42,7 +41,7 @@ public class PostEditService(
 
             var batches = xliffService.BatchTranslationUnits(unitsToProcess, request.BucketSize);
             var batchOptions = new BatchProcessingOptions(
-                request.ApiVersion,
+                request.ApiVersion ?? "",
                 sourceLanguage,
                 targetLanguage,
                 request.Prompt,
@@ -195,7 +194,7 @@ public class PostEditService(
                     options.Glossary, batch, options.FilterGlossary);
             }
 
-            var userPrompt = promptBuilderService.BuildPostEditUserPrompt(
+            var userPrompt = promptBuilderService.BuildProcessUserPrompt(
                 options.SourceLanguage,
                 options.TargetLanguage,
                 batch,
@@ -204,7 +203,7 @@ public class PostEditService(
 
             var messages = new List<ChatMessageDto>
             {
-                new(MessageRoles.System, promptBuilderService.GetPostEditSystemPrompt()),
+                new(MessageRoles.System, promptBuilderService.GetProcessSystemPrompt()),
                 new(MessageRoles.User, userPrompt)
             };
 

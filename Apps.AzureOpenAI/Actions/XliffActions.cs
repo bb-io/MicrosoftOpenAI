@@ -32,43 +32,42 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
     [Action("Process XLIFF file",
         Description =
             "Processes each translation unit in the XLIFF file according to the provided instructions (by default it just translates the source tags) and updates the target text for each unit. For now it supports only 1.2 version of XLIFF.")]
-    public async Task<TranslateXliffResponse> TranslateXliff(
-        [ActionParameter] TranslateXliffRequest input,
+    public async Task<ProcessXliffResponse> TranslateXliff([ActionParameter] TranslateXliffRequest input,
         [ActionParameter] BaseChatRequest promptRequest,
-        [ActionParameter,
-         Display("Prompt",
-             Description =
-                 "Specify the instruction to be applied to each source tag within a translation unit. For example, 'Translate text'")]
-        string? prompt,
+        [ActionParameter, Display("Additional instructions", Description = "Specify the instruction to be applied to each source tag within a translation unit. For example, 'Translate text'")] string? prompt,
         [ActionParameter] GlossaryRequest glossary,
-        [ActionParameter,
-         Display("Bucket size",
-             Description =
-                 "Specify the number of source texts to be translated at once. Default value: 1500. (See our documentation for an explanation)")]
-        int? bucketSize = 1500)
+        [ActionParameter, Display("Bucket size", Description = "Specify the number of source texts to be translated at once. Default value: 1500. (See our documentation for an explanation)")] int? bucketSize = 1500)
     {
-        var xliffDocument = await DownloadXliffDocumentAsync(input.File);
-        if (xliffDocument.TranslationUnits.Count == 0)
-        {
-            return new TranslateXliffResponse { File = input.File, Usage = new UsageDto() };
-        }
+        var xliffProcessingService = new ProcessXliffService(new XliffService(FileManagementClient), 
+            new JsonGlossaryService(FileManagementClient),
+            new OpenAICompletionService(RestClient, InvocationContext.AuthenticationCredentialsProviders), 
+            new ResponseDeserializationService(),
+            new PromptBuilderService(), 
+            FileManagementClient);
 
-        var systemPrompt = GetSystemPrompt(string.IsNullOrEmpty(prompt));
-        var (translatedTexts, usage) = await ProcessTranslationUnits(xliffDocument,
-            new(prompt, systemPrompt, bucketSize ?? 1500, promptRequest, glossary?.Glossary, input.FilterGlossary));
-
-        translatedTexts.ForEach(x =>
+        var result = await xliffProcessingService.ProcessXliffAsync(new OpenAiXliffInnerRequest
         {
-            var translationUnit = xliffDocument.TranslationUnits.FirstOrDefault(tu => tu.Id == x.TranslationId);
-            if (translationUnit != null)
-            {
-                translationUnit.Target = x.TranslatedText;
-            }
+            ApiVersion = "2024-08-01-preview",
+            Prompt = prompt,
+            XliffFile = input.File,
+            Glossary = glossary.Glossary,
+            BucketSize = bucketSize ?? 1500,
+            SourceLanguage = input.SourceLanguage,
+            TargetLanguage = input.TargetLanguage,
+            UpdateLockedSegments = input.UpdateLockedSegments ?? false,
+            AddMissingTrailingTags = false,
+            FilterGlossary = input.FilterGlossary ?? true,
+            NeverFail = input.NeverFail ?? true,
+            BatchRetryAttempts = input.BatchRetryAttempts ?? 2,
+            MaxTokens = promptRequest.MaximumTokens,
+            TopP = promptRequest.TopP,
+            Temperature = promptRequest.Temperature,
+            FrequencyPenalty = promptRequest.FrequencyPenalty,
+            PresencePenalty = promptRequest.PresencePenalty,
+            DisableTagChecks = false
         });
 
-        var fileReference =
-            await fileManagementClient.UploadAsync(xliffDocument.ToStream(), input.File.ContentType, input.File.Name);
-        return new TranslateXliffResponse { File = fileReference, Usage = usage };
+        return new ProcessXliffResponse(result);
     }
 
     [Action("Get Quality Scores for XLIFF file",
@@ -206,7 +205,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             new PromptBuilderService(), 
             FileManagementClient);
 
-        var result = await postEditService.PostEditXliffAsync(new PostEditInnerRequest
+        var result = await postEditService.PostEditXliffAsync(new OpenAiXliffInnerRequest
         {
             ApiVersion = "2024-08-01-preview",
             Prompt = prompt,
@@ -215,7 +214,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             BucketSize = bucketSize ?? 1500,
             SourceLanguage = input.SourceLanguage,
             TargetLanguage = input.TargetLanguage,
-            PostEditLockedSegments = input.PostEditLockedSegments ?? false,
+            UpdateLockedSegments = input.PostEditLockedSegments ?? false,
             ProcessOnlyTargetState = input.ProcessOnlyTargetState,
             AddMissingTrailingTags = input.AddMissingTrailingTags ?? false,
             FilterGlossary = input.FilterGlossary ?? true,
