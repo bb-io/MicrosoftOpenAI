@@ -14,7 +14,7 @@ public class BaseChatRequest
     [StaticDataSource(typeof(TemperatureDataSourceHandler))]
     public float? Temperature { get; set; }    
     
-    [Display("top_p")]
+    [Display("Top p")]
     [StaticDataSource(typeof(TopPDataSourceHandler))]
     public float? TopP { get; set; }
 

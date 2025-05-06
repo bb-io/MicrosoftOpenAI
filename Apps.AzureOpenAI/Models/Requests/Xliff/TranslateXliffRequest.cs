@@ -19,7 +19,7 @@ public class TranslateXliffRequest
     [Display("Update locked segments")]
     public bool? UpdateLockedSegments { get; set; }
 
-    [Display("Never fail", Description = "If set to true, the action will ignore any errors and return a result. If set to false, the action will fail if any errors occur.")]
+    [Display("Never fail", Description = "If set to true, the action will ignore any errors and return a result. If set to false, the action will fail if any errors occur. By default, this is set to false.")]
     public bool? NeverFail { get; set; }
 
     [Display("Batch retry attempts")]

@@ -57,7 +57,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             UpdateLockedSegments = input.UpdateLockedSegments ?? false,
             AddMissingTrailingTags = false,
             FilterGlossary = input.FilterGlossary ?? true,
-            NeverFail = input.NeverFail ?? true,
+            NeverFail = input.NeverFail ?? false,
             BatchRetryAttempts = input.BatchRetryAttempts ?? 2,
             MaxTokens = promptRequest.MaximumTokens,
             TopP = promptRequest.TopP,
