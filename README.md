@@ -84,12 +84,15 @@ Note, currently only gpt-4o version: 2024-08-06 supports structured outputs. Thi
 - **Post-edit XLIFF file** Updates the targets of XLIFF 1.2 files
 
 	Optional inputs:
-	- Prompt: Add your linguistic criteria for postediting targets.
+	- Additional instructions: Add your linguistic criteria for postediting targets.
 	- Bucket size: Amount of translation units to process in the same request. (See dedicated section)
 	- Source and Target languages: By default, we get these values from the XLIFF header. You can provide different values, no specific format required.
-	- Glossary
+	- Glossary: Glossary file in TBX format. The glossary will be used to enhance the target text by incorporating relevant terms from the glossary where applicable.
+	- Update locked segments: If true, locked segments will be updated, otherwise they will be skipped. By default, this is set to false.
+	- Batch retry attempts: Number of attempts to retry the batch process in case of failure. By default, this is set to 2.
+	- Never fail: If true, the action will never fail even with the critical errrors, it will just return the exact same file as input and the error message. By default, this is set to true.
 
-- **Process XLIFF file** given an XLIFF file, processes each translation unit according to provided instructions (default is to translate source tags) and updates the target text for each unit. This action supports only version 1.2 of XLIFF currently.
+- **Process XLIFF file** given an XLIFF file, processes each translation unit according to provided instructions (default is to translate source tags) and updates the target text for each unit. This action supports only version 1.2 and 2.1 of XLIFF currently.
 
 #### Bucket size, performance and cost
 
