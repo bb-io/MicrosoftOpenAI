@@ -45,6 +45,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             new PromptBuilderService(), 
             FileManagementClient);
 
+        var fileExtension = Path.GetExtension(input.File.Name)?.ToLowerInvariant() ?? string.Empty;
         var result = await xliffProcessingService.ProcessXliffAsync(new OpenAiXliffInnerRequest
         {
             ApiVersion = "2024-08-01-preview",
@@ -64,7 +65,8 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             Temperature = promptRequest.Temperature,
             FrequencyPenalty = promptRequest.FrequencyPenalty,
             PresencePenalty = promptRequest.PresencePenalty,
-            DisableTagChecks = false
+            DisableTagChecks = false,
+            FileExtension = fileExtension
         });
 
         return new ProcessXliffResponse(result);
@@ -205,6 +207,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             new PromptBuilderService(), 
             FileManagementClient);
 
+        var fileExtension = Path.GetExtension(input.File.Name)?.ToLowerInvariant() ?? string.Empty;
         var result = await postEditService.PostEditXliffAsync(new OpenAiXliffInnerRequest
         {
             ApiVersion = "2024-08-01-preview",
@@ -226,6 +229,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             FrequencyPenalty = promptRequest.FrequencyPenalty,
             PresencePenalty = promptRequest.PresencePenalty,
             DisableTagChecks = input.DisableTagChecks ?? false,
+            FileExtension = fileExtension
         });
 
         return new PostEditXliffResponse(result);
