@@ -24,7 +24,7 @@ public class PostEditService(
 {
     public async Task<XliffResult> PostEditXliffAsync(OpenAiXliffInnerRequest request)
     {
-        var result = new XliffResult 
+        var result = new XliffResult
         {
             ErrorMessages = [],
             Usage = new UsageDto()
@@ -72,7 +72,8 @@ public class PostEditService(
                     xliffDocument,
                     batchProcessingResult.Results,
                     tagOptions,
-                    request.DisableTagChecks);
+                    request.DisableTagChecks,
+                    request.FileExtension);
             }
 
             var stream = xliffService.SerializeXliffDocument(xliffDocument);
@@ -108,8 +109,8 @@ public class PostEditService(
     private IEnumerable<TranslationUnit> FilterTranslationUnits(IEnumerable<TranslationUnit> units, bool processLocked, string targetStateToFilter)
     {
         if (!string.IsNullOrEmpty(targetStateToFilter))
-        { 
-            units = units.Where(x => x.TargetAttributes.TryGetValue("state", out string value) && x.TargetAttributes["state"] == targetStateToFilter); 
+        {
+            units = units.Where(x => x.TargetAttributes.TryGetValue("state", out string value) && x.TargetAttributes["state"] == targetStateToFilter);
         }
 
         return processLocked ? units : units.Where(x => !x.IsLocked());
@@ -238,7 +239,7 @@ public class PostEditService(
         while (!success && currentAttempt < options.MaxRetryAttempts)
         {
             currentAttempt++;
-            
+
             var chatCompletionResult = await openaiService.ExecuteChatCompletionAsync(
                 messages,
                 options.ApiVersion,
@@ -272,7 +273,7 @@ public class PostEditService(
                 errors.Add($"Attempt {currentAttempt}/{options.MaxRetryAttempts}: {deserializationResult.Error}");
             }
         }
-        
+
         return new OpenAICompletionResult(success, usage, errors, translations);
     }
 
@@ -280,19 +281,21 @@ public class PostEditService(
         XliffDocument document,
         List<TranslationEntity> updatedEntities,
         TagHandlingOptions tagOptions,
-        bool disableTagChecks)
+        bool disableTagChecks,
+        string fileExtension)
     {
         var translationDict = updatedEntities.ToDictionary(x => x.TranslationId, x => x.TranslatedText);
         var updatedTranslations = xliffService.CheckAndFixTagIssues(
             document.TranslationUnits, translationDict, disableTagChecks);
 
-        return UpdateXliffDocument(document, updatedTranslations, tagOptions.AddMissingTrailingTags);
+        return UpdateXliffDocument(document, updatedTranslations, tagOptions.AddMissingTrailingTags, fileExtension);
     }
 
     private int UpdateXliffDocument(
         XliffDocument document,
         Dictionary<string, string> updatedTranslations,
-        bool addMissingTrailingTags)
+        bool addMissingTrailingTags,
+        string fileExtension)
     {
         int updatedCount = 0;
         foreach (var (translationId, translatedText) in updatedTranslations)
@@ -309,6 +312,13 @@ public class PostEditService(
                 translationUnit.Target = addMissingTrailingTags
                     ? ApplyTagsIfNeeded(translationUnit.Source, translatedText)
                     : translatedText;
+
+                if (fileExtension == ".mxliff")
+                {
+                    long unixTimestampMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                    translationUnit.Attributes["modified-at"] = unixTimestampMs.ToString();
+                    translationUnit.Attributes["modified-by"] = "Blackbird";
+                }
             }
         }
 

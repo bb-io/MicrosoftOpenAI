@@ -7,7 +7,7 @@ public class OpenAiXliffInnerRequest
     public string ApiVersion { get; set; } = "2024-08-01-preview";
     public string? Prompt { get; set; }
     public FileReference XliffFile { get; set; } = new();
-    public FileReference? Glossary { get; set; } 
+    public FileReference? Glossary { get; set; }
     public int BucketSize { get; set; } = 1500;
     public string? SourceLanguage { get; set; }
     public string? TargetLanguage { get; set; }
@@ -23,4 +23,5 @@ public class OpenAiXliffInnerRequest
     public float? FrequencyPenalty { get; set; }
     public float? Temperature { get; set; }
     public bool DisableTagChecks { get; set; }
+    public string FileExtension { get; set; } = string.Empty;
 }
