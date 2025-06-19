@@ -24,4 +24,7 @@ public class TranslateXliffRequest
 
     [Display("Batch retry attempts")]
     public int? BatchRetryAttempts { get; set; }
+
+    [Display("Modified by", Description = "The name or ID to use as the modifier. Only works for mxliff files.")]
+    public string? ModifiedBy { get; set; }
 }

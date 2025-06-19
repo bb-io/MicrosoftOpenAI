@@ -24,4 +24,5 @@ public class OpenAiXliffInnerRequest
     public float? Temperature { get; set; }
     public bool DisableTagChecks { get; set; }
     public string FileExtension { get; set; } = string.Empty;
+    public string ModifiedBy { get; set; } = "Blackbird";
 }
