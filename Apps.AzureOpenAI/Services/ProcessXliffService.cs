@@ -72,7 +72,8 @@ public class ProcessXliffService(
                     batchProcessingResult.Results,
                     tagOptions,
                     request.DisableTagChecks,
-                    request.FileExtension);
+                    request.FileExtension,
+                    request.ModifiedBy);
             }
 
             var stream = xliffService.SerializeXliffDocument(xliffDocument);
@@ -281,20 +282,22 @@ public class ProcessXliffService(
         List<TranslationEntity> updatedEntities,
         TagHandlingOptions tagOptions,
         bool disableTagChecks,
-        string fileExtension)
+        string fileExtension,
+        string modifiedBy)
     {
         var translationDict = updatedEntities.ToDictionary(x => x.TranslationId, x => x.TranslatedText);
         var updatedTranslations = xliffService.CheckAndFixTagIssues(
             document.TranslationUnits, translationDict, disableTagChecks);
 
-        return UpdateXliffDocument(document, updatedTranslations, tagOptions.AddMissingTrailingTags, fileExtension);
+        return UpdateXliffDocument(document, updatedTranslations, tagOptions.AddMissingTrailingTags, fileExtension, modifiedBy);
     }
 
     private int UpdateXliffDocument(
         XliffDocument document,
         Dictionary<string, string> updatedTranslations,
         bool addMissingTrailingTags,
-        string fileExtension)
+        string fileExtension,
+        string modifiedBy)
     {
         int updatedCount = 0;
         foreach (var (translationId, translatedText) in updatedTranslations)
@@ -316,7 +319,7 @@ public class ProcessXliffService(
                 {
                     long unixTimestampMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                     translationUnit.Attributes["modified-at"] = unixTimestampMs.ToString();
-                    translationUnit.Attributes["modified-by"] = "Blackbird";
+                    translationUnit.Attributes["modified-by"] = modifiedBy;
                 }
             }
         }

@@ -38,4 +38,7 @@ public class PostEditXliffRequest
 
     [Display("Disable tag checks", Description = "After LLM provide the translation, it will be checked for tags. If the tags are not correct (model hallucinated), the translation of specific translation unit will be rejected. But disabling this option you highly increase the risk of hallucinations. By default it is set to false.")]
     public bool? DisableTagChecks { get; set; }
+
+    [Display("Modified by", Description = "The name to use as the modifier. Only works for mxliff files.")]
+    public string? ModifiedBy { get; set; }
 }
