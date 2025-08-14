@@ -67,7 +67,8 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             PresencePenalty = promptRequest.PresencePenalty,
             DisableTagChecks = false,
             FileExtension = fileExtension,
-            ModifiedBy = input.ModifiedBy ?? "Blackbird"
+            ModifiedBy = input.ModifiedBy ?? "Blackbird",
+            ReasoningEffort = promptRequest.ReasoningEffort
         });
 
         return new ProcessXliffResponse(result);
@@ -231,7 +232,8 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             PresencePenalty = promptRequest.PresencePenalty,
             DisableTagChecks = input.DisableTagChecks ?? false,
             FileExtension = fileExtension,
-            ModifiedBy = input.ModifiedBy ?? "Blackbird"
+            ModifiedBy = input.ModifiedBy ?? "Blackbird",
+            ReasoningEffort = promptRequest.ReasoningEffort
         });
 
         return new PostEditXliffResponse(result);

@@ -25,4 +25,5 @@ public class OpenAiXliffInnerRequest
     public bool DisableTagChecks { get; set; }
     public string FileExtension { get; set; } = string.Empty;
     public string ModifiedBy { get; set; } = "Blackbird";
+    public string? ReasoningEffort { get; set; }
 }
