@@ -25,4 +25,8 @@ public class BaseChatRequest
     [Display("Frequency penalty")]
     [StaticDataSource(typeof(PenaltyDataSourceHandler))]
     public float? FrequencyPenalty { get; set; }
+    
+    [Display("Reasoning effort")]
+    [StaticDataSource(typeof(ReasoningEffortDataSourceHandler))]
+    public string? ReasoningEffort { get; set; }
 }

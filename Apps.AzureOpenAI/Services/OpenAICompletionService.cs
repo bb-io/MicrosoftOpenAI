@@ -66,12 +66,16 @@ public class OpenAICompletionService : IOpenAICompletionService
         {
             body.Add("top_p", request.TopP.Value);
         }
+        
+        if(request?.ReasoningEffort != null)
+        {
+            body.Add("reasoning_effort", request.ReasoningEffort);
+        }
 
         var apiRequest = new AzureOpenAIRequest(endpoint, Method.Post, creds)
             .AddJsonBody(body);
-
+        
         var response = await openAIClient.ExecuteAsync(apiRequest);
-
         if (!response.IsSuccessStatusCode)
         {
             if (string.IsNullOrEmpty(response.Content))

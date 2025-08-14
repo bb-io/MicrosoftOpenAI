@@ -52,7 +52,8 @@ public class ProcessXliffService(
                 request.Temperature,
                 request.TopP,
                 request.FrequencyPenalty,
-                request.PresencePenalty);
+                request.PresencePenalty,
+                request.ReasoningEffort);
 
             var batchProcessingResult = await ProcessAllBatchesAsync(
                 batches,
@@ -243,7 +244,7 @@ public class ProcessXliffService(
             var chatCompletionResult = await openaiService.ExecuteChatCompletionAsync(
                 messages,
                 options.ApiVersion,
-                new BaseChatRequest { Temperature = options.Temperature, TopP = options.Temperature, FrequencyPenalty = options.FrequencyPenalty, PresencePenalty = options.PresencePenalty, MaximumTokens = options.MaxTokens },
+                new BaseChatRequest { Temperature = options.Temperature, TopP = options.Temperature, FrequencyPenalty = options.FrequencyPenalty, PresencePenalty = options.PresencePenalty, MaximumTokens = options.MaxTokens, ReasoningEffort = options.ReasoningEffort},
                 ResponseFormats.GetXliffResponseFormat());
 
             if (!chatCompletionResult.Success)

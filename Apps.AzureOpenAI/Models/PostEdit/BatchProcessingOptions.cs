@@ -14,4 +14,5 @@ public record BatchProcessingOptions(
     float? Temperature,
     float? TopP,
     float? FrequencyPenalty,
-    float? PresencePenalty);
+    float? PresencePenalty,
+    string? ReasoningEffort);

@@ -10,5 +10,6 @@ public interface IOpenAICompletionService
         string apiVersion, 
         BaseChatRequest request, 
         object? responseFormat = null);
+    
     int CalculateTokenCount(string text, string modelId);
 }
