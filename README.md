@@ -57,6 +57,7 @@ You can find how to create and deploy an Azure OpenAI Service resource [here](ht
 ### Image Actions
 
 - **Generate image**: Generates an image based on a prompt.
+- **Get localizable content from image** : Extracts localizable content from an image.
 
 ### Text Analysis Actions
 
