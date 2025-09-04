@@ -65,7 +65,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             Temperature = promptRequest.Temperature,
             FrequencyPenalty = promptRequest.FrequencyPenalty,
             PresencePenalty = promptRequest.PresencePenalty,
-            DisableTagChecks = false,
+            DisableTagChecks = input.DisableTagChecks ?? false,
             FileExtension = fileExtension,
             ModifiedBy = input.ModifiedBy ?? "Blackbird",
             ReasoningEffort = promptRequest.ReasoningEffort
