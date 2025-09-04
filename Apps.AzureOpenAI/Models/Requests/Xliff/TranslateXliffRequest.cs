@@ -27,4 +27,7 @@ public class TranslateXliffRequest
     
     [Display("Modified by", Description = "The name or ID to use as the modifier. Only works for mxliff files.")]
     public string? ModifiedBy { get; set; }
+
+    [Display("Disable tag checks", Description = "Turn on if you don't want to check if there is any issues with XLIFF file tags. Note that this value can impact the output by only partial file translation")]
+    public bool? DisableTagChecks { get; set; } = false;
 }

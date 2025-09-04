@@ -36,8 +36,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         [ActionParameter] BaseChatRequest promptRequest,
         [ActionParameter, Display("Additional instructions", Description = "Specify the instruction to be applied to each source tag within a translation unit. For example, 'Translate text'")] string? prompt,
         [ActionParameter] GlossaryRequest glossary,
-        [ActionParameter, Display("Bucket size", Description = "Specify the number of source texts to be translated at once. Default value: 1500. (See our documentation for an explanation)")] int? bucketSize = 1500,
-        [ActionParameter, Display("Disable tag checks", Description = "Turn off if you want to check if there is any issues with XLIFF file tags. Note that this can impact the output by only partial file translation")] bool disableTagChecks = true)
+        [ActionParameter, Display("Bucket size", Description = "Specify the number of source texts to be translated at once. Default value: 1500. (See our documentation for an explanation)")] int? bucketSize = 1500)
     {
         var xliffProcessingService = new ProcessXliffService(new XliffService(FileManagementClient), 
             new JsonGlossaryService(FileManagementClient),
@@ -66,7 +65,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             Temperature = promptRequest.Temperature,
             FrequencyPenalty = promptRequest.FrequencyPenalty,
             PresencePenalty = promptRequest.PresencePenalty,
-            DisableTagChecks = disableTagChecks,
+            DisableTagChecks = input.DisableTagChecks ?? false,
             FileExtension = fileExtension,
             ModifiedBy = input.ModifiedBy ?? "Blackbird",
             ReasoningEffort = promptRequest.ReasoningEffort
