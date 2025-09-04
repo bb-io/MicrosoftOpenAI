@@ -68,18 +68,8 @@ public static class Extensions
         var changesToImplement = new Dictionary<string, string>();
         foreach (var update in results) 
         {
-            var translationUnit = translationUnits.FirstOrDefault(x => x.Id == update.Key);
-            if (translationUnit == null) 
-            {
-                continue;
-            }
-
             var newTags = GetTags(update.Value);
-            if (AreTagsOk(translationUnit.Tags, newTags)) 
-            {
-                changesToImplement.Add(update.Key, update.Value);
-            }
-            else 
+            if (AreTagsOk(translationUnits.FirstOrDefault(x => x.Id == update.Key).Tags, newTags)) 
             {
                 changesToImplement.Add(update.Key, update.Value);
             }
@@ -114,12 +104,36 @@ public static class Extensions
         return parsedTags;
     }
 
-    private static bool AreTagsOk(List<Blackbird.Xliff.Utils.Models.Tag> expected, List<Blackbird.Xliff.Utils.Models.Tag> actual) 
+    private static bool AreTagsOk(List<Blackbird.Xliff.Utils.Models.Tag> tags, List<Blackbird.Xliff.Utils.Models.Tag> newTags) 
     {
-        var expectedIds = expected.Select(t => t.Id).ToHashSet();
-        var actualIds = actual.Select(t => t.Id).ToHashSet();
-
-        return expectedIds.IsSubsetOf(actualIds);
+        if (tags.Count != newTags.Count) 
+        { return false; }
+        foreach (var tag in newTags) 
+        {
+            if (tags.Any(x => x.Id == tag.Id && x.Type == tag.Type && x.Value == tag.Value && x.Position == tag.Position)) 
+            {
+                continue;
+            }
+            else if (tags.Any(x => x.Id == tag.Id && x.Type == tag.Type && x.Value == tag.Value)) 
+            {
+                if (tag.Type == "bpt" || tag.Type == "ept") 
+                {
+                    if (tag.Type == "bpt") 
+                    {
+                        if (newTags.Any(x => x.Type == "ept" && x.Id == tag.Id && x.Position > tag.Position)) continue;
+                        else return false;
+                    }
+                    else if (tag.Type == "ept") 
+                    {
+                        if (newTags.Any(x => x.Type == "bpt" && x.Id == tag.Id && x.Position < tag.Position)) continue;
+                        else return false;
+                    }
+                }
+                else continue;
+            }
+            else return false;
+        }
+        return true;
     }
 }
 
