@@ -31,7 +31,7 @@ public class ProcessXliffService(
 
         try
         {
-            var xliffDocument = await xliffService.LoadXliffDocumentAsync(request.XliffFile ?? throw new PluginApplicationException("XLIFF file is null (input)."));
+            var xliffDocument = await xliffService.LoadXliffDocumentAsync(request.XliffFile);
             result.TotalSegmentsCount = xliffDocument.TranslationUnits.Count();
 
             var sourceLanguage = request.SourceLanguage ?? xliffDocument.SourceLanguage;
@@ -89,10 +89,6 @@ public class ProcessXliffService(
             result.File = request.XliffFile;
             return result;
         }
-        catch (Exception ex)
-        {
-            throw new PluginApplicationException($"Error: {ex.Message}");
-        }
     }
 
     private void IdentifyDuplicateTranslationIdsAndLogErrors(BatchProcessingResult result)
@@ -115,7 +111,7 @@ public class ProcessXliffService(
     {
         if (!string.IsNullOrEmpty(targetStateToFilter))
         {
-            units = units.Where(x => x.TargetAttributes != null && x.TargetAttributes.TryGetValue("state", out var state) && state == targetStateToFilter);
+            units = units.Where(x => x.TargetAttributes.TryGetValue("state", out string value) && x.TargetAttributes["state"] == targetStateToFilter);
         }
 
         return processLocked ? units : units.Where(x => !x.IsLocked());
@@ -245,11 +241,11 @@ public class ProcessXliffService(
         {
             currentAttempt++;
 
-            var chatCompletionResult = await TryCatchHelper.ExecuteWithErrorHandling(() => openaiService.ExecuteChatCompletionAsync(
+            var chatCompletionResult = await openaiService.ExecuteChatCompletionAsync(
                 messages,
                 options.ApiVersion,
                 new BaseChatRequest { Temperature = options.Temperature, TopP = options.Temperature, FrequencyPenalty = options.FrequencyPenalty, PresencePenalty = options.PresencePenalty, MaximumTokens = options.MaxTokens, ReasoningEffort = options.ReasoningEffort},
-                ResponseFormats.GetXliffResponseFormat()));
+                ResponseFormats.GetXliffResponseFormat());
 
             if (!chatCompletionResult.Success)
             {
@@ -258,35 +254,16 @@ public class ProcessXliffService(
                 continue;
             }
 
-            if (chatCompletionResult.ChatCompletion == null)
-            {
-                errors.Add($"Attempt {currentAttempt}/{options.MaxRetryAttempts}: ChatCompletion is null");
-                continue;
-            }
-
             usage = chatCompletionResult.ChatCompletion.Usage;
-            var choices = chatCompletionResult.ChatCompletion.Choices;
-            if (choices == null || !choices.Any())
+            var choice = chatCompletionResult.ChatCompletion.Choices.First();
+            var content = choice.Message.Content;
+
+            if (choice.FinishReason == "length")
             {
-                errors.Add($"Attempt {currentAttempt}/{options.MaxRetryAttempts}: No choices");
-                continue;
+                errors.Add($"Attempt {currentAttempt}/{options.MaxRetryAttempts}: The response from OpenAI was truncated. Try reducing the batch size.");
             }
 
-            var choice = choices.FirstOrDefault();
-            var content = choice?.Message?.Content;
-
-            if (string.IsNullOrWhiteSpace(content))
-            {
-                errors.Add($"Attempt {currentAttempt}/{options.MaxRetryAttempts}: Empty content");
-                continue;
-            }
-
-            if (string.Equals(choice.FinishReason, "length", StringComparison.OrdinalIgnoreCase))
-                errors.Add($"Attempt {currentAttempt}/{options.MaxRetryAttempts}: Response truncated — reduce batch size.");
-
-            var deserializationResult = await TryCatchHelper.ExecuteWithErrorHandling(() =>
-            Task.FromResult(deserializationService.DeserializeResponse(content)));
-
+            var deserializationResult = deserializationService.DeserializeResponse(content);
             if (deserializationResult.Success)
             {
                 success = true;
@@ -341,11 +318,6 @@ public class ProcessXliffService(
 
                 if (fileExtension == ".mxliff")
                 {
-                    if (translationUnit.Attributes ==null)
-                    {
-                        translationUnit.Attributes = new Dictionary<string, string>();
-                    }
-
                     long unixTimestampMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                     translationUnit.Attributes["modified-at"] = unixTimestampMs.ToString();
                     translationUnit.Attributes["modified-by"] = modifiedBy;
