@@ -203,8 +203,7 @@ public class BatchActions(InvocationContext invocationContext, IFileManagementCl
                             role = "user",
                             content
                         }
-                    },
-                    max_tokens = 4096
+                    }
                 }
             };
 
