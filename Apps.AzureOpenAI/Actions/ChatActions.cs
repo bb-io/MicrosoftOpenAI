@@ -224,7 +224,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 new List<ChatMessage>
                     { new(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
-                MaxTokens = input.MaximumTokens ?? 5000,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature ?? 0.5f,
                 DeploymentName = DeploymentName,
             }));
@@ -264,7 +264,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 new List<ChatMessage>()
                     { new ChatMessage(ChatRole.System, systemPrompt), new ChatMessage(ChatRole.User, userPrompt) })
             {
-                MaxTokens = input.MaximumTokens ?? 5000,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature ?? 0.5f,
                 DeploymentName = DeploymentName,
             }));
@@ -306,7 +306,7 @@ public class ChatActions(InvocationContext invocationContext, IFileManagementCli
                 new List<ChatMessage>
                     { new(ChatRole.System, systemPrompt), new(ChatRole.User, userPrompt) })
             {
-                MaxTokens = input.MaximumTokens ?? 5000,
+                MaxTokens = input.MaximumTokens,
                 Temperature = input.Temperature ?? 0.5f,
                 DeploymentName = DeploymentName,
             }));
