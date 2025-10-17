@@ -85,4 +85,27 @@ public sealed class XliffActionsTests : TestBase
         Assert.IsNotNull(result.Changes);
         Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
     }
+
+    [TestMethod]
+    public async Task PromptXLIFF_WithXliffFile_ProcessesSuccessfully()
+    {
+        var xliffActions = new XliffActions(InvocationContext, FileManager);
+
+        var result = await xliffActions.PromptXLIFF(
+            new PromptXliffRequest
+            {
+                File = new Blackbird.Applications.Sdk.Common.Files.FileReference
+                {
+                    Name = "3 random sentences-en-de-T.mxliff"
+                },
+            },
+            "Get the input list and reply with translations only. Do not modify translations, repply with them to validate connection.",
+            "You're validating connection to an LLM."
+            , new BaseChatRequest(),
+            bucketSize: 5);
+
+        Assert.IsNotNull(result);
+        Assert.IsNotNull(result.Changes);
+        Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
+    }
 }

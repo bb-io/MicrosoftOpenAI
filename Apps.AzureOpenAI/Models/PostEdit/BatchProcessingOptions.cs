@@ -7,6 +7,8 @@ public record BatchProcessingOptions(
     string SourceLanguage,
     string TargetLanguage,
     string? Prompt,
+    string? SystemPrompt,
+    bool OverwritePrompts,
     FileReference? Glossary,
     bool FilterGlossary,
     int MaxRetryAttempts,
