@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using Apps.AzureOpenAI.Constants;
 using Apps.AzureOpenAI.Models.Dto;
 using Apps.AzureOpenAI.Models.Entities;
@@ -11,6 +10,8 @@ using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Xliff.Utils;
 using Blackbird.Xliff.Utils.Models;
 using DocumentFormat.OpenXml;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace Apps.AzureOpenAI.Services;
 
@@ -46,6 +47,8 @@ public class PostEditService(
                 sourceLanguage,
                 targetLanguage,
                 request.Prompt,
+                request.SystemPrompt,
+                request.OverwritePrompts == true,
                 request.Glossary,
                 request.FilterGlossary ?? true,
                 request.BatchRetryAttempts ?? 3,
@@ -205,10 +208,18 @@ public class PostEditService(
                 options.Prompt,
                 glossaryPrompt);
 
-            var messages = new List<ChatMessageDto>
+            var messages = options.OverwritePrompts switch
             {
-                new(MessageRoles.System, promptBuilderService.GetPostEditSystemPrompt()),
-                new(MessageRoles.User, userPrompt)
+                true => new List<ChatMessageDto>
+                {
+                    new(MessageRoles.User, options.SystemPrompt ?? string.Empty),
+                    new(MessageRoles.User, options.Prompt + " " + JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target })) ?? string.Empty)
+                },
+                false => new List<ChatMessageDto>
+                {
+                    new(MessageRoles.System, options.SystemPrompt ?? promptBuilderService.GetPostEditSystemPrompt()),
+                    new(MessageRoles.User, userPrompt)
+                },
             };
 
             var completionResult = await CallOpenAIAndProcessResponseAsync(

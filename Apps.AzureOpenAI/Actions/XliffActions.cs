@@ -238,7 +238,53 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
 
         return new PostEditXliffResponse(result);
     }
-    
+
+    [Action("Apply prompt to XLIFF file (experimental)",
+        Description = "Runs prompt for each translation unit in the XLIFF file according to the provided instructions and updates the target text for each unit. For now it supports only 1.2 version and 2.1 of XLIFF. Supports batching where multiple units will be put into a single prompt.")]
+    public async Task<PostEditXliffResponse> PromptXLIFF(
+        [ActionParameter] PromptXliffRequest input,
+        [ActionParameter, Display("User prompt")] string prompt,
+        [ActionParameter, Display("System prompt")] string? systemPrompt,
+        [ActionParameter] BaseChatRequest promptRequest,
+        [ActionParameter, Display("Bucket size", Description = "Specify the number of translation units to be processed at once. Default value: 1. (See our documentation for an explanation)")]
+            int? bucketSize = 1)
+    {
+        var postEditService = new PostEditService(
+            new XliffService(FileManagementClient),
+            new JsonGlossaryService(FileManagementClient),
+            new OpenAICompletionService(RestClient, InvocationContext.AuthenticationCredentialsProviders),
+            new ResponseDeserializationService(),
+            new PromptBuilderService(),
+            FileManagementClient);
+
+        var fileExtension = Path.GetExtension(input.File.Name)?.ToLowerInvariant() ?? string.Empty;
+        var result = await postEditService.PostEditXliffAsync(new OpenAiXliffInnerRequest
+        {
+            ApiVersion = "2024-08-01-preview",
+            Prompt = prompt,
+            SystemPrompt = systemPrompt,
+            OverwritePrompts = true,
+            XliffFile = input.File,
+            BucketSize = bucketSize ?? 1,
+            UpdateLockedSegments = input.PostEditLockedSegments ?? false,
+            ProcessOnlyTargetState = input.ProcessOnlyTargetState,
+            AddMissingTrailingTags = input.AddMissingTrailingTags ?? false,
+            NeverFail = input.NeverFail ?? true,
+            BatchRetryAttempts = input.BatchRetryAttempts ?? 2,
+            MaxTokens = promptRequest.MaximumTokens,
+            TopP = promptRequest.TopP,
+            Temperature = promptRequest.Temperature,
+            FrequencyPenalty = promptRequest.FrequencyPenalty,
+            PresencePenalty = promptRequest.PresencePenalty,
+            DisableTagChecks = input.DisableTagChecks ?? false,
+            FileExtension = fileExtension,
+            ModifiedBy = input.ModifiedBy ?? "Blackbird",
+            ReasoningEffort = promptRequest.ReasoningEffort
+        });
+
+        return new PostEditXliffResponse(result);
+    }
+
     private string GetSystemPrompt(bool translator)
     {
         string prompt;
