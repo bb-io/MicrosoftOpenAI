@@ -245,6 +245,7 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
         [ActionParameter] PromptXliffRequest input,
         [ActionParameter, Display("User prompt")] string prompt,
         [ActionParameter, Display("System prompt")] string? systemPrompt,
+        [ActionParameter] GlossaryRequest glossary,
         [ActionParameter] BaseChatRequest promptRequest,
         [ActionParameter, Display("Bucket size", Description = "Specify the number of translation units to be processed at once. Default value: 1. (See our documentation for an explanation)")]
             int? bucketSize = 1)
@@ -265,6 +266,8 @@ public class XliffActions(InvocationContext invocationContext, IFileManagementCl
             SystemPrompt = systemPrompt,
             OverwritePrompts = true,
             XliffFile = input.File,
+            Glossary = glossary.Glossary,
+            FilterGlossary = input.FilterGlossary ?? true,
             BucketSize = bucketSize ?? 1,
             UpdateLockedSegments = input.PostEditLockedSegments ?? false,
             ProcessOnlyTargetState = input.ProcessOnlyTargetState,

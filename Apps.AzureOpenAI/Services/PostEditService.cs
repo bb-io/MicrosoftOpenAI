@@ -213,7 +213,10 @@ public class PostEditService(
                 true => new List<ChatMessageDto>
                 {
                     new(MessageRoles.User, options.SystemPrompt ?? string.Empty),
-                    new(MessageRoles.User, options.Prompt + " " + JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target })) ?? string.Empty)
+                    new(MessageRoles.User, 
+                        options.Prompt + $" {Environment.NewLine}{Environment.NewLine}"
+                        + (JsonConvert.SerializeObject(batch.Select(x => new { x.Id, x.Source, x.Target })) ?? string.Empty) + $" {Environment.NewLine}{Environment.NewLine}"
+                        + (glossaryPrompt?.Substring(glossaryPrompt.IndexOf($"{Environment.NewLine}Glossary:{Environment.NewLine}")) ?? string.Empty))
                 },
                 false => new List<ChatMessageDto>
                 {
