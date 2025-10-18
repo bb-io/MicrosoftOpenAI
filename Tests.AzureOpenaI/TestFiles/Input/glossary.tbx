@@ -72,6 +72,18 @@
           </termSec>
         </langSec>
       </conceptEntry>
+      <conceptEntry id="xliff-term-6">
+        <langSec xml:lang="en">
+          <termSec>
+            <term>kittens</term>
+          </termSec>
+        </langSec>
+        <langSec xml:lang="fr">
+          <termSec>
+            <term>des chatons</term>
+          </termSec>
+        </langSec>
+      </conceptEntry>
     </body>
   </text>
 </tbx>

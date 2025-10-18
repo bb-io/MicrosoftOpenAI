@@ -1,6 +1,7 @@
 ﻿using Apps.AzureOpenAI.Actions;
 using Apps.AzureOpenAI.Models.Requests.Chat;
 using Apps.AzureOpenAI.Models.Requests.Xliff;
+using Blackbird.Applications.Sdk.Common.Files;
 using Newtonsoft.Json;
 using Tests.AzureOpenAI.Base;
 
@@ -92,16 +93,29 @@ public sealed class XliffActionsTests : TestBase
         var xliffActions = new XliffActions(InvocationContext, FileManager);
 
         var result = await xliffActions.PromptXLIFF(
-            new PromptXliffRequest
-            {
-                File = new Blackbird.Applications.Sdk.Common.Files.FileReference
-                {
-                    Name = "3 random sentences-en-de-T.mxliff"
-                },
-            },
+            new PromptXliffRequest { File = new FileReference { Name = "3 random sentences-en-de-T.mxliff" } },
             "Get the input list and reply with translations only. Do not modify translations, repply with them to validate connection.",
-            "You're validating connection to an LLM."
-            , new BaseChatRequest(),
+            "You're validating connection to an LLM.",
+            new GlossaryRequest(),
+            new BaseChatRequest(),
+            bucketSize: 5);
+
+        Assert.IsNotNull(result);
+        Assert.IsNotNull(result.Changes);
+        Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
+    }
+
+    [TestMethod]
+    public async Task PromptXLIFF_WithXliffFileAndGlossary_ProcessesSuccessfully()
+    {
+        var xliffActions = new XliffActions(InvocationContext, FileManager);
+
+        var result = await xliffActions.PromptXLIFF(
+            new PromptXliffRequest { File = new FileReference { Name = "3 random sentences-en-de-T.mxliff" }, FilterGlossary = false },
+            "Get the input list and reply with translations only. Do not modify translations, repply with them to validate connection.",
+            "You're validating connection to an LLM.",
+            new GlossaryRequest { Glossary = new FileReference { Name = "glossary.tbx" } },
+            new BaseChatRequest(),
             bucketSize: 5);
 
         Assert.IsNotNull(result);
